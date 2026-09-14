@@ -1564,7 +1564,9 @@
       background: #fff8d8;
       color: #2f2c27;
     }
-    .theme-option:first-child { grid-column: 1 / -1; }
+    .theme-options.thematic { grid-template-columns: 1fr; }
+    .theme-options.thematic .theme-option { grid-column: 1; }
+    .theme-group + .theme-group { margin-top: 12px; }
     .theme-option-emoji { flex: 0 0 auto; font-size: 15px; }
 
     body[data-theme="autumn"] {
@@ -1597,6 +1599,21 @@
       --season-decoration: "❄️";
     }
 
+    body[data-theme="winter"][data-festive="true"] {
+      --season-bg: #f1f5f1;
+      --season-surface: #fffdf8;
+      --season-soft: #e1eee5;
+      --season-card: rgba(255,253,248,.96);
+      --season-line: #bfd2c4;
+      --season-accent: #c64242;
+      --season-accent-2: #efc65c;
+      --season-ink: #203b2d;
+      --season-muted: #64796c;
+      --season-reel: #fffef9;
+      --season-glow: rgba(198,66,66,.15);
+      --season-decoration: "🎄";
+    }
+
     body[data-theme="spring"] {
       --season-bg: #f1f7ed;
       --season-surface: #fbfff8;
@@ -1610,6 +1627,21 @@
       --season-reel: #fdfff9;
       --season-glow: rgba(128,186,104,.20);
       --season-decoration: "🌿";
+    }
+
+    body[data-theme="spring"][data-romantic="true"] {
+      --season-bg: #fff1f4;
+      --season-surface: #fffafd;
+      --season-soft: #fbe1e8;
+      --season-card: rgba(255,250,253,.96);
+      --season-line: #efc2ce;
+      --season-accent: #e05272;
+      --season-accent-2: #f49ab0;
+      --season-ink: #542735;
+      --season-muted: #8d6873;
+      --season-reel: #fffafd;
+      --season-glow: rgba(224,82,114,.18);
+      --season-decoration: "💝";
     }
 
     body[data-theme="summer"] {
@@ -1749,12 +1781,201 @@
     }
 
     body[data-theme="autumn"] .theme-option[data-theme-choice="autumn"],
-    body[data-theme="winter"] .theme-option[data-theme-choice="winter"],
-    body[data-theme="spring"] .theme-option[data-theme-choice="spring"],
+    body[data-theme="winter"]:not([data-festive="true"]) .theme-option[data-theme-choice="winter"],
+    body[data-theme="spring"]:not([data-romantic="true"]) .theme-option[data-theme-choice="spring"],
     body[data-theme="summer"] .theme-option[data-theme-choice="summer"] {
       border-color: var(--season-line);
       background: var(--season-soft);
       color: var(--season-ink);
+    }
+
+    body[data-theme="winter"][data-festive="true"] .theme-option[data-theme-choice="newyear"] {
+      border-color: #bfd2c4;
+      background: #e1eee5;
+      color: #203b2d;
+    }
+
+    body[data-theme="spring"][data-romantic="true"] .theme-option[data-theme-choice="valentine"] {
+      border-color: #efc2ce;
+      background: #fbe1e8;
+      color: #542735;
+    }
+
+    body[data-theme="spring"][data-romantic="true"] .primary,
+    body[data-theme="spring"][data-romantic="true"] .primary:hover {
+      border-color: rgba(190,55,88,.25);
+      background: linear-gradient(180deg, #ef7794, #d94769);
+      box-shadow: 0 10px 24px rgba(224,82,114,.22), inset 0 1px 0 rgba(255,255,255,.35);
+      color: #fff;
+    }
+
+    body[data-theme="spring"][data-romantic="true"] .selection-window {
+      border-color: rgba(190,55,88,.25);
+      background: linear-gradient(180deg, #f7b0c1, #ef7895);
+      box-shadow: 0 8px 20px rgba(224,82,114,.20), inset 0 1px 0 rgba(255,255,255,.55);
+    }
+
+    body[data-theme="spring"][data-romantic="true"] .result-card::before {
+      background: linear-gradient(90deg, transparent, #e05272 18%, #f3a2b5 50%, #e05272 82%, transparent);
+    }
+
+    body[data-theme="spring"][data-romantic="true"] .experience-shell::after {
+      content: "♥  ♡  ♥";
+      position: absolute;
+      top: 22px;
+      left: 32px;
+      color: #e05272;
+      font-size: 19px;
+      letter-spacing: 8px;
+      opacity: .31;
+      pointer-events: none;
+    }
+
+    body[data-theme="spring"][data-romantic="true"] .hero .subtitle {
+      border-color: rgba(224,82,114,.25);
+      background: linear-gradient(135deg, rgba(255,235,241,.94), rgba(255,250,253,.92));
+    }
+
+    body[data-theme="spring"][data-romantic="true"] .meeting-tip {
+      background: linear-gradient(135deg, rgba(255,250,253,.97), rgba(255,235,241,.91));
+    }
+
+    body[data-theme="winter"][data-festive="true"] .primary,
+    body[data-theme="winter"][data-festive="true"] .primary:hover {
+      border-color: rgba(24,93,61,.24);
+      background: linear-gradient(180deg, #3d9369, #26734f);
+      box-shadow: 0 10px 24px rgba(38,115,79,.20), inset 0 1px 0 rgba(255,255,255,.28);
+      color: #fff;
+    }
+
+    body[data-theme="winter"][data-festive="true"] .selection-window {
+      border-color: rgba(172,126,15,.28);
+      background: linear-gradient(180deg, #f7da7d, #e9b949);
+      box-shadow: 0 8px 20px rgba(202,153,32,.22), inset 0 1px 0 rgba(255,255,255,.55);
+    }
+
+    body[data-theme="winter"][data-festive="true"] .result-card::before {
+      background: linear-gradient(90deg, transparent, #c64242 18%, #26734f 50%, #c64242 82%, transparent);
+    }
+
+    body[data-theme="winter"][data-festive="true"] .experience-shell::after {
+      content: "✦  •  ✦  •  ✦";
+      position: absolute;
+      top: 18px;
+      left: 30px;
+      color: #c64242;
+      font-size: 15px;
+      letter-spacing: 7px;
+      opacity: .34;
+      pointer-events: none;
+    }
+
+    .festive-garland { display: none; }
+
+    body[data-theme="winter"][data-festive="true"] .festive-garland {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 4;
+      display: block;
+      height: 54px;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .garland-wire {
+      position: absolute;
+      top: -17px;
+      left: -3%;
+      width: 106%;
+      height: 50px;
+      border-bottom: 2px solid rgba(32,91,61,.74);
+      border-radius: 0 0 50% 50%;
+    }
+
+    .garland-bulbs {
+      position: absolute;
+      top: 20px;
+      left: 4%;
+      right: 4%;
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .garland-bulbs span {
+      position: relative;
+      width: 9px;
+      height: 14px;
+      border-radius: 45% 45% 60% 60%;
+      background: #f4cb55;
+      box-shadow: 0 0 7px 3px rgba(244,203,85,.34);
+      transform: rotate(5deg);
+      animation: festiveGlow 2.4s ease-in-out infinite alternate;
+    }
+
+    .garland-bulbs span::before {
+      content: "";
+      position: absolute;
+      top: -4px;
+      left: 2px;
+      width: 5px;
+      height: 4px;
+      border-radius: 2px 2px 0 0;
+      background: #466855;
+    }
+
+    .garland-bulbs span:nth-child(3n + 1) {
+      background: #dc5550;
+      box-shadow: 0 0 7px 3px rgba(220,85,80,.31);
+      transform: rotate(-6deg);
+    }
+
+    .garland-bulbs span:nth-child(3n + 2) {
+      background: #56aa7b;
+      box-shadow: 0 0 7px 3px rgba(86,170,123,.30);
+    }
+
+    .garland-bulbs span:nth-child(even) { animation-delay: -1.2s; }
+
+    @keyframes festiveGlow {
+      from { opacity: .68; filter: saturate(.88); }
+      to { opacity: 1; filter: saturate(1.18) brightness(1.08); }
+    }
+
+    .festive-ribbon {
+      position: absolute;
+      top: 4px;
+      width: 170px;
+      height: 30px;
+      border-bottom: 7px solid rgba(198,66,66,.86);
+      border-radius: 50%;
+      opacity: .78;
+    }
+
+    .festive-ribbon.left { left: -48px; transform: rotate(-8deg); }
+    .festive-ribbon.right { right: -48px; transform: rotate(8deg); }
+
+    body[data-theme="winter"][data-festive="true"] .experience-shell .hero {
+      padding-top: 53px;
+    }
+
+    body[data-theme="winter"][data-festive="true"] .hero h1 {
+      text-shadow: 0 2px 0 rgba(255,255,255,.86), 0 10px 30px rgba(38,115,79,.09);
+    }
+
+    body[data-theme="winter"][data-festive="true"] .hero .subtitle {
+      border-color: rgba(198,66,66,.24);
+      background: linear-gradient(135deg, rgba(229,243,233,.92), rgba(255,247,224,.90));
+    }
+
+    body[data-theme="winter"][data-festive="true"] .experience-shell .slot-machine {
+      border-color: rgba(38,115,79,.24);
+      box-shadow: 0 16px 35px rgba(38,115,79,.10), inset 0 0 0 2px rgba(233,185,73,.15), inset 0 1px 0 #fff;
+    }
+
+    body[data-theme="winter"][data-festive="true"] .meeting-tip {
+      background: linear-gradient(135deg, rgba(255,253,248,.97), rgba(229,243,233,.91));
     }
 
     @media (max-width: 520px) {
@@ -1780,6 +2001,170 @@
       }
       .meeting-tip::before { top: 15px; bottom: 15px; }
       .meeting-tip-text { font-size: 13px; }
+    }
+
+    /* Mobile hardening for iPhone, Android and narrow GitHub Pages views. */
+    @media (max-width: 600px) {
+      html,
+      body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+        -webkit-text-size-adjust: 100%;
+      }
+
+      body { min-height: 100svh; }
+
+      .app {
+        display: block;
+        width: 100%;
+        min-height: 100svh;
+        padding:
+          max(48px, env(safe-area-inset-top))
+          max(10px, env(safe-area-inset-right))
+          max(24px, env(safe-area-inset-bottom))
+          max(10px, env(safe-area-inset-left));
+      }
+
+      .topbar {
+        position: fixed;
+        top: max(8px, env(safe-area-inset-top));
+        right: max(8px, env(safe-area-inset-right));
+        z-index: 40;
+      }
+
+      .icon-button {
+        width: 42px;
+        height: 42px;
+        border: 1px solid rgba(220,215,204,.7);
+        background: rgba(255,255,255,.88);
+        opacity: .82;
+        backdrop-filter: blur(10px);
+      }
+
+      .menu {
+        position: fixed;
+        top: calc(env(safe-area-inset-top) + 56px);
+        right: max(10px, env(safe-area-inset-right));
+        width: min(330px, calc(100vw - 20px));
+        max-height: calc(100svh - env(safe-area-inset-top) - 68px);
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 18px;
+      }
+
+      .menu-item,
+      .theme-option {
+        min-height: 44px;
+        touch-action: manipulation;
+      }
+
+      .theme-picker { padding-inline: 6px; }
+      .theme-options { gap: 7px; }
+
+      .experience-shell {
+        width: 100%;
+        margin: 0;
+        border-radius: 22px;
+      }
+
+      .experience-shell .hero {
+        padding: 28px 14px 24px;
+      }
+
+      .hero h1 {
+        display: block;
+        width: 100%;
+        white-space: normal;
+        font-size: clamp(30px, 10.5vw, 44px);
+        line-height: 1.04;
+        letter-spacing: -.05em;
+        text-align: center;
+        text-wrap: balance;
+      }
+
+      .hero .subtitle {
+        width: min(100%, 370px);
+        margin-top: 17px;
+        padding: 10px 13px;
+        font-size: 13px;
+        line-height: 1.4;
+      }
+
+      .experience-shell .workspace {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto auto auto;
+        gap: 13px;
+        width: 100%;
+        min-width: 0;
+        padding: 10px;
+      }
+
+      .experience-shell .wheel-column,
+      .experience-shell .wheel-stage,
+      .experience-shell .slot-machine,
+      .experience-shell .side,
+      .experience-shell .result-card {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .experience-shell .slot-machine { padding: 7px; }
+      .reel-frame { padding: 5px; }
+
+      .reel-screen {
+        --row-height: 56px;
+        height: 280px;
+        border-radius: 14px;
+      }
+
+      .reel-track {
+        padding-top: 112px;
+        padding-bottom: 112px;
+      }
+
+      .reel-item {
+        padding-inline: 10px;
+        font-size: clamp(15px, 4.6vw, 19px);
+      }
+
+      .reel-item.final { font-size: clamp(18px, 5.4vw, 23px); }
+
+      .experience-shell .result-card {
+        min-height: 220px;
+        padding: 25px 22px;
+      }
+
+      .result-card:not(.has-result) .empty-copy { padding-inline: 8px; }
+      .result-card .question { font-size: clamp(21px, 6.4vw, 28px); }
+
+      .spin-area { grid-column: 1; }
+      .spin-area .primary { min-height: 54px; padding-inline: 16px; }
+
+      .meeting-tip {
+        margin-inline: 10px;
+        padding: 16px 16px 17px 18px;
+      }
+
+      body[data-theme="winter"][data-festive="true"] .experience-shell .hero {
+        padding-top: 51px;
+      }
+
+      body[data-theme="winter"][data-festive="true"] .festive-garland { height: 48px; }
+      .garland-bulbs { left: 1%; right: 1%; }
+      .garland-bulbs span { width: 8px; height: 12px; }
+      .festive-ribbon { width: 110px; border-bottom-width: 6px; }
+      .festive-ribbon.left { left: -35px; }
+      .festive-ribbon.right { right: -35px; }
+    }
+
+    @media (max-width: 360px) {
+      .app { padding-inline: 7px; }
+      .menu { right: 7px; width: calc(100vw - 14px); }
+      .experience-shell .workspace { padding: 7px; }
+      .experience-shell .result-card { padding-inline: 19px; }
+      .theme-option { padding-inline: 8px; font-size: 11.5px; }
     }
 
     /* Windows / Edge performance hardening */
@@ -1815,22 +2200,35 @@
         <div class="menu" id="menu" role="menu">
           <button class="menu-item" id="uploadButton" type="button" role="menuitem"><span class="menu-icon">↥</span>Загрузить идеи</button>
           <button class="menu-item" id="downloadButton" type="button" role="menuitem"><span class="menu-icon">↧</span>Скачать идеи</button>
-          <div class="theme-picker" role="radiogroup" aria-label="Оформление по сезону">
-            <div class="theme-picker-title">Оформление</div>
-            <div class="theme-options">
-              <button class="theme-option" type="button" role="radio" aria-checked="false" data-theme-choice="original"><span class="theme-option-emoji">☕</span><span>Оригинальное</span></button>
-              <button class="theme-option" type="button" role="radio" aria-checked="false" data-theme-choice="autumn"><span class="theme-option-emoji">🍂</span><span>Осень</span></button>
-              <button class="theme-option" type="button" role="radio" aria-checked="false" data-theme-choice="winter"><span class="theme-option-emoji">❄️</span><span>Зима</span></button>
-              <button class="theme-option" type="button" role="radio" aria-checked="false" data-theme-choice="spring"><span class="theme-option-emoji">🌿</span><span>Весна</span></button>
-              <button class="theme-option" type="button" role="radio" aria-checked="false" data-theme-choice="summer"><span class="theme-option-emoji">☀️</span><span>Лето</span></button>
+          <div class="theme-picker" aria-label="Выбор оформления">
+            <div class="theme-group" role="radiogroup" aria-label="Сезонные оформления">
+              <div class="theme-picker-title">Сезонные</div>
+              <div class="theme-options seasonal">
+                <button class="theme-option" type="button" role="radio" aria-checked="false" data-theme-choice="autumn"><span class="theme-option-emoji">🍂</span><span>Осень</span></button>
+                <button class="theme-option" type="button" role="radio" aria-checked="false" data-theme-choice="winter"><span class="theme-option-emoji">❄️</span><span>Зима</span></button>
+                <button class="theme-option" type="button" role="radio" aria-checked="false" data-theme-choice="spring"><span class="theme-option-emoji">🌿</span><span>Весна</span></button>
+                <button class="theme-option" type="button" role="radio" aria-checked="false" data-theme-choice="summer"><span class="theme-option-emoji">☀️</span><span>Лето</span></button>
+              </div>
+            </div>
+            <div class="theme-group" role="radiogroup" aria-label="Тематические оформления">
+              <div class="theme-picker-title">Тематические</div>
+              <div class="theme-options thematic">
+                <button class="theme-option" type="button" role="radio" aria-checked="false" data-theme-choice="newyear"><span class="theme-option-emoji">🎄</span><span>Новый год</span></button>
+                <button class="theme-option" type="button" role="radio" aria-checked="false" data-theme-choice="valentine"><span class="theme-option-emoji">💝</span><span>День влюблённых</span></button>
+              </div>
             </div>
           </div>
-          <div class="privacy"><span class="privacy-dot">●</span> После загрузки Excel скачается обновлённый HTML. Передавайте именно его — все данные уже будут внутри.</div>
         </div>
       </div>
     </header>
 
     <div class="experience-shell">
+      <div class="festive-garland" aria-hidden="true">
+        <span class="festive-ribbon left"></span>
+        <span class="festive-ribbon right"></span>
+        <span class="garland-wire"></span>
+        <span class="garland-bulbs"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span>
+      </div>
       <section class="hero">
         <h1><span>Рандом кофе SME</span></h1>
         <p class="subtitle">Создано для тёплых встреч и хороших разговоров🧋</p>
@@ -1922,20 +2320,22 @@
 
     const STORAGE_KEY = 'randomCoffeeTopicsV2';
     const THEME_STORAGE_KEY = 'randomCoffeeThemeV1';
-    const VALID_THEMES = ['original', 'autumn', 'winter', 'spring', 'summer'];
+    const VALID_THEMES = ['autumn', 'winter', 'spring', 'summer', 'newyear', 'valentine'];
     const THEME_LABELS = {
-      original: 'Оригинальное',
       autumn: 'Осень',
       winter: 'Зима',
       spring: 'Весна',
-      summer: 'Лето'
+      summer: 'Лето',
+      newyear: 'Новый год',
+      valentine: 'День влюблённых'
     };
     const THEME_COLORS = {
-      original: '#f8f6f0',
       autumn: '#f7eee3',
       winter: '#edf4f8',
       spring: '#f1f7ed',
-      summer: '#eef8f7'
+      summer: '#eef8f7',
+      newyear: '#f1f5f1',
+      valentine: '#fff1f4'
     };
     const reelScreen = document.getElementById('reelScreen');
     const reelTrack = document.getElementById('reelTrack');
@@ -1956,7 +2356,7 @@
     const meetingTipText = document.getElementById('meetingTipText');
     const themeButtons = [...document.querySelectorAll('[data-theme-choice]')];
     let topics = loadTopics();
-    let currentTheme = 'original';
+    let currentTheme = 'autumn';
     let spinning = false;
     let lastIndex = -1;
     let toastTimer;
@@ -1999,19 +2399,31 @@
       return embedded ? embedded.topics : DEFAULT_TOPICS.map(item => ({ ...item }));
     }
 
+    function seasonalDefault() {
+      const month = new Date().getMonth();
+      if (month === 11 || month <= 1) return 'winter';
+      if (month <= 4) return 'spring';
+      if (month <= 7) return 'summer';
+      return 'autumn';
+    }
+
     function initialTheme() {
-      const embedded = readEmbeddedTopics();
-      if (embedded && embedded.customized && embedded.theme) return embedded.theme;
       try {
         const saved = localStorage.getItem(THEME_STORAGE_KEY);
         if (VALID_THEMES.includes(saved)) return saved;
       } catch (_) {}
-      return 'original';
+      const embedded = readEmbeddedTopics();
+      if (embedded && embedded.customized && embedded.theme) return embedded.theme;
+      return seasonalDefault();
     }
 
     function applyTheme(theme, persist = true) {
-      currentTheme = VALID_THEMES.includes(theme) ? theme : 'original';
-      document.body.dataset.theme = currentTheme;
+      currentTheme = VALID_THEMES.includes(theme) ? theme : seasonalDefault();
+      document.body.dataset.theme = currentTheme === 'newyear' ? 'winter' : currentTheme === 'valentine' ? 'spring' : currentTheme;
+      if (currentTheme === 'newyear') document.body.dataset.festive = 'true';
+      else delete document.body.dataset.festive;
+      if (currentTheme === 'valentine') document.body.dataset.romantic = 'true';
+      else delete document.body.dataset.romantic;
       document.querySelector('meta[name="theme-color"]')?.setAttribute('content', THEME_COLORS[currentTheme]);
       themeButtons.forEach(button => {
         const active = button.dataset.themeChoice === currentTheme;
