@@ -2190,6 +2190,290 @@
       opacity: .84;
     }
 
+    /* Mobile-first finish: one predictable layout for every visual theme. */
+    @media (max-width: 600px) {
+      * {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      body {
+        background-attachment: scroll;
+      }
+
+      .app {
+        width: 100%;
+        min-height: 100svh;
+        padding:
+          max(10px, env(safe-area-inset-top))
+          max(8px, env(safe-area-inset-right))
+          max(18px, env(safe-area-inset-bottom))
+          max(8px, env(safe-area-inset-left));
+      }
+
+      /* The settings button stays with the card instead of floating over the page. */
+      .topbar {
+        position: absolute;
+        top: max(18px, calc(env(safe-area-inset-top) + 8px));
+        right: max(17px, calc(env(safe-area-inset-right) + 9px));
+        z-index: 40;
+      }
+
+      .icon-button {
+        width: 40px;
+        height: 40px;
+        border: 1px solid rgba(214, 205, 191, .72);
+        border-radius: 14px;
+        background: rgba(255, 255, 255, .82);
+        box-shadow: 0 6px 18px rgba(54, 46, 27, .08);
+        opacity: .92;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+
+      .icon-button:active {
+        transform: scale(.96);
+      }
+
+      .menu {
+        position: fixed;
+        top: calc(env(safe-area-inset-top) + 58px);
+        right: max(8px, env(safe-area-inset-right));
+        width: min(340px, calc(100vw - 16px));
+        max-height: calc(100svh - env(safe-area-inset-top) - 70px);
+      }
+
+      .experience-shell {
+        width: 100%;
+        margin: 0;
+        padding-bottom: 10px;
+        border-radius: 24px;
+        box-shadow: 0 14px 40px rgba(54, 46, 27, .09), inset 0 1px 0 rgba(255, 255, 255, .94);
+      }
+
+      .experience-shell .hero {
+        min-height: 0;
+        padding: 56px 15px 22px;
+      }
+
+      .hero h1 {
+        display: block;
+        width: 100%;
+        max-width: 350px;
+        margin-inline: auto;
+        padding-inline: 5px;
+        white-space: normal;
+        font-size: clamp(29px, 9vw, 38px);
+        line-height: 1.06;
+        letter-spacing: -.045em;
+        text-align: center;
+        text-wrap: balance;
+      }
+
+      .hero .subtitle {
+        display: block;
+        width: min(100%, 350px);
+        margin: 15px auto 0;
+        padding: 10px 14px;
+        border-radius: 15px;
+        font-size: clamp(12.5px, 3.7vw, 14px);
+        line-height: 1.42;
+        text-align: center;
+        text-wrap: balance;
+      }
+
+      /* Seasonal symbol lives in its own corner and never touches the title. */
+      body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .experience-shell::before {
+        top: 17px;
+        left: 18px;
+        right: auto;
+        z-index: 2;
+        font-size: 31px;
+        opacity: .18;
+        transform: rotate(-8deg);
+      }
+
+      body[data-theme="spring"][data-romantic="true"] .experience-shell::after,
+      body[data-theme="winter"][data-festive="true"] .experience-shell::after {
+        top: 26px;
+        left: 62px;
+        z-index: 2;
+        max-width: 110px;
+        overflow: hidden;
+        font-size: 12px;
+        letter-spacing: 4px;
+        white-space: nowrap;
+      }
+
+      .experience-shell .workspace {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto auto auto;
+        gap: 12px;
+        width: 100%;
+        padding: 9px;
+      }
+
+      .experience-shell .wheel-column,
+      .experience-shell .wheel-stage,
+      .experience-shell .slot-machine,
+      .experience-shell .side,
+      .experience-shell .result-card {
+        width: 100%;
+        min-width: 0;
+        height: auto;
+      }
+
+      .experience-shell .slot-machine {
+        padding: 7px;
+        border-radius: 20px;
+      }
+
+      .reel-frame {
+        padding: 5px;
+        border-radius: 17px;
+      }
+
+      .reel-screen {
+        --row-height: 52px;
+        height: 260px;
+        border-radius: 13px;
+      }
+
+      .reel-track {
+        padding-top: 104px;
+        padding-bottom: 104px;
+      }
+
+      .selection-window {
+        left: 6px;
+        right: 6px;
+        border-radius: 13px;
+      }
+
+      .reel-item {
+        min-width: 0;
+        padding-inline: 10px;
+        font-size: clamp(15px, 4.4vw, 18px);
+        line-height: 1.15;
+        text-align: center;
+        overflow-wrap: anywhere;
+      }
+
+      .reel-item.final {
+        font-size: clamp(17px, 5vw, 21px);
+      }
+
+      .experience-shell .result-card {
+        min-height: 185px;
+        padding: 22px 18px;
+        border-radius: 20px;
+      }
+
+      .result-card::before {
+        left: 18px;
+        right: 18px;
+      }
+
+      .result-card:not(.has-result) .empty-copy {
+        width: 100%;
+        margin: 0 auto;
+        padding: 18px 12px;
+        font-size: clamp(16px, 4.7vw, 19px);
+        line-height: 1.42;
+        text-align: center;
+        text-wrap: balance;
+      }
+
+      #resultContent {
+        padding: 21px 0 10px;
+      }
+
+      .result-card .question {
+        font-size: clamp(20px, 6vw, 27px);
+        line-height: 1.2;
+      }
+
+      .spin-area {
+        grid-column: 1;
+        width: 100%;
+        margin-top: 0;
+      }
+
+      .spin-area .primary {
+        width: 100%;
+        min-height: 56px;
+        margin: 0;
+        padding: 13px 18px;
+        border-radius: 16px;
+        font-size: clamp(15px, 4.2vw, 17px);
+        font-weight: 800;
+        touch-action: manipulation;
+      }
+
+      .spin-area .primary:active {
+        transform: translateY(1px) scale(.995);
+      }
+
+      .spin-area .chance-note {
+        display: block;
+        width: 100%;
+        max-width: none;
+        margin: 11px auto 2px;
+        padding: 0 14px;
+        font-size: 12.5px;
+        line-height: 1.4;
+        text-align: center;
+        text-wrap: balance;
+      }
+
+      .meeting-tip {
+        margin: 0 9px;
+        padding: 16px 16px 17px 18px;
+        border-radius: 17px;
+      }
+
+      body[data-theme="winter"][data-festive="true"] .experience-shell .hero {
+        padding-top: 58px;
+      }
+
+      body[data-theme="winter"][data-festive="true"] .festive-garland {
+        height: 42px;
+      }
+
+      .garland-bulbs {
+        top: 17px;
+      }
+    }
+
+    @media (max-width: 370px) {
+      .app {
+        padding-inline: 6px;
+      }
+
+      .experience-shell {
+        border-radius: 20px;
+      }
+
+      .experience-shell .hero {
+        padding-inline: 10px;
+      }
+
+      .hero h1 {
+        font-size: clamp(28px, 8.8vw, 33px);
+      }
+
+      .experience-shell .workspace {
+        padding: 7px;
+      }
+
+      .reel-screen {
+        height: 244px;
+      }
+
+      .experience-shell .result-card {
+        min-height: 170px;
+      }
+    }
+
   </style>
 </head>
 <body>
