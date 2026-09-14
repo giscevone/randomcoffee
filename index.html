@@ -1677,16 +1677,8 @@
     }
 
     body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .experience-shell::before {
-      content: var(--season-decoration);
-      position: absolute;
-      top: 27px;
-      right: 38px;
-      z-index: 0;
-      font-size: 66px;
-      line-height: 1;
-      opacity: .12;
-      transform: rotate(10deg);
-      pointer-events: none;
+      content: none;
+      display: none;
     }
 
     body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .experience-shell .workspace {
@@ -1819,17 +1811,6 @@
       background: linear-gradient(90deg, transparent, #e05272 18%, #f3a2b5 50%, #e05272 82%, transparent);
     }
 
-    body[data-theme="spring"][data-romantic="true"] .experience-shell::after {
-      content: "♥  ♡  ♥";
-      position: absolute;
-      top: 22px;
-      left: 32px;
-      color: #e05272;
-      font-size: 19px;
-      letter-spacing: 8px;
-      opacity: .31;
-      pointer-events: none;
-    }
 
     body[data-theme="spring"][data-romantic="true"] .hero .subtitle {
       border-color: rgba(224,82,114,.25);
@@ -2777,17 +2758,6 @@
         padding-bottom: 28px;
       }
 
-      .wheel-column::before {
-        content: "Случайный выбор";
-        align-self: flex-start;
-        margin: 0 0 8px 9px;
-        color: var(--season-muted, #81796e);
-        font-size: 10.5px;
-        font-weight: 800;
-        letter-spacing: .07em;
-        text-transform: uppercase;
-      }
-
       .experience-shell .workspace {
         gap: 17px;
       }
@@ -2889,16 +2859,633 @@
     }
 
     @media (max-width: 370px) {
-      .wheel-column::before {
-        margin-left: 7px;
-      }
-
       .experience-shell .workspace {
         gap: 14px;
       }
 
       .experience-shell .result-card:not(.has-result) {
         min-height: 132px;
+      }
+    }
+
+    /* Cohesive mobile service UI: shared cards, headers and spacing. */
+    .mobile-section-heading {
+      display: none;
+    }
+
+    .meeting-tip-heading {
+      display: block;
+    }
+
+    .meeting-tip-subtitle {
+      display: none;
+    }
+
+    @media (max-width: 600px) {
+      .app {
+        max-width: 480px;
+        margin-inline: auto;
+      }
+
+      .wheel-column::before {
+        content: none;
+        display: none;
+      }
+
+      .experience-shell .workspace {
+        gap: 15px;
+      }
+
+      .experience-shell .wheel-column,
+      .spin-area,
+      .experience-shell .result-card,
+      .meeting-tip {
+        border: 1px solid var(--season-line, #e3ddd1);
+        border-radius: 22px;
+        background: var(--season-card, rgba(255, 255, 255, .94));
+        box-shadow:
+          0 10px 28px color-mix(in srgb, var(--season-accent, #d0a614) 10%, transparent),
+          inset 0 1px 0 rgba(255, 255, 255, .9);
+      }
+
+      .experience-shell .wheel-column {
+        display: flex;
+        align-items: stretch;
+        padding: 12px;
+      }
+
+      .mobile-section-heading {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        min-height: 46px;
+        padding: 1px 3px 11px;
+        color: var(--season-ink, #38342e);
+        text-align: left;
+      }
+
+      .mobile-section-icon,
+      .meeting-tip-icon,
+      .result-icon {
+        display: grid;
+        place-items: center;
+        flex: 0 0 auto;
+        width: 38px;
+        height: 38px;
+        border: 1px solid var(--season-line, #e3ddd1);
+        border-radius: 12px;
+        background: var(--season-soft, #f7f4ec);
+        color: var(--season-ink, #38342e);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, .72);
+        font-family: "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+        font-size: 17px;
+      }
+
+      .mobile-section-copy,
+      .meeting-tip-heading {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        min-width: 0;
+      }
+
+      .mobile-section-copy strong,
+      .meeting-tip-heading strong {
+        color: var(--season-ink, #38342e);
+        font-size: 13.5px;
+        font-weight: 820;
+        line-height: 1.2;
+      }
+
+      .mobile-section-copy span,
+      .meeting-tip-subtitle {
+        display: block;
+        color: var(--season-muted, #81796e);
+        font-size: 11px;
+        font-weight: 600;
+        line-height: 1.3;
+      }
+
+      .experience-shell .wheel-stage {
+        overflow: hidden;
+        border-radius: 16px;
+      }
+
+      .experience-shell .slot-machine {
+        border: 0;
+        border-radius: 16px;
+        background: var(--season-soft, #f2eee5);
+        box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--season-line, #e3ddd1) 75%, transparent);
+      }
+
+      .reel-frame {
+        border-radius: 13px;
+      }
+
+      .reel-screen {
+        border-radius: 11px;
+      }
+
+      .spin-area {
+        padding: 11px;
+      }
+
+      .experience-shell .result-card,
+      .experience-shell .result-card:not(.has-result) {
+        min-height: 0;
+        padding: 14px;
+        border-style: solid;
+      }
+
+      .result-card::before {
+        display: none;
+      }
+
+      .result-card:not(.has-result) .result-header {
+        display: flex;
+      }
+
+      .result-header {
+        justify-content: flex-start;
+        min-height: 42px;
+        padding: 0 1px 11px;
+        border-bottom: 1px solid color-mix(in srgb, var(--season-line, #e3ddd1) 72%, transparent);
+      }
+
+      .result-icon {
+        order: -1;
+      }
+
+      .result-header .result-kicker,
+      body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .result-header .result-kicker {
+        padding: 0;
+        border: 0;
+        background: transparent;
+        color: var(--season-ink, #38342e);
+        font-size: 13.5px;
+        font-weight: 820;
+        line-height: 1.25;
+      }
+
+      .result-card:not(.has-result) .empty-copy {
+        display: grid;
+        min-height: 92px;
+        max-width: 310px;
+        margin-inline: auto;
+        padding: 18px 10px 14px;
+        color: var(--season-muted, #81796e);
+        font-size: 14px;
+        line-height: 1.4;
+      }
+
+      .result-card:not(.has-result) .empty-copy::before {
+        display: none;
+      }
+
+      #resultContent {
+        padding: 20px 5px 5px;
+      }
+
+      .result-card .question {
+        font-size: clamp(20px, 5.8vw, 26px);
+        line-height: 1.22;
+      }
+
+      .copy-link {
+        margin-top: 18px;
+      }
+
+      .meeting-tip {
+        margin-top: 15px;
+        padding: 14px;
+        overflow: hidden;
+      }
+
+      .meeting-tip::before {
+        display: none;
+      }
+
+      .meeting-tip-title {
+        gap: 11px;
+        min-height: 42px;
+        margin: 0;
+        padding: 0 1px 11px;
+        border-bottom: 1px solid color-mix(in srgb, var(--season-line, #e3ddd1) 72%, transparent);
+      }
+
+      .meeting-tip-text {
+        margin: 0;
+        padding: 15px 5px 4px;
+        color: var(--season-muted, #81796e);
+        font-size: 13px;
+        line-height: 1.52;
+      }
+
+      body[data-theme="winter"][data-festive="true"] .experience-shell .hero {
+        padding-top: 58px;
+      }
+    }
+
+    @media (max-width: 370px) {
+      .experience-shell .wheel-column,
+      .spin-area,
+      .experience-shell .result-card,
+      .meeting-tip {
+        border-radius: 19px;
+      }
+
+      .experience-shell .wheel-column,
+      .spin-area {
+        padding: 9px;
+      }
+    }
+
+    /* Cylindrical reel: correct centering, depth and cleaner mobile geometry. */
+    .reel-screen {
+      perspective: 620px;
+      perspective-origin: 50% 50%;
+    }
+
+    .reel-track {
+      transform-style: preserve-3d;
+    }
+
+    .reel-item {
+      transform-origin: 50% 50%;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      will-change: transform, opacity, filter;
+    }
+
+    @media (max-width: 600px) {
+      .experience-shell .slot-machine {
+        padding: 7px;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, .36), transparent 22%),
+          var(--season-soft, #f2eee5);
+      }
+
+      .reel-frame {
+        padding: 5px;
+        background: color-mix(in srgb, var(--season-line, #e3ddd1) 68%, white);
+        box-shadow: inset 0 1px 3px color-mix(in srgb, var(--season-ink, #38342e) 9%, transparent);
+      }
+
+      .reel-screen {
+        overflow: hidden;
+        border: 1px solid color-mix(in srgb, var(--season-line, #e3ddd1) 78%, transparent);
+        background: var(--season-reel, #fffdf8);
+        box-shadow:
+          inset 0 18px 32px var(--season-glow, rgba(54, 46, 27, .07)),
+          inset 0 -18px 32px var(--season-glow, rgba(54, 46, 27, .07)),
+          0 1px 0 rgba(255, 255, 255, .8);
+      }
+
+      .reel-screen::before,
+      .reel-screen::after {
+        height: 88px;
+      }
+
+      .reel-track {
+        padding-inline: 8px;
+      }
+
+      .reel-item {
+        border-bottom: 0;
+        transition: color .18s ease;
+      }
+
+      .selection-window,
+      body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .selection-window {
+        left: 7px;
+        right: 7px;
+        border-width: 1px;
+        border-radius: 13px;
+        box-shadow:
+          0 8px 18px var(--season-glow, rgba(54, 46, 27, .12)),
+          inset 0 1px 0 rgba(255, 255, 255, .58),
+          inset 0 -1px 0 color-mix(in srgb, var(--season-ink, #38342e) 8%, transparent);
+      }
+
+      .reel-item.final {
+        text-shadow: 0 1px 0 rgba(255, 255, 255, .38);
+      }
+
+      .reel-is-spinning .selection-window {
+        box-shadow:
+          0 5px 13px var(--season-glow, rgba(54, 46, 27, .10)),
+          inset 0 1px 0 rgba(255, 255, 255, .42);
+      }
+    }
+
+    /* Desktop adaptation of the same service design used on mobile. */
+    @media (min-width: 601px) {
+      .app {
+        width: min(1120px, calc(100% - 40px));
+        padding-top: 54px;
+        padding-bottom: 54px;
+      }
+
+      .experience-shell,
+      body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .experience-shell {
+        overflow: visible;
+        padding-bottom: 0;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+      }
+
+      .experience-shell .hero {
+        padding: 24px 30px 38px;
+      }
+
+      .experience-shell .workspace,
+      body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .experience-shell .workspace {
+        grid-template-areas:
+          "wheel result"
+          "spin spin";
+        grid-template-columns: minmax(0, 1.12fr) minmax(340px, .88fr);
+        grid-template-rows: auto auto;
+        align-items: stretch;
+        gap: 20px;
+        width: 100%;
+        padding: 0;
+        border: 0;
+        background: transparent;
+      }
+
+      .wheel-column {
+        grid-area: wheel;
+      }
+
+      .side {
+        grid-area: result;
+      }
+
+      .spin-area {
+        grid-area: spin;
+      }
+
+      .experience-shell .wheel-column,
+      .spin-area,
+      .experience-shell .result-card,
+      .meeting-tip {
+        border: 1px solid var(--season-line, #e3ddd1);
+        border-radius: 24px;
+        background: var(--season-card, rgba(255, 255, 255, .94));
+        box-shadow:
+          0 14px 36px color-mix(in srgb, var(--season-accent, #d0a614) 10%, transparent),
+          inset 0 1px 0 rgba(255, 255, 255, .92);
+      }
+
+      .experience-shell .wheel-column {
+        display: flex;
+        align-items: stretch;
+        height: auto;
+        padding: 17px;
+      }
+
+      .mobile-section-heading {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-height: 48px;
+        padding: 1px 3px 13px;
+        color: var(--season-ink, #38342e);
+        text-align: left;
+      }
+
+      .mobile-section-icon,
+      .meeting-tip-icon,
+      .result-icon {
+        display: grid;
+        place-items: center;
+        flex: 0 0 auto;
+        width: 40px;
+        height: 40px;
+        border: 1px solid var(--season-line, #e3ddd1);
+        border-radius: 13px;
+        background: var(--season-soft, #f7f4ec);
+        color: var(--season-ink, #38342e);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, .75);
+        font-family: "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+        font-size: 18px;
+      }
+
+      .mobile-section-copy,
+      .meeting-tip-heading {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        min-width: 0;
+      }
+
+      .mobile-section-copy strong,
+      .meeting-tip-heading strong {
+        color: var(--season-ink, #38342e);
+        font-size: 14px;
+        font-weight: 820;
+        line-height: 1.2;
+      }
+
+      .experience-shell .wheel-stage,
+      .experience-shell .slot-machine {
+        height: auto;
+      }
+
+      .experience-shell .wheel-stage {
+        overflow: hidden;
+        border-radius: 18px;
+      }
+
+      .experience-shell .slot-machine {
+        padding: 8px;
+        border: 0;
+        border-radius: 18px;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, .38), transparent 22%),
+          var(--season-soft, #f2eee5);
+        box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--season-line, #e3ddd1) 76%, transparent);
+      }
+
+      .reel-frame {
+        padding: 6px;
+        border-radius: 15px;
+        background: color-mix(in srgb, var(--season-line, #e3ddd1) 68%, white);
+        box-shadow: inset 0 1px 3px color-mix(in srgb, var(--season-ink, #38342e) 9%, transparent);
+      }
+
+      .reel-screen {
+        overflow: hidden;
+        height: 330px;
+        border: 1px solid color-mix(in srgb, var(--season-line, #e3ddd1) 78%, transparent);
+        border-radius: 12px;
+        background: var(--season-reel, #fffdf8);
+        box-shadow:
+          inset 0 22px 38px var(--season-glow, rgba(54, 46, 27, .07)),
+          inset 0 -22px 38px var(--season-glow, rgba(54, 46, 27, .07)),
+          0 1px 0 rgba(255, 255, 255, .82);
+      }
+
+      .reel-item {
+        border-bottom: 0;
+      }
+
+      .selection-window,
+      body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .selection-window {
+        left: 9px;
+        right: 9px;
+        border-width: 1px;
+        border-radius: 14px;
+        box-shadow:
+          0 9px 20px var(--season-glow, rgba(54, 46, 27, .12)),
+          inset 0 1px 0 rgba(255, 255, 255, .58),
+          inset 0 -1px 0 color-mix(in srgb, var(--season-ink, #38342e) 8%, transparent);
+      }
+
+      .experience-shell .side {
+        width: auto;
+        min-width: 0;
+        height: 100%;
+      }
+
+      .experience-shell .result-card,
+      .experience-shell .result-card:not(.has-result) {
+        width: 100%;
+        min-height: 100%;
+        padding: 18px;
+        border-style: solid;
+      }
+
+      .result-card::before {
+        display: none;
+      }
+
+      .result-card:not(.has-result) .result-header {
+        display: flex;
+      }
+
+      .result-header {
+        justify-content: flex-start;
+        min-height: 48px;
+        padding: 0 2px 14px;
+        border-bottom: 1px solid color-mix(in srgb, var(--season-line, #e3ddd1) 72%, transparent);
+      }
+
+      .result-icon {
+        order: -1;
+      }
+
+      .result-header .result-kicker,
+      body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .result-header .result-kicker {
+        padding: 0;
+        border: 0;
+        background: transparent;
+        color: var(--season-ink, #38342e);
+        font-size: 14px;
+        font-weight: 820;
+        line-height: 1.25;
+      }
+
+      .result-card:not(.has-result) .empty-copy {
+        display: grid;
+        min-height: 260px;
+        max-width: 310px;
+        margin: 0 auto;
+        padding: 28px 10px;
+        color: var(--season-muted, #81796e);
+        font-size: 16px;
+        line-height: 1.45;
+        text-align: center;
+      }
+
+      #resultContent {
+        padding: 32px 6px 8px;
+      }
+
+      .result-card .question {
+        font-size: clamp(24px, 2.5vw, 32px);
+        line-height: 1.2;
+      }
+
+      .copy-link {
+        align-self: stretch;
+        width: 100%;
+        min-height: 48px;
+        margin-top: 24px;
+        border-color: var(--season-line, #e3ddd1);
+        background: var(--season-soft, #f7f4ec);
+        color: var(--season-ink, #38342e);
+      }
+
+      .spin-area {
+        margin-top: 0;
+        padding: 12px;
+      }
+
+      .spin-area .primary,
+      body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .spin-area .primary,
+      body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .spin-area .primary:hover {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 11px;
+        min-height: 62px;
+        margin: 0;
+        border: 0;
+        border-radius: 17px;
+        background: linear-gradient(145deg, color-mix(in srgb, var(--season-ink, #38342e) 84%, white), var(--season-ink, #38342e));
+        box-shadow: 0 11px 25px color-mix(in srgb, var(--season-ink, #38342e) 24%, transparent), inset 0 1px 0 rgba(255, 255, 255, .16);
+        color: #fff;
+        font-size: 17px;
+        font-weight: 820;
+      }
+
+      .spin-area .primary::before {
+        content: "🎲";
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 11px;
+        background: rgba(255, 255, 255, .13);
+        font-size: 19px;
+      }
+
+      .spin-area .chance-note {
+        margin: 10px auto 1px;
+        color: var(--season-muted, #81796e);
+        font-size: 12px;
+      }
+
+      .meeting-tip {
+        margin: 20px 0 0;
+        padding: 18px;
+      }
+
+      .meeting-tip::before {
+        display: none;
+      }
+
+      .meeting-tip-title {
+        gap: 12px;
+        min-height: 48px;
+        margin: 0;
+        padding: 0 2px 14px;
+        border-bottom: 1px solid color-mix(in srgb, var(--season-line, #e3ddd1) 72%, transparent);
+      }
+
+      .meeting-tip-text {
+        max-width: none;
+        padding: 17px 6px 3px;
+        color: var(--season-muted, #81796e);
+        font-size: 14px;
+        line-height: 1.55;
+      }
+
+      body[data-theme="winter"][data-festive="true"] .experience-shell .hero {
+        padding-top: 54px;
       }
     }
 
@@ -2943,7 +3530,7 @@
       </div>
       <section class="hero">
         <h1><span>Рандом кофе SME</span></h1>
-        <p class="subtitle">Создано для тёплых встреч и хороших разговоров🧋</p>
+        <p class="subtitle">Темы и активности для встречи 🧋</p>
       </section>
 
       <section class="workspace" aria-label="Рулетка идей">
@@ -2964,7 +3551,7 @@
       <aside class="side" aria-live="polite">
         <article class="result-card" id="resultCard">
           <div class="result-header">
-            <div class="result-kicker" id="resultKicker">Тема для встречи</div>
+            <div class="result-kicker" id="resultKicker">Результат рулетки</div>
             <div class="result-icon" id="resultIcon" aria-hidden="true">✦</div>
           </div>
           <p class="empty-copy" id="emptyCopy">После запуска здесь появится вопрос или совместная активность</p>
@@ -2985,7 +3572,10 @@
       </section>
 
       <section class="meeting-tip" id="meetingTip" aria-live="polite" hidden>
-        <div class="meeting-tip-title">💡 Маленький совет</div>
+        <div class="meeting-tip-title">
+          <span class="meeting-tip-icon" aria-hidden="true">💡</span>
+          <span class="meeting-tip-heading"><strong>Маленький совет</strong></span>
+        </div>
         <p class="meeting-tip-text" id="meetingTipText"></p>
       </section>
 
@@ -3076,6 +3666,7 @@
     let reelFinishTimer = null;
     let reelStartFrame = null;
     let windowsAnimationFrame = null;
+    let reelDepthFrame = null;
     let typeBag = [];
     let currentLink = '';
 
@@ -3206,6 +3797,59 @@
       return parseFloat(getComputedStyle(reelScreen).getPropertyValue('--row-height')) || 66;
     }
 
+    function syncReelGeometry() {
+      const height = rowHeight();
+      const verticalPadding = Math.max(0, (reelScreen.clientHeight - height) / 2);
+      reelTrack.style.paddingTop = `${verticalPadding}px`;
+      reelTrack.style.paddingBottom = `${verticalPadding}px`;
+    }
+
+    function reelTrackY() {
+      const transform = getComputedStyle(reelTrack).transform;
+      if (!transform || transform === 'none') return 0;
+      try {
+        const Matrix = window.DOMMatrixReadOnly || window.WebKitCSSMatrix;
+        if (Matrix) return new Matrix(transform).m42 || 0;
+      } catch (_) {}
+      const values = transform.match(/-?\d*\.?\d+(?:e[-+]?\d+)?/gi)?.map(Number) || [];
+      return transform.startsWith('matrix3d') ? (values[13] || 0) : (values[5] || 0);
+    }
+
+    function applyReelDepth() {
+      const height = rowHeight();
+      const trackStyle = getComputedStyle(reelTrack);
+      const paddingTop = parseFloat(trackStyle.paddingTop) || 0;
+      const center = reelScreen.clientHeight / 2;
+      const translateY = reelTrackY();
+
+      [...reelTrack.children].forEach((item, index) => {
+        const itemCenter = paddingTop + index * height + height / 2 + translateY;
+        const distance = (itemCenter - center) / height;
+        const limited = Math.max(-3.2, Math.min(3.2, distance));
+        const depth = Math.abs(limited);
+        const angle = -limited * 17;
+        const scale = Math.max(.73, 1 - depth * .085);
+        const z = -depth * 25;
+        const opacity = Math.max(.08, 1 - depth * .29);
+        const blur = Math.max(0, depth - 1.55) * .42;
+
+        item.style.transform = `translateZ(${z.toFixed(1)}px) rotateX(${angle.toFixed(1)}deg) scale(${scale.toFixed(3)})`;
+        item.style.opacity = opacity.toFixed(3);
+        item.style.filter = blur > .05 ? `blur(${blur.toFixed(2)}px)` : 'none';
+        item.style.zIndex = String(Math.max(1, 20 - Math.round(depth * 5)));
+      });
+    }
+
+    function startReelDepthEffect() {
+      if (reelDepthFrame !== null) cancelAnimationFrame(reelDepthFrame);
+      const frame = () => {
+        applyReelDepth();
+        if (reelTrack.classList.contains('is-spinning')) reelDepthFrame = requestAnimationFrame(frame);
+        else reelDepthFrame = null;
+      };
+      reelDepthFrame = requestAnimationFrame(frame);
+    }
+
     function reelItem(index, isFinal = false) {
       const item = document.createElement('div');
       const activity = topics[index].type === 'Активность';
@@ -3217,6 +3861,7 @@
     }
 
     function renderRestingReel(centerIndex = 0) {
+      syncReelGeometry();
       reelTrack.replaceChildren();
       for (let offset = -2; offset <= 2; offset++) {
         const index = (centerIndex + offset + topics.length) % topics.length;
@@ -3224,9 +3869,11 @@
       }
       reelTrack.style.transition = 'none';
       reelTrack.style.transform = `translate3d(0, ${-2 * rowHeight()}px, 0)`;
+      requestAnimationFrame(applyReelDepth);
     }
 
     function runReel(selected, duration, steps, done) {
+      syncReelGeometry();
       const sequence = [];
       sequence.push(lastIndex >= 0 ? lastIndex : randomInt(topics.length));
       for (let i = 1; i < steps; i++) sequence.push(randomInt(topics.length));
@@ -3238,6 +3885,7 @@
       reelTrack.style.transform = 'translate3d(0, 0, 0)';
       reelTrack.classList.add('is-spinning');
       document.body.classList.add('reel-is-spinning');
+      startReelDepthEffect();
 
       const target = -(sequence.length - 1) * rowHeight();
       let finished = false;
@@ -3250,6 +3898,8 @@
         reelStartFrame = null;
         if (windowsAnimationFrame !== null) cancelAnimationFrame(windowsAnimationFrame);
         windowsAnimationFrame = null;
+        if (reelDepthFrame !== null) cancelAnimationFrame(reelDepthFrame);
+        reelDepthFrame = null;
         if (activeReelAnimation) activeReelAnimation.cancel();
         activeReelAnimation = null;
         reelTrack.classList.remove('is-spinning');
@@ -3392,6 +4042,8 @@
       activeReelAnimation = null;
       if (windowsAnimationFrame !== null) cancelAnimationFrame(windowsAnimationFrame);
       windowsAnimationFrame = null;
+      if (reelDepthFrame !== null) cancelAnimationFrame(reelDepthFrame);
+      reelDepthFrame = null;
       spinning = false;
       setControls(false);
       reelTrack.classList.remove('is-spinning');
@@ -3401,7 +4053,7 @@
       currentLink = '';
       copyLinkLabel.textContent = 'Перейти по ссылке';
       copyLinkButton.hidden = true;
-      resultKicker.textContent = 'Тема для встречи';
+      resultKicker.textContent = 'Результат рулетки';
       resultIcon.textContent = '✦';
       emptyCopy.hidden = false;
       resultContent.hidden = true;
@@ -3891,6 +4543,14 @@
         }));
       return { topics: importedTopics };
     }
+
+    let reelResizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(reelResizeTimer);
+      reelResizeTimer = setTimeout(() => {
+        if (!spinning) renderRestingReel(lastIndex >= 0 ? lastIndex : 0);
+      }, 120);
+    }, { passive: true });
 
     renderRestingReel(0);
   </script>
