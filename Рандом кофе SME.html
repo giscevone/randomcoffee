@@ -1,0 +1,2789 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f8f6f0">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; connect-src 'none'; font-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; child-src 'none'; worker-src 'none'; base-uri 'none'; form-action 'none'; manifest-src 'none'">
+  <title>Рандом кофе — идеи для хорошей встречи</title>
+  <style>
+    :root {
+      --bg: #f7f5ef;
+      --surface: #ffffff;
+      --surface-soft: #fbfaf7;
+      --ink: #24231f;
+      --muted: #74716a;
+      --line: #e8e4da;
+      --yellow: #ffd84a;
+      --yellow-hover: #ffcf24;
+      --yellow-soft: #fff4bd;
+      --shadow: 0 22px 60px rgba(45, 39, 24, .10), 0 3px 12px rgba(45, 39, 24, .05);
+      --shadow-soft: 0 10px 30px rgba(45, 39, 24, .07);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 16px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { min-width: 320px; background: var(--bg); color-scheme: light; }
+
+    ::selection { background: rgba(255, 216, 74, .55); color: var(--ink); }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 13% 4%, rgba(255, 216, 74, .16), transparent 28rem),
+        radial-gradient(circle at 90% 35%, rgba(255, 238, 166, .20), transparent 30rem),
+        var(--bg);
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button, input { font: inherit; }
+    button { color: inherit; }
+
+    .app {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 26px 0 48px;
+    }
+
+    .topbar {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 58px;
+    }
+
+    .brand { display: inline-flex; align-items: center; gap: 12px; }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      border: 1px solid rgba(211, 174, 25, .25);
+      border-radius: 15px;
+      background: var(--yellow);
+      box-shadow: 0 7px 18px rgba(205, 162, 0, .18);
+      font-size: 24px;
+    }
+
+    .brand-copy strong { display: block; font-size: 18px; letter-spacing: -.025em; }
+    .brand-copy span { display: block; margin-top: 3px; color: var(--muted); font-size: 12px; }
+
+    .menu-wrap { position: relative; z-index: 20; }
+
+    .icon-button {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255,255,255,.78);
+      box-shadow: 0 3px 12px rgba(45,39,24,.04);
+      cursor: pointer;
+      transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+    }
+
+    .icon-button:hover { transform: translateY(-1px); background: #fff; box-shadow: var(--shadow-soft); }
+    .icon-button:focus-visible, .primary:focus-visible, .secondary:focus-visible, .menu-item:focus-visible, .copy-link:focus-visible { outline: 3px solid rgba(231, 183, 0, .28); outline-offset: 3px; }
+    .dots { font-size: 24px; line-height: 0; transform: translateY(-3px); letter-spacing: 1px; }
+
+    .menu {
+      position: absolute;
+      top: 53px;
+      right: 0;
+      width: 292px;
+      padding: 8px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: rgba(255,255,255,.97);
+      box-shadow: var(--shadow);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px) scale(.98);
+      transform-origin: top right;
+      transition: .18s ease;
+      backdrop-filter: blur(14px);
+    }
+
+    .menu.open { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      padding: 12px 13px;
+      border: 0;
+      border-radius: 13px;
+      background: transparent;
+      text-align: left;
+      font-weight: 650;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background .15s ease;
+    }
+
+    .menu-item:hover { background: #f7f5ef; }
+    .menu-icon { width: 20px; text-align: center; color: #7b766a; font-size: 17px; }
+    .privacy { margin: 7px 5px 4px; padding: 12px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11.5px; line-height: 1.45; }
+    .privacy-dot { color: #2da867; }
+
+    .hero { padding: 48px 0 28px; text-align: center; }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      padding: 8px 13px;
+      border: 1px solid rgba(205, 162, 0, .18);
+      border-radius: 999px;
+      background: rgba(255, 244, 189, .65);
+      color: #6a5814;
+      font-size: 12px;
+      font-weight: 750;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    h1 { margin: 0; font-size: clamp(38px, 5.5vw, 72px); line-height: .98; letter-spacing: -.065em; }
+    .subtitle { margin: 18px auto 0; color: var(--muted); font-size: clamp(16px, 2vw, 20px); line-height: 1.55; }
+    .subtitle span { display: block; margin-top: 3px; font-size: .84em; color: #918d84; }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 350px;
+      align-items: center;
+      gap: clamp(34px, 6vw, 78px);
+      margin: 12px auto 0;
+      max-width: 1030px;
+    }
+
+    .wheel-column { display: flex; flex-direction: column; align-items: center; min-width: 0; }
+
+    .wheel-stage {
+      position: relative;
+      width: min(62vw, 560px);
+      min-height: 520px;
+      padding: 22px;
+      isolation: isolate;
+    }
+
+    .wheel-halo { position: absolute; inset: 10% 2%; border-radius: 80px; background: rgba(255, 216, 74, .23); filter: blur(38px); z-index: -1; }
+
+    .slot-machine {
+      position: relative;
+      width: 100%;
+      padding: 18px 20px 22px;
+      border: 2px solid #1f1e1a;
+      border-radius: 34px;
+      background: linear-gradient(145deg, #34332d 0%, #1f1e1a 58%, #292823 100%);
+      box-shadow: 0 28px 65px rgba(45,39,24,.20), inset 0 0 0 4px rgba(255,255,255,.06), inset 0 0 0 7px #d9ad20;
+    }
+
+    .machine-top {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      height: 54px;
+      color: #fff3b7;
+      font-size: 13px;
+      font-weight: 850;
+      letter-spacing: .16em;
+    }
+
+    .machine-light {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--yellow);
+      box-shadow: 0 0 13px rgba(255,216,74,.8);
+    }
+
+    .reel-frame {
+      position: relative;
+      padding: 13px;
+      border: 1px solid #d7aa20;
+      border-radius: 23px;
+      background: linear-gradient(180deg, #bd8d10, #ffe579 8%, #9a6d07 100%);
+      box-shadow: inset 0 1px 1px rgba(255,255,255,.75), 0 8px 24px rgba(0,0,0,.24);
+    }
+
+    .reel-screen {
+      --row-height: 66px;
+      position: relative;
+      height: 330px;
+      overflow: hidden;
+      border: 2px solid #171612;
+      border-radius: 14px;
+      background: #fffdf5;
+      box-shadow: inset 0 12px 28px rgba(41,40,34,.14), inset 0 -12px 28px rgba(41,40,34,.14);
+    }
+
+    .reel-screen::before,
+    .reel-screen::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      z-index: 4;
+      height: 106px;
+      pointer-events: none;
+    }
+
+    .reel-screen::before { top: 0; background: linear-gradient(#fffdf5 8%, rgba(255,253,245,.82) 50%, transparent); }
+    .reel-screen::after { bottom: 0; background: linear-gradient(transparent, rgba(255,253,245,.82) 50%, #fffdf5 92%); }
+
+    .selection-window {
+      position: absolute;
+      left: 8px;
+      right: 8px;
+      top: 50%;
+      z-index: 5;
+      height: var(--row-height);
+      transform: translateY(-50%);
+      border: 2px solid #d9ad20;
+      border-radius: 12px;
+      background: rgba(255,216,74,.16);
+      box-shadow: 0 0 0 4px rgba(255,216,74,.08), inset 0 0 20px rgba(255,216,74,.12);
+      pointer-events: none;
+    }
+
+    .selection-window::before,
+    .selection-window::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 0;
+      height: 0;
+      transform: translateY(-50%);
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+    }
+
+    .selection-window::before { left: -10px; border-left: 0; border-right: 9px solid #d9ad20; }
+    .selection-window::after { right: -10px; border-right: 0; border-left: 9px solid #d9ad20; }
+
+    .reel-track {
+      position: relative;
+      z-index: 2;
+      padding: 132px 14px;
+      will-change: transform;
+      transform: translateY(0);
+    }
+
+    .reel-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: var(--row-height);
+      padding: 0 18px;
+      border-bottom: 1px solid #ebe5d6;
+      color: #777269;
+      font-size: clamp(17px, 2vw, 23px);
+      font-weight: 750;
+      line-height: 1.12;
+      text-align: center;
+    }
+
+    .reel-item.final { color: #24231f; font-size: clamp(20px, 2.35vw, 27px); font-weight: 850; }
+
+    .reel-item > span:last-child {
+      display: -webkit-box;
+      max-width: calc(100% - 34px);
+      overflow: hidden;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow-wrap: anywhere;
+    }
+
+    .machine-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      height: 50px;
+      color: #d7d1c2;
+      font-size: 11px;
+      font-weight: 750;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .machine-bottom span { color: var(--yellow); }
+
+    .primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-width: 230px;
+      min-height: 56px;
+      padding: 15px 24px;
+      border: 1px solid rgba(190, 148, 0, .18);
+      border-radius: 17px;
+      background: var(--yellow);
+      box-shadow: 0 11px 26px rgba(211, 168, 0, .22);
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: .025em;
+      cursor: pointer;
+      transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+    }
+
+    .primary:hover { transform: translateY(-2px); background: var(--yellow-hover); box-shadow: 0 14px 31px rgba(211,168,0,.27); }
+    .primary:active { transform: translateY(0) scale(.985); }
+    .primary:disabled { cursor: wait; opacity: .64; transform: none; }
+
+    .side { display: flex; flex-direction: column; gap: 16px; }
+
+    .result-card, .tip-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: rgba(255,255,255,.88);
+      box-shadow: var(--shadow-soft);
+      text-align: left;
+      backdrop-filter: blur(10px);
+    }
+
+    .result-card {
+      min-height: 250px;
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      transition: opacity .28s ease, transform .28s ease;
+    }
+
+    .result-card.enter { animation: cardIn .48s cubic-bezier(.2,.8,.2,1); }
+    @keyframes cardIn { from { opacity: 0; transform: translateY(12px) scale(.98); } to { opacity: 1; transform: none; } }
+
+    .result-kicker { display: flex; align-items: center; gap: 8px; color: #8b7418; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .result-title { margin: 14px 0 9px; color: var(--muted); font-size: 13px; font-weight: 650; }
+    .question { margin: 0; font-size: clamp(20px, 2.4vw, 27px); line-height: 1.25; letter-spacing: -.035em; font-weight: 750; }
+    .empty-copy { color: var(--muted); font-size: 16px; line-height: 1.55; }
+
+    .result-actions { display: none; gap: 9px; margin-top: 23px; flex-wrap: wrap; }
+    .result-card.has-result .result-actions { display: flex; }
+
+    .secondary {
+      min-height: 40px;
+      padding: 9px 13px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      font-size: 12px;
+      font-weight: 750;
+      cursor: pointer;
+      transition: .18s ease;
+    }
+
+    .secondary:hover { background: var(--surface-soft); transform: translateY(-1px); }
+
+    .tip-card { padding: 18px 20px; }
+    .tip-title { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 12px; font-weight: 800; }
+    .tip-text { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
+
+    .footer { margin-top: 46px; text-align: center; color: #a09c93; font-size: 11px; }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 28px;
+      z-index: 50;
+      width: min(410px, calc(100% - 32px));
+      padding: 14px 17px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: #292822;
+      box-shadow: var(--shadow);
+      color: #fff;
+      font-size: 13px;
+      line-height: 1.45;
+      opacity: 0;
+      visibility: hidden;
+      transform: translate(-50%, 13px);
+      transition: .25s ease;
+    }
+
+    .toast.show { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+    .toast.error { background: #5c2d2b; }
+    #fileInput { display: none; }
+
+    @media (max-width: 860px) {
+      .app { width: min(100% - 28px, 680px); }
+      .hero { padding-top: 36px; }
+      .workspace { grid-template-columns: 1fr; gap: 28px; }
+      .wheel-stage { width: min(88vw, 560px); min-height: 500px; }
+      .side { width: min(100%, 560px); margin: 0 auto; }
+      .result-card { min-height: auto; }
+    }
+
+    @media (max-width: 520px) {
+      .app { width: min(100% - 20px, 470px); padding-top: 16px; }
+      .brand-copy span { display: none; }
+      .hero { padding: 31px 0 22px; }
+      .eyebrow { margin-bottom: 12px; }
+      .subtitle { margin-top: 13px; }
+      .wheel-stage { width: min(96vw, 470px); min-height: 450px; padding: 10px; }
+      .slot-machine { padding: 13px 14px 16px; border-radius: 27px; }
+      .machine-top { height: 48px; font-size: 11px; }
+      .reel-frame { padding: 9px; }
+      .reel-screen { --row-height: 60px; height: 300px; }
+      .reel-track { padding-top: 120px; padding-bottom: 120px; }
+      .reel-item { padding-inline: 12px; font-size: 16px; }
+      .primary { min-width: 210px; min-height: 52px; }
+      .menu { width: min(292px, calc(100vw - 20px)); }
+      .result-card { padding: 22px; }
+    }
+
+    /* Clean finance-app visual language: neutral surfaces and one yellow accent. */
+    body {
+      background: #f5f5f5;
+    }
+
+    .app {
+      width: min(1160px, calc(100% - 40px));
+      padding-top: 18px;
+    }
+
+    .topbar {
+      min-height: 44px;
+      justify-content: flex-end;
+    }
+
+    .hero {
+      padding: 28px 0 38px;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 5vw, 66px);
+      letter-spacing: -.06em;
+    }
+
+    .subtitle {
+      margin-top: 13px;
+      color: #777;
+      font-size: 18px;
+    }
+
+    .workspace {
+      grid-template-columns: minmax(0, 1.12fr) minmax(330px, .88fr);
+      align-items: stretch;
+      gap: 22px;
+      max-width: 1040px;
+      padding: 24px;
+      border: 1px solid #ececec;
+      border-radius: 32px;
+      background: #fff;
+      box-shadow: 0 18px 50px rgba(0,0,0,.055);
+    }
+
+    .wheel-column {
+      justify-content: center;
+      padding: 8px;
+    }
+
+    .wheel-stage {
+      width: 100%;
+      min-height: auto;
+      padding: 0;
+    }
+
+    .wheel-halo { display: none; }
+
+    .slot-machine {
+      padding: 10px;
+      border: 0;
+      border-radius: 25px;
+      background: #f1f2f3;
+      box-shadow: none;
+    }
+
+    .reel-frame {
+      padding: 0;
+      border: 0;
+      border-radius: 19px;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .reel-screen {
+      height: 330px;
+      border: 0;
+      border-radius: 19px;
+      background: #fafafa;
+      box-shadow: inset 0 0 0 1px #e7e7e7;
+    }
+
+    .reel-screen::before { background: linear-gradient(#fafafa 10%, rgba(250,250,250,.90) 48%, transparent); }
+    .reel-screen::after { background: linear-gradient(transparent, rgba(250,250,250,.90) 52%, #fafafa 90%); }
+
+    .selection-window {
+      left: 10px;
+      right: 10px;
+      border: 0;
+      border-radius: 14px;
+      background: #ffdd2d;
+      box-shadow: none;
+      z-index: 1;
+    }
+
+    .selection-window::before,
+    .selection-window::after { display: none; }
+
+    .reel-item {
+      border-bottom-color: #ececec;
+      color: #8a8a8a;
+      font-weight: 650;
+    }
+
+    .reel-item.final { color: #1f1f1f; }
+
+    .primary {
+      width: 100%;
+      margin-top: 16px;
+      border: 0;
+      border-radius: 15px;
+      background: #ffdd2d;
+      box-shadow: none;
+      color: #1f1f1f;
+      font-size: 15px;
+    }
+
+    .primary:hover {
+      background: #fccf24;
+      box-shadow: none;
+    }
+
+    .side {
+      min-width: 0;
+    }
+
+    .result-card {
+      min-height: 100%;
+      padding: clamp(28px, 4vw, 44px);
+      border: 0;
+      border-radius: 24px;
+      background: #f5f5f5;
+      box-shadow: none;
+      backdrop-filter: none;
+    }
+
+    .result-kicker {
+      display: block;
+      color: #777;
+      font-size: 13px;
+      font-weight: 650;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    .result-title {
+      margin: 26px 0 10px;
+      color: #777;
+      font-size: 14px;
+    }
+
+    .question {
+      font-size: clamp(24px, 2.5vw, 34px);
+      line-height: 1.18;
+      letter-spacing: -.035em;
+      font-weight: 760;
+    }
+
+    .empty-copy {
+      max-width: 320px;
+      margin: 22px 0 0;
+      color: #767676;
+      font-size: 17px;
+    }
+
+    @media (max-width: 860px) {
+      .app { width: min(100% - 24px, 680px); }
+      .workspace { grid-template-columns: 1fr; padding: 16px; }
+      .wheel-stage { width: 100%; min-height: auto; }
+      .side { width: 100%; }
+      .result-card { min-height: 260px; }
+    }
+
+    @media (max-width: 520px) {
+      .app { width: min(100% - 16px, 470px); }
+      .hero { padding: 18px 0 28px; }
+      .subtitle { font-size: 16px; }
+      .workspace { padding: 10px; border-radius: 25px; }
+      .wheel-column { padding: 0; }
+      .slot-machine { padding: 7px; border-radius: 21px; }
+      .reel-screen { height: 300px; }
+      .result-card { padding: 28px 24px; }
+    }
+
+    /* Refined warm visual language inspired by the original concept. */
+    body {
+      background:
+        radial-gradient(circle at 50% -12%, rgba(255, 221, 45, .17), transparent 36rem),
+        radial-gradient(circle at 8% 55%, rgba(255, 238, 165, .12), transparent 28rem),
+        #f8f6f0;
+    }
+
+    .icon-button {
+      border-color: #e7e1d6;
+      background: rgba(255,255,255,.88);
+      box-shadow: 0 5px 16px rgba(48,42,28,.055);
+    }
+
+    .hero {
+      padding-top: 22px;
+      padding-bottom: 42px;
+    }
+
+    .hero h1 {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .18em;
+      white-space: nowrap;
+      text-shadow: 0 1px 0 rgba(255,255,255,.7);
+    }
+
+    .title-emoji {
+      display: inline-block;
+      flex: 0 0 auto;
+      font-size: .78em;
+      line-height: 1;
+      transform: translateY(.02em);
+    }
+
+    .subtitle > span {
+      margin-top: 5px;
+      color: #99958c;
+      font-size: .88em;
+    }
+
+    .workspace {
+      gap: 28px;
+      padding: 30px;
+      border-color: rgba(224,217,203,.82);
+      border-radius: 34px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.94), rgba(255,253,247,.82));
+      box-shadow:
+        0 24px 65px rgba(54,46,27,.08),
+        0 3px 12px rgba(54,46,27,.035),
+        inset 0 1px 0 rgba(255,255,255,.9);
+      backdrop-filter: blur(10px);
+    }
+
+    .slot-machine {
+      padding: 12px;
+      border: 1px solid #e4ded1;
+      border-radius: 27px;
+      background: linear-gradient(150deg, #fffdf8, #f0ede5);
+      box-shadow:
+        0 16px 35px rgba(57,48,26,.09),
+        inset 0 1px 0 #fff;
+    }
+
+    .reel-frame {
+      padding: 7px;
+      border-radius: 21px;
+      background: #e9e5dc;
+      box-shadow: inset 0 1px 3px rgba(55,49,35,.09);
+    }
+
+    .reel-screen {
+      border-radius: 16px;
+      background: #fff;
+      box-shadow:
+        inset 0 0 0 1px #ded9ce,
+        inset 0 14px 30px rgba(49,43,30,.055),
+        inset 0 -14px 30px rgba(49,43,30,.055);
+    }
+
+    .reel-screen::before { background: linear-gradient(#fff 9%, rgba(255,255,255,.9) 48%, transparent); }
+    .reel-screen::after { background: linear-gradient(transparent, rgba(255,255,255,.9) 52%, #fff 91%); }
+
+    .selection-window {
+      left: 8px;
+      right: 8px;
+      border: 1px solid rgba(190,146,0,.18);
+      background: linear-gradient(180deg, #ffe875, #ffdc3f);
+      box-shadow:
+        0 8px 20px rgba(213,168,0,.19),
+        inset 0 1px 0 rgba(255,255,255,.55);
+    }
+
+    .reel-item {
+      color: #8c887f;
+      border-bottom-color: #efebe3;
+    }
+
+    .reel-item.final {
+      color: #24231f;
+      letter-spacing: -.02em;
+    }
+
+    .reel-type-icon {
+      flex: 0 0 auto;
+      margin-right: 10px;
+      font-size: .78em;
+      filter: grayscale(.15);
+    }
+
+    .reel-item.activity .reel-type-icon {
+      filter: none;
+    }
+
+    .primary {
+      margin-top: 18px;
+      border: 1px solid rgba(190,146,0,.16);
+      background: linear-gradient(180deg, #ffe263, #ffd739);
+      box-shadow: 0 10px 24px rgba(211,168,0,.20), inset 0 1px 0 rgba(255,255,255,.5);
+    }
+
+    .primary:hover {
+      background: linear-gradient(180deg, #ffdf51, #ffd127);
+      box-shadow: 0 13px 29px rgba(211,168,0,.24), inset 0 1px 0 rgba(255,255,255,.5);
+    }
+
+    .chance-note {
+      margin: 13px 0 0;
+      color: #99958c;
+      font-size: 13px;
+      line-height: 1.45;
+      text-align: center;
+    }
+
+    .result-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #e5dfd3;
+      background: rgba(255,255,255,.94);
+      box-shadow:
+        0 16px 38px rgba(54,46,27,.075),
+        inset 0 1px 0 #fff;
+    }
+
+    .result-card::after {
+      content: "";
+      position: absolute;
+      right: -70px;
+      bottom: -90px;
+      width: 210px;
+      height: 210px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,221,45,.13), transparent 68%);
+      pointer-events: none;
+    }
+
+    .result-kicker {
+      position: relative;
+      z-index: 1;
+      align-self: flex-start;
+      padding: 7px 11px;
+      border: 1px solid rgba(198,154,0,.14);
+      border-radius: 999px;
+      background: #fff7cf;
+      color: #75601b;
+      font-size: 12px;
+      font-weight: 780;
+    }
+
+    #resultContent,
+    .empty-copy {
+      position: relative;
+      z-index: 1;
+    }
+
+    .question {
+      margin-top: 28px;
+    }
+
+    @media (max-width: 860px) {
+      .workspace { gap: 16px; padding: 18px; }
+      .result-card { min-height: 270px; }
+    }
+
+    @media (max-width: 520px) {
+      .hero h1 { font-size: clamp(36px, 11vw, 48px); }
+      .workspace { padding: 11px; }
+      .slot-machine { padding: 8px; border-radius: 22px; }
+    }
+
+    /* Polished hero */
+    .hero {
+      position: relative;
+      width: min(860px, 100%);
+      margin: 4px auto 44px;
+      padding: 25px 30px 30px;
+      border: 1px solid rgba(228,220,203,.68);
+      border-radius: 32px;
+      background:
+        radial-gradient(circle at 82% 12%, rgba(255,221,45,.16), transparent 13rem),
+        linear-gradient(135deg, rgba(255,255,255,.72), rgba(255,251,237,.54));
+      box-shadow: 0 16px 45px rgba(61,51,28,.055), inset 0 1px 0 rgba(255,255,255,.88);
+      overflow: hidden;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero::before {
+      width: 108px;
+      height: 108px;
+      left: -58px;
+      bottom: -65px;
+      border: 18px solid rgba(255,221,45,.11);
+    }
+
+    .hero::after {
+      width: 13px;
+      height: 13px;
+      right: 48px;
+      top: 34px;
+      background: #ffdd2d;
+      box-shadow: 23px 14px 0 -3px rgba(255,221,45,.35);
+    }
+
+    .hero-badge {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 17px;
+      padding: 7px 11px;
+      border: 1px solid rgba(198,154,0,.15);
+      border-radius: 999px;
+      background: rgba(255,248,210,.88);
+      color: #75601b;
+      font-size: 11px;
+      font-weight: 780;
+      letter-spacing: .035em;
+      text-transform: uppercase;
+    }
+
+    .hero-badge > span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #f2be00;
+      box-shadow: 0 0 0 4px rgba(242,190,0,.11);
+    }
+
+    .hero h1 {
+      position: relative;
+      z-index: 1;
+      gap: 15px;
+    }
+
+    .title-emoji {
+      display: grid;
+      place-items: center;
+      width: 62px;
+      height: 62px;
+      border: 1px solid rgba(196,150,0,.16);
+      border-radius: 20px;
+      background: linear-gradient(145deg, #ffe770, #ffd632);
+      box-shadow: 0 9px 22px rgba(211,168,0,.20), inset 0 1px 0 rgba(255,255,255,.58);
+      font-size: 30px;
+      transform: none;
+    }
+
+    .subtitle {
+      position: relative;
+      z-index: 1;
+      margin-top: 17px;
+    }
+
+    .hero-options {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .hero-options > span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 34px;
+      padding: 7px 12px;
+      border: 1px solid #e7e1d6;
+      border-radius: 11px;
+      background: rgba(255,255,255,.76);
+      color: #68645c;
+      font-size: 12px;
+      font-weight: 650;
+      box-shadow: 0 3px 10px rgba(48,42,28,.035);
+    }
+
+    .option-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #f2c400;
+    }
+
+    .option-dot.activity { background: #2f2e29; }
+
+    @media (max-width: 520px) {
+      .hero { margin-bottom: 24px; padding: 22px 13px 24px; border-radius: 25px; }
+      .hero-badge { margin-bottom: 15px; font-size: 10px; }
+      .hero h1 { gap: 9px; }
+      .title-emoji { width: 48px; height: 48px; border-radius: 15px; font-size: 24px; }
+      .hero-options { margin-top: 17px; gap: 7px; }
+      .hero-options > span { font-size: 11px; padding-inline: 10px; }
+    }
+
+    /* Simplified hero: one meaningful outlined accent, no decorative dots. */
+    .hero::after { display: none; }
+
+    .hero h1 {
+      display: flex;
+      width: fit-content;
+      margin: 0 auto;
+    }
+
+    .hero .subtitle {
+      display: inline-block;
+      margin-top: 24px;
+      padding: 12px 22px 11px;
+      border: 1px solid rgba(211,168,0,.25);
+      border-radius: 17px;
+      background: linear-gradient(180deg, rgba(255,250,222,.92), rgba(255,246,199,.72));
+      box-shadow: 0 6px 18px rgba(211,168,0,.07), inset 0 1px 0 rgba(255,255,255,.7);
+      color: #5f594d;
+      font-size: 16px;
+      line-height: 1.45;
+    }
+
+    .hero .subtitle > span {
+      margin-top: 3px;
+      color: #928d82;
+      font-size: 14px;
+    }
+
+    @media (max-width: 520px) {
+      .hero .subtitle { margin-top: 19px; padding: 11px 15px; font-size: 14px; }
+      .hero .subtitle > span { font-size: 12px; }
+      .chance-note { max-width: 260px; margin-top: 11px; font-size: 12px; }
+    }
+
+    /* Unified, symmetrical composition */
+    .topbar {
+      width: min(1040px, 100%);
+      margin-inline: auto;
+    }
+
+    .experience-shell {
+      width: min(1040px, 100%);
+      margin: 4px auto 0;
+      overflow: hidden;
+      border: 1px solid rgba(224,217,203,.86);
+      border-radius: 36px;
+      background:
+        radial-gradient(circle at 78% 2%, rgba(255,221,45,.12), transparent 22rem),
+        linear-gradient(135deg, rgba(255,255,255,.96), rgba(255,253,247,.88));
+      box-shadow:
+        0 25px 70px rgba(54,46,27,.09),
+        0 3px 12px rgba(54,46,27,.035),
+        inset 0 1px 0 rgba(255,255,255,.94);
+    }
+
+    .experience-shell .hero {
+      width: 100%;
+      margin: 0;
+      padding: 35px 30px 32px;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      backdrop-filter: none;
+    }
+
+    .experience-shell .hero::before,
+    .experience-shell .hero::after {
+      display: none;
+    }
+
+    .experience-shell .workspace {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: stretch;
+      gap: 26px;
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding: 30px;
+      border: 0;
+      border-top: 1px solid rgba(229,223,211,.88);
+      border-radius: 0;
+      background: rgba(255,255,255,.30);
+      box-shadow: none;
+      backdrop-filter: none;
+    }
+
+    .experience-shell .wheel-column {
+      width: 100%;
+      padding: 0;
+    }
+
+    .experience-shell .slot-machine,
+    .experience-shell .result-card {
+      border-color: #e3ddd1;
+      border-radius: 26px;
+      box-shadow: 0 14px 34px rgba(54,46,27,.065), inset 0 1px 0 #fff;
+    }
+
+    .experience-shell .result-card {
+      width: 100%;
+      min-height: 100%;
+    }
+
+    .title-emoji > span {
+      display: block;
+      line-height: 1;
+      transform: translate(-1px, -2px);
+      font-family: "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+    }
+
+    @media (max-width: 860px) {
+      .experience-shell { border-radius: 30px; }
+      .experience-shell .workspace { grid-template-columns: 1fr; gap: 18px; padding: 20px; }
+      .experience-shell .hero { padding: 30px 20px 28px; }
+      .experience-shell .result-card { min-height: 280px; }
+    }
+
+    @media (max-width: 520px) {
+      .experience-shell { border-radius: 25px; }
+      .experience-shell .hero { padding: 25px 12px 24px; }
+      .experience-shell .workspace { padding: 11px; }
+      .experience-shell .slot-machine,
+      .experience-shell .result-card { border-radius: 21px; }
+      .title-emoji > span { transform: translate(-1px, -1px); }
+    }
+
+    /* Quiet settings control in the top-right corner */
+    .app { position: relative; }
+
+    .topbar {
+      position: absolute;
+      top: 4px;
+      right: 0;
+      z-index: 30;
+      width: auto;
+      min-height: 0;
+      margin: 0;
+    }
+
+    .icon-button {
+      width: 36px;
+      height: 36px;
+      border: 0;
+      border-radius: 11px;
+      background: transparent;
+      box-shadow: none;
+      opacity: .42;
+    }
+
+    .icon-button:hover,
+    .icon-button[aria-expanded="true"] {
+      opacity: 1;
+      background: rgba(255,255,255,.82);
+      box-shadow: 0 5px 16px rgba(48,42,28,.06);
+      transform: none;
+    }
+
+    .dots {
+      font-size: 20px;
+      letter-spacing: 0;
+      transform: translateY(-2px);
+    }
+
+    .menu { top: 43px; }
+
+    @media (max-width: 520px) {
+      .topbar { top: 2px; right: 2px; }
+      .icon-button { width: 34px; height: 34px; }
+    }
+
+    /* Centered layout and lightweight reel animation for Windows */
+    .app {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 100vh;
+      min-height: 100svh;
+      padding-top: 54px;
+      padding-bottom: 54px;
+    }
+
+    .topbar {
+      top: 18px;
+    }
+
+    .experience-shell {
+      flex: 0 0 auto;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    .reel-screen {
+      isolation: isolate;
+      transform: translateZ(0);
+    }
+
+    .reel-track {
+      backface-visibility: hidden;
+      transform: translate3d(0, 0, 0);
+    }
+
+    .reel-type-icon,
+    .reel-item.activity .reel-type-icon {
+      color: #8c887f;
+      filter: none;
+      font-family: "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+      font-weight: 400;
+    }
+
+    .reel-item.activity .reel-type-icon {
+      color: #c89200;
+    }
+
+    .reel-is-spinning .selection-window {
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.45);
+    }
+
+    .windows .menu {
+      backdrop-filter: none;
+    }
+
+    .windows .experience-shell,
+    .windows .experience-shell .slot-machine,
+    .windows .experience-shell .result-card {
+      box-shadow: 0 12px 30px rgba(54,46,27,.065), inset 0 1px 0 rgba(255,255,255,.9);
+    }
+
+    .windows .result-card.enter {
+      animation: cardInWindows .34s ease-out;
+    }
+
+    @keyframes cardInWindows {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    @media (max-height: 800px) {
+      .app {
+        justify-content: flex-start;
+        min-height: 100vh;
+        padding-top: 48px;
+        padding-bottom: 32px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .app { padding-top: 46px; padding-bottom: 28px; }
+      .topbar { top: 8px; }
+    }
+
+    /* Optical alignment of the emoji block with the title text */
+    .hero h1 .title-emoji {
+      transform: translateY(5px);
+    }
+
+    .hero h1 .title-emoji > span {
+      transform: translate(-1px, 0);
+    }
+
+    @media (max-width: 520px) {
+      .hero h1 .title-emoji { transform: translateY(3px); }
+      .hero h1 .title-emoji > span { transform: translate(-1px, 0); }
+    }
+
+    /* Refined result card */
+    .experience-shell .result-card {
+      justify-content: flex-start;
+      padding: 38px 40px;
+    }
+
+    .result-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 40px;
+      right: 40px;
+      height: 3px;
+      border-radius: 0 0 999px 999px;
+      background: linear-gradient(90deg, transparent, #ffda35 18%, #ffda35 82%, transparent);
+      opacity: .82;
+    }
+
+    .result-header {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      gap: 16px;
+    }
+
+    .result-icon {
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      width: 43px;
+      height: 43px;
+      border: 1px solid rgba(199,155,0,.14);
+      border-radius: 14px;
+      background: #fff8d8;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.8);
+      font-family: "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+      font-size: 19px;
+      line-height: 1;
+    }
+
+    .result-header .result-kicker {
+      align-self: auto;
+    }
+
+    #resultContent {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      flex: 1 1 auto;
+      width: 100%;
+      padding: 28px 0 20px;
+    }
+
+    #resultContent[hidden] {
+      display: none;
+    }
+
+    .result-card .question {
+      max-width: 100%;
+      margin: 0;
+      text-wrap: balance;
+      overflow-wrap: anywhere;
+    }
+
+    .copy-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      align-self: flex-start;
+      gap: 8px;
+      min-height: 42px;
+      margin-top: 24px;
+      padding: 10px 14px;
+      border: 1px solid #e3ddd1;
+      border-radius: 13px;
+      background: #fffdf7;
+      box-shadow: 0 4px 12px rgba(54,46,27,.045), inset 0 1px 0 #fff;
+      color: #565149;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+
+    .copy-link:hover {
+      transform: translateY(-1px);
+      border-color: #d8c77c;
+      background: #fff8d8;
+    }
+
+    .copy-link:active { transform: translateY(0); }
+    .copy-link[hidden] { display: none; }
+
+    .result-card .empty-copy {
+      margin-top: auto;
+      margin-bottom: auto;
+      padding: 28px 0 54px;
+    }
+
+    .result-card:not(.has-result) .result-header {
+      display: none;
+    }
+
+    .result-card:not(.has-result) .empty-copy {
+      display: grid;
+      place-items: center;
+      flex: 1 1 auto;
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding: 0 24px;
+      text-align: center;
+      text-wrap: balance;
+    }
+
+    @media (max-width: 860px) {
+      .experience-shell .result-card { padding: 32px; }
+      .result-card::before { left: 32px; right: 32px; }
+    }
+
+    @media (max-width: 520px) {
+      .experience-shell .result-card { padding: 26px 24px; }
+      .result-card::before { left: 24px; right: 24px; }
+      .result-icon { width: 39px; height: 39px; border-radius: 12px; font-size: 17px; }
+      #resultContent { padding-top: 24px; }
+      .result-card .question { font-size: clamp(22px, 7vw, 30px); line-height: 1.2; }
+    }
+
+    @media (max-width: 380px) {
+      .hero h1 { gap: 8px; font-size: 31px; }
+      .title-emoji { width: 43px; height: 43px; border-radius: 14px; font-size: 21px; }
+      .experience-shell .hero { padding-inline: 8px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+
+
+    /* Final layout refinements: equal cards and one full-width roulette button. */
+    .experience-shell .workspace {
+      grid-template-rows: auto auto;
+    }
+
+    .experience-shell .wheel-column,
+    .experience-shell .side {
+      height: 100%;
+    }
+
+    .experience-shell .wheel-stage,
+    .experience-shell .slot-machine,
+    .experience-shell .result-card {
+      height: 100%;
+    }
+
+    .spin-area {
+      grid-column: 1 / -1;
+      width: 100%;
+      margin-top: -2px;
+    }
+
+    .spin-area .primary {
+      width: 100%;
+      min-height: 58px;
+      margin-top: 0;
+      font-size: 16px;
+    }
+
+    .spin-area .chance-note {
+      margin-top: 12px;
+      margin-bottom: 0;
+    }
+
+    .reel-item > span:last-child {
+      max-width: 100%;
+    }
+
+    @media (max-width: 860px) {
+      .experience-shell .workspace { grid-template-rows: auto auto auto; }
+      .spin-area { grid-column: 1; }
+    }
+
+    .meeting-tip {
+      margin: 0 30px 0;
+      padding: 20px 22px;
+      border: 1px solid #e5dfd3;
+      border-radius: 22px;
+      background: rgba(255,255,255,.78);
+      box-shadow: 0 10px 28px rgba(54,46,27,.045), inset 0 1px 0 rgba(255,255,255,.9);
+    }
+    .meeting-tip-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 9px;
+      color: #34322d;
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .meeting-tip-text {
+      margin: 0;
+      color: #7d7971;
+      font-size: 14px;
+      line-height: 1.55;
+      transition: opacity .18s ease, transform .18s ease;
+    }
+
+    .meeting-tip[hidden] { display: none !important; }
+    .meeting-tip-text.changing {
+      opacity: 0;
+      transform: translateY(3px);
+    }
+    .site-signature {
+      padding: 42px 24px 30px;
+      color: #aaa69d;
+      font-size: 12px;
+      line-height: 1.4;
+      text-align: center;
+    }
+    @media (max-width: 860px) {
+      .meeting-tip { margin: 0 20px; }
+    }
+    @media (max-width: 520px) {
+      .meeting-tip { margin: 0 11px; padding: 18px 17px; border-radius: 18px; }
+      .meeting-tip-text { font-size: 13px; }
+      .site-signature { padding: 32px 18px 24px; font-size: 11px; }
+    }
+
+    /* Polished lower section: cleaner spacing and a lighter tip card. */
+    .experience-shell {
+      padding-bottom: 30px;
+    }
+
+    .experience-shell .workspace {
+      padding-bottom: 22px;
+    }
+
+    .spin-area {
+      margin-top: 2px;
+    }
+
+    .spin-area .primary {
+      min-height: 60px;
+      border-radius: 16px;
+      box-shadow: 0 9px 22px rgba(211,168,0,.16), inset 0 1px 0 rgba(255,255,255,.52);
+    }
+
+    .spin-area .chance-note {
+      margin-top: 11px;
+      color: #aaa69d;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .meeting-tip {
+      position: relative;
+      margin: 0 30px;
+      padding: 19px 22px 20px;
+      overflow: hidden;
+      border: 1px solid #e9e3d8;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(255,255,255,.92), rgba(255,252,239,.9));
+      box-shadow: 0 8px 24px rgba(54,46,27,.045), inset 0 1px 0 rgba(255,255,255,.92);
+    }
+
+    .meeting-tip::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 18px;
+      bottom: 18px;
+      width: 3px;
+      border-radius: 0 999px 999px 0;
+      background: #ffda35;
+    }
+
+    .meeting-tip-title {
+      margin-bottom: 8px;
+      color: #4a463f;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .meeting-tip-text {
+      max-width: 900px;
+      color: #858178;
+      font-size: 13.5px;
+      line-height: 1.55;
+    }
+
+    /* Five switchable visual themes. The original theme remains unchanged. */
+    .theme-picker {
+      margin: 7px 5px 4px;
+      padding: 12px 8px 10px;
+      border-top: 1px solid var(--line);
+    }
+
+    .theme-picker-title {
+      margin: 0 4px 9px;
+      color: #77736b;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .055em;
+      text-transform: uppercase;
+    }
+
+    .theme-options {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px;
+    }
+
+    .theme-option {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      min-width: 0;
+      min-height: 36px;
+      padding: 7px 9px;
+      border: 1px solid transparent;
+      border-radius: 11px;
+      background: transparent;
+      color: #666159;
+      font-size: 12px;
+      font-weight: 700;
+      text-align: left;
+      cursor: pointer;
+      transition: background .16s ease, border-color .16s ease, transform .16s ease;
+    }
+
+    .theme-option:hover { background: #f6f4ef; }
+    .theme-option:active { transform: scale(.98); }
+    .theme-option.active {
+      border-color: #e3dccd;
+      background: #fff8d8;
+      color: #2f2c27;
+    }
+    .theme-option:first-child { grid-column: 1 / -1; }
+    .theme-option-emoji { flex: 0 0 auto; font-size: 15px; }
+
+    body[data-theme="autumn"] {
+      --season-bg: #f7eee3;
+      --season-surface: #fffaf3;
+      --season-soft: #f7e5d2;
+      --season-card: rgba(255,250,243,.94);
+      --season-line: #dec3aa;
+      --season-accent: #d97732;
+      --season-accent-2: #f2ad57;
+      --season-ink: #3f2d24;
+      --season-muted: #806b5d;
+      --season-reel: #fffaf4;
+      --season-glow: rgba(217,119,50,.20);
+      --season-decoration: "🍂";
+    }
+
+    body[data-theme="winter"] {
+      --season-bg: #edf4f8;
+      --season-surface: #fafdff;
+      --season-soft: #deedf5;
+      --season-card: rgba(250,253,255,.95);
+      --season-line: #bfd5e2;
+      --season-accent: #58a7cf;
+      --season-accent-2: #9bd8ee;
+      --season-ink: #213944;
+      --season-muted: #66818d;
+      --season-reel: #fbfeff;
+      --season-glow: rgba(88,167,207,.20);
+      --season-decoration: "❄️";
+    }
+
+    body[data-theme="spring"] {
+      --season-bg: #f1f7ed;
+      --season-surface: #fbfff8;
+      --season-soft: #e5f2dc;
+      --season-card: rgba(252,255,249,.95);
+      --season-line: #c9ddbb;
+      --season-accent: #80ba68;
+      --season-accent-2: #c9df83;
+      --season-ink: #2f432c;
+      --season-muted: #708169;
+      --season-reel: #fdfff9;
+      --season-glow: rgba(128,186,104,.20);
+      --season-decoration: "🌿";
+    }
+
+    body[data-theme="summer"] {
+      --season-bg: #eef8f7;
+      --season-surface: #fbfffe;
+      --season-soft: #dff4ef;
+      --season-card: rgba(251,255,254,.95);
+      --season-line: #b9ddd8;
+      --season-accent: #35b9aa;
+      --season-accent-2: #7eddd0;
+      --season-ink: #173f3d;
+      --season-muted: #5d827e;
+      --season-reel: #fbfffe;
+      --season-glow: rgba(53,185,170,.20);
+      --season-decoration: "☀️";
+    }
+
+    body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) {
+      color: var(--season-ink);
+      background:
+        radial-gradient(circle at 13% 5%, var(--season-glow), transparent 29rem),
+        radial-gradient(circle at 91% 54%, var(--season-soft), transparent 31rem),
+        var(--season-bg);
+    }
+
+    body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .experience-shell {
+      position: relative;
+      border-color: var(--season-line);
+      background:
+        radial-gradient(circle at 80% 0, var(--season-glow), transparent 23rem),
+        linear-gradient(135deg, var(--season-surface), var(--season-bg));
+      box-shadow: 0 25px 70px color-mix(in srgb, var(--season-accent) 13%, transparent), inset 0 1px 0 rgba(255,255,255,.9);
+    }
+
+    body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .experience-shell::before {
+      content: var(--season-decoration);
+      position: absolute;
+      top: 27px;
+      right: 38px;
+      z-index: 0;
+      font-size: 66px;
+      line-height: 1;
+      opacity: .12;
+      transform: rotate(10deg);
+      pointer-events: none;
+    }
+
+    body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .experience-shell .workspace {
+      border-top-color: var(--season-line);
+      background: color-mix(in srgb, var(--season-surface) 54%, transparent);
+    }
+
+    body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .hero h1,
+    body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .question {
+      color: var(--season-ink);
+    }
+
+    body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .hero .subtitle {
+      border-color: color-mix(in srgb, var(--season-accent) 38%, transparent);
+      background: color-mix(in srgb, var(--season-soft) 72%, white);
+      color: var(--season-muted);
+    }
+
+    body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .experience-shell .slot-machine {
+      border-color: var(--season-line);
+      background: linear-gradient(150deg, var(--season-surface), var(--season-soft));
+      box-shadow: 0 16px 35px color-mix(in srgb, var(--season-accent) 13%, transparent), inset 0 1px 0 #fff;
+    }
+
+    body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .reel-frame {
+      background: color-mix(in srgb, var(--season-line) 70%, white);
+    }
+
+    body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .reel-screen {
+      background: var(--season-reel);
+      box-shadow: inset 0 0 0 1px var(--season-line), inset 0 14px 30px var(--season-glow), inset 0 -14px 30px var(--season-glow);
+    }
+
+    body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .reel-screen::before {
+      background: linear-gradient(var(--season-reel) 9%, color-mix(in srgb, var(--season-reel) 90%, transparent) 48%, transparent);
+    }
+
+    body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .reel-screen::after {
+      background: linear-gradient(transparent, color-mix(in srgb, var(--season-reel) 90%, transparent) 52%, var(--season-reel) 91%);
+    }
+
+    body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .selection-window {
+      border-color: color-mix(in srgb, var(--season-accent) 42%, transparent);
+      background: linear-gradient(180deg, var(--season-accent-2), var(--season-accent));
+      box-shadow: 0 8px 20px var(--season-glow), inset 0 1px 0 rgba(255,255,255,.55);
+    }
+
+    body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .reel-item {
+      border-bottom-color: color-mix(in srgb, var(--season-line) 60%, white);
+      color: var(--season-muted);
+    }
+
+    body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .reel-item.final {
+      color: var(--season-ink);
+    }
+
+    body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .primary,
+    body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .primary:hover {
+      border-color: color-mix(in srgb, var(--season-accent) 38%, transparent);
+      background: linear-gradient(180deg, var(--season-accent-2), var(--season-accent));
+      box-shadow: 0 10px 24px var(--season-glow), inset 0 1px 0 rgba(255,255,255,.42);
+      color: var(--season-ink);
+    }
+
+    body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .experience-shell .result-card,
+    body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .meeting-tip {
+      border-color: var(--season-line);
+      background: var(--season-card);
+      box-shadow: 0 14px 34px color-mix(in srgb, var(--season-accent) 11%, transparent), inset 0 1px 0 #fff;
+    }
+
+    body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .result-card::before,
+    body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .meeting-tip::before {
+      background: var(--season-accent);
+    }
+
+    body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .result-kicker,
+    body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .result-icon {
+      border-color: color-mix(in srgb, var(--season-accent) 30%, transparent);
+      background: color-mix(in srgb, var(--season-soft) 68%, white);
+      color: var(--season-ink);
+    }
+
+    body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .meeting-tip-title {
+      color: var(--season-ink);
+    }
+
+    body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .meeting-tip-text,
+    body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .empty-copy,
+    body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .chance-note {
+      color: var(--season-muted);
+    }
+
+    body[data-theme="autumn"] .theme-option[data-theme-choice="autumn"],
+    body[data-theme="winter"] .theme-option[data-theme-choice="winter"],
+    body[data-theme="spring"] .theme-option[data-theme-choice="spring"],
+    body[data-theme="summer"] .theme-option[data-theme-choice="summer"] {
+      border-color: var(--season-line);
+      background: var(--season-soft);
+      color: var(--season-ink);
+    }
+
+    @media (max-width: 520px) {
+      body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .experience-shell::before {
+        top: 30px;
+        right: 21px;
+        font-size: 45px;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .experience-shell { padding-bottom: 20px; }
+      .experience-shell .workspace { padding-bottom: 18px; }
+      .meeting-tip { margin: 0 20px; }
+    }
+
+    @media (max-width: 520px) {
+      .experience-shell { padding-bottom: 12px; }
+      .meeting-tip {
+        margin: 0 11px;
+        padding: 17px 17px 18px 19px;
+        border-radius: 17px;
+      }
+      .meeting-tip::before { top: 15px; bottom: 15px; }
+      .meeting-tip-text { font-size: 13px; }
+    }
+
+    /* Windows / Edge performance hardening */
+    .windows .reel-track {
+      will-change: transform;
+      contain: layout paint style;
+      transform: translate3d(0,0,0);
+    }
+
+    .windows .reel-screen {
+      contain: layout paint;
+      backface-visibility: hidden;
+      perspective: 1000px;
+    }
+
+    .windows.reel-is-spinning .reel-item,
+    .windows .reel-is-spinning .reel-item {
+      text-rendering: optimizeSpeed;
+    }
+
+    .windows .reel-is-spinning .reel-screen::before,
+    .windows .reel-is-spinning .reel-screen::after {
+      opacity: .84;
+    }
+
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div class="menu-wrap">
+        <button class="icon-button" id="menuButton" type="button" aria-label="Открыть меню" aria-haspopup="true" aria-expanded="false"><span class="dots">•••</span></button>
+        <div class="menu" id="menu" role="menu">
+          <button class="menu-item" id="uploadButton" type="button" role="menuitem"><span class="menu-icon">↥</span>Загрузить идеи</button>
+          <button class="menu-item" id="downloadButton" type="button" role="menuitem"><span class="menu-icon">↧</span>Скачать идеи</button>
+          <div class="theme-picker" role="radiogroup" aria-label="Оформление по сезону">
+            <div class="theme-picker-title">Оформление</div>
+            <div class="theme-options">
+              <button class="theme-option" type="button" role="radio" aria-checked="false" data-theme-choice="original"><span class="theme-option-emoji">☕</span><span>Оригинальное</span></button>
+              <button class="theme-option" type="button" role="radio" aria-checked="false" data-theme-choice="autumn"><span class="theme-option-emoji">🍂</span><span>Осень</span></button>
+              <button class="theme-option" type="button" role="radio" aria-checked="false" data-theme-choice="winter"><span class="theme-option-emoji">❄️</span><span>Зима</span></button>
+              <button class="theme-option" type="button" role="radio" aria-checked="false" data-theme-choice="spring"><span class="theme-option-emoji">🌿</span><span>Весна</span></button>
+              <button class="theme-option" type="button" role="radio" aria-checked="false" data-theme-choice="summer"><span class="theme-option-emoji">☀️</span><span>Лето</span></button>
+            </div>
+          </div>
+          <div class="privacy"><span class="privacy-dot">●</span> После загрузки Excel скачается обновлённый HTML. Передавайте именно его — все данные уже будут внутри.</div>
+        </div>
+      </div>
+    </header>
+
+    <div class="experience-shell">
+      <section class="hero">
+        <h1><span>Рандом кофе SME</span></h1>
+        <p class="subtitle">Создано для тёплых встреч и хороших разговоров🧋</p>
+      </section>
+
+      <section class="workspace" aria-label="Рулетка идей">
+      <div class="wheel-column">
+        <div class="wheel-stage">
+          <div class="wheel-halo" aria-hidden="true"></div>
+          <div class="slot-machine" aria-label="Вертикальная рулетка тем и активностей Random Coffee">
+            <div class="reel-frame">
+              <div class="reel-screen" id="reelScreen">
+                <div class="reel-track" id="reelTrack"></div>
+                <div class="selection-window" aria-hidden="true"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="side" aria-live="polite">
+        <article class="result-card" id="resultCard">
+          <div class="result-header">
+            <div class="result-kicker" id="resultKicker">Тема для встречи</div>
+            <div class="result-icon" id="resultIcon" aria-hidden="true">✦</div>
+          </div>
+          <p class="empty-copy" id="emptyCopy">Здесь появится вопрос или совместная активность</p>
+          <div id="resultContent" hidden>
+            <p class="question" id="resultQuestion"></p>
+            <button class="copy-link" id="copyLinkButton" type="button" hidden>
+              <span aria-hidden="true">⧉</span>
+              <span id="copyLinkLabel">Скопировать ссылку</span>
+            </button>
+          </div>
+        </article>
+      </aside>
+
+      <div class="spin-area">
+        <button class="primary" id="spinButton" type="button"><span>Крутить рулетку 🎲</span></button>
+        <p class="chance-note">Не знаете, с чего начать? Доверьтесь случаю</p>
+      </div>
+      </section>
+
+      <section class="meeting-tip" id="meetingTip" aria-live="polite" hidden>
+        <div class="meeting-tip-title">💡 Маленький совет</div>
+        <p class="meeting-tip-text" id="meetingTipText"></p>
+      </section>
+
+      
+    </div>
+  </main>
+
+  <input id="fileInput" type="file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script id="embeddedData" type="application/json">{"version":2,"customized":false,"topics":[]}</script>
+  <script>
+    'use strict';
+
+    const IS_WINDOWS = /Windows/i.test(navigator.userAgent);
+    const REEL_EASING = 'cubic-bezier(.17,0,.18,1)';
+    const MAX_IDEAS = 500;
+    const MAX_FILE_SIZE = 8 * 1024 * 1024;
+    const MAX_UNZIPPED_SIZE = 32 * 1024 * 1024;
+    const MAX_ZIP_ENTRIES = 512;
+    const MAX_XML_SIZE = 6 * 1024 * 1024;
+    document.documentElement.classList.toggle('windows', IS_WINDOWS);
+
+    const DEFAULT_TOPICS = [
+      { type: 'Тема', topic: 'Путешествия', question: 'Какое путешествие запомнилось тебе больше всего?', tip: 'Спросите, какое место из этой поездки собеседник посоветовал бы увидеть именно вам.' },
+      { type: 'Тема', topic: 'Хобби', question: 'Чем тебе нравится заниматься после работы?', tip: 'Попробуйте найти хобби, которое было бы интересно попробовать вместе.' },
+      { type: 'Тема', topic: 'Кино и сериалы', question: 'Какой фильм или сериал ты готов пересматривать?', tip: 'Попросите выбрать одну сцену или героя и объяснить, чем именно они запомнились.' },
+      { type: 'Тема', topic: 'Музыка', question: 'Какая песня мгновенно поднимает тебе настроение?', tip: 'Можно сразу включить по одному любимому треку и обменяться музыкальными открытиями.' },
+      { type: 'Тема', topic: 'Карьера', question: 'Какой профессиональный навык ты хотел бы освоить?', tip: 'Поделитесь одним небольшим шагом, с которого можно начать осваивать этот навык.' },
+      { type: 'Тема', topic: 'Мечты', question: 'Какой небольшой мечте ты хотел бы дать шанс в этом году?', tip: 'Спросите, что можно сделать для этой мечты уже на ближайшей неделе.' },
+      { type: 'Тема', topic: 'Технологии', question: 'Какая технология заметно упростила твою жизнь?', tip: 'Обменяйтесь по одному приложению или приёму, который экономит вам время.' },
+      { type: 'Тема', topic: 'Книги', question: 'Какую книгу ты недавно советовал другим?', tip: 'Попросите описать книгу тремя словами — без спойлеров.' },
+      { type: 'Тема', topic: 'Необычный факт', question: 'Какой неожиданный факт о тебе обычно удивляет людей?', tip: 'После ответа попробуйте угадать ещё один неожиданный факт друг о друге.' },
+      { type: 'Тема', topic: 'Идеальный выходной', question: 'Как выглядит твой идеальный свободный день?', tip: 'Сравните ваши варианты и найдите хотя бы одну общую деталь.' },
+      { type: 'Тема', topic: 'Город', question: 'Какое место в твоём городе ты показал бы гостю первым?', tip: 'Соберите из ваших ответов короткий маршрут на один свободный вечер.' },
+      { type: 'Тема', topic: 'Вдохновение', question: 'Что в последнее время тебя по-настоящему вдохновило?', tip: 'Уточните, изменилось ли после этого какое-нибудь решение или привычка.' },
+      { type: 'Активность', topic: 'Прогуляться', question: 'Предлагаем выйти на короткую прогулку и продолжить разговор на свежем воздухе.', tip: 'Выберите новый маршрут и первые пять минут не обсуждайте рабочие задачи.' },
+      { type: 'Активность', topic: 'Вместе пообедать', question: 'Выберите место поблизости и устройте совместный обед.', tip: 'Пусть один выбирает место, а второй — блюдо или напиток, который стоит попробовать.' },
+      { type: 'Активность', topic: 'Настольный теннис', question: 'Сыграйте короткую дружескую партию в настольный теннис.', tip: 'Придумайте максимально несерьёзный приз победителю.' },
+      { type: 'Активность', topic: 'Разгадать загадку', question: 'Найдите небольшую загадку или головоломку и попробуйте решить её вместе.', tip: 'Сначала обсудите версии вслух: ход мыслей часто интереснее правильного ответа.' },
+      { type: 'Активность', topic: 'Кофейная пауза', question: 'Возьмите по любимому напитку и устройте пятнадцатиминутную паузу без разговоров о задачах.', tip: 'Закажите друг другу напиток или расскажите, почему обычно выбираете именно свой.' },
+      { type: 'Активность', topic: 'Мини-викторина', question: 'Выберите короткую викторину и вместе ответьте на несколько вопросов.', tip: 'Играйте одной командой и придумайте ей смешное название.' }
+    ];
+
+    const STORAGE_KEY = 'randomCoffeeTopicsV2';
+    const THEME_STORAGE_KEY = 'randomCoffeeThemeV1';
+    const VALID_THEMES = ['original', 'autumn', 'winter', 'spring', 'summer'];
+    const THEME_LABELS = {
+      original: 'Оригинальное',
+      autumn: 'Осень',
+      winter: 'Зима',
+      spring: 'Весна',
+      summer: 'Лето'
+    };
+    const THEME_COLORS = {
+      original: '#f8f6f0',
+      autumn: '#f7eee3',
+      winter: '#edf4f8',
+      spring: '#f1f7ed',
+      summer: '#eef8f7'
+    };
+    const reelScreen = document.getElementById('reelScreen');
+    const reelTrack = document.getElementById('reelTrack');
+    const spinButton = document.getElementById('spinButton');
+    const resultCard = document.getElementById('resultCard');
+    const emptyCopy = document.getElementById('emptyCopy');
+    const resultContent = document.getElementById('resultContent');
+    const resultKicker = document.getElementById('resultKicker');
+    const resultIcon = document.getElementById('resultIcon');
+    const resultQuestion = document.getElementById('resultQuestion');
+    const copyLinkButton = document.getElementById('copyLinkButton');
+    const copyLinkLabel = document.getElementById('copyLinkLabel');
+    const menuButton = document.getElementById('menuButton');
+    const menu = document.getElementById('menu');
+    const fileInput = document.getElementById('fileInput');
+    const toast = document.getElementById('toast');
+    const meetingTip = document.getElementById('meetingTip');
+    const meetingTipText = document.getElementById('meetingTipText');
+    const themeButtons = [...document.querySelectorAll('[data-theme-choice]')];
+    let topics = loadTopics();
+    let currentTheme = 'original';
+    let spinning = false;
+    let lastIndex = -1;
+    let toastTimer;
+    let activeReelAnimation = null;
+    let reelFinishTimer = null;
+    let reelStartFrame = null;
+    let windowsAnimationFrame = null;
+    let typeBag = [];
+    let currentLink = '';
+    let copyLabelTimer = null;
+
+    function readEmbeddedTopics() {
+      try {
+        const node = document.getElementById('embeddedData');
+        const data = JSON.parse(node ? node.textContent : '{}');
+        if (data && data.version === 2 && Array.isArray(data.topics) && data.topics.length >= 2) {
+          const restored = data.topics.map(item => ({ ...item }));
+          validateTopics(restored);
+          return {
+            customized: data.customized === true,
+            topics: restored,
+            theme: VALID_THEMES.includes(data.theme) ? data.theme : ''
+          };
+        }
+      } catch (_) {}
+      return null;
+    }
+
+    function loadTopics() {
+      const embedded = readEmbeddedTopics();
+      if (embedded && embedded.customized) return embedded.topics;
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+        if (Array.isArray(saved) && saved.length >= 2) {
+          const restored = saved.map(item => ({ ...item, type: item.type === 'Активность' ? 'Активность' : 'Тема' }));
+          validateTopics(restored);
+          return restored;
+        }
+      } catch (_) {}
+      return embedded ? embedded.topics : DEFAULT_TOPICS.map(item => ({ ...item }));
+    }
+
+    function initialTheme() {
+      const embedded = readEmbeddedTopics();
+      if (embedded && embedded.customized && embedded.theme) return embedded.theme;
+      try {
+        const saved = localStorage.getItem(THEME_STORAGE_KEY);
+        if (VALID_THEMES.includes(saved)) return saved;
+      } catch (_) {}
+      return 'original';
+    }
+
+    function applyTheme(theme, persist = true) {
+      currentTheme = VALID_THEMES.includes(theme) ? theme : 'original';
+      document.body.dataset.theme = currentTheme;
+      document.querySelector('meta[name="theme-color"]')?.setAttribute('content', THEME_COLORS[currentTheme]);
+      themeButtons.forEach(button => {
+        const active = button.dataset.themeChoice === currentTheme;
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-checked', String(active));
+      });
+      if (persist) {
+        try { localStorage.setItem(THEME_STORAGE_KEY, currentTheme); } catch (_) {}
+      }
+    }
+
+    function showTip(value) {
+      const text = String(value || '').trim();
+      if (!text) {
+        meetingTipText.textContent = '';
+        meetingTip.hidden = true;
+        return;
+      }
+      meetingTip.hidden = false;
+      meetingTipText.classList.add('changing');
+      window.setTimeout(() => {
+        meetingTipText.textContent = text;
+        meetingTipText.classList.remove('changing');
+      }, 120);
+    }
+
+    function randomInt(max) {
+      if (max <= 1) return 0;
+      if (window.crypto && crypto.getRandomValues) {
+        const limit = Math.floor(0x100000000 / max) * max;
+        const values = new Uint32Array(1);
+        do crypto.getRandomValues(values); while (values[0] >= limit);
+        return values[0] % max;
+      }
+      return Math.floor(Math.random() * max);
+    }
+
+    function shuffled(values) {
+      const result = values.slice();
+      for (let i = result.length - 1; i > 0; i--) {
+        const j = randomInt(i + 1);
+        [result[i], result[j]] = [result[j], result[i]];
+      }
+      return result;
+    }
+
+    function nextIndex() {
+      if (topics.length === 1) return 0;
+      const themes = [];
+      const activities = [];
+      topics.forEach((item, index) => (item.type === 'Активность' ? activities : themes).push(index));
+
+      let pool = topics.map((_, index) => index);
+      if (themes.length && activities.length) {
+        // В каждой серии из четырёх запусков — поровну тем и активностей,
+        // но порядок остаётся случайным.
+        if (!typeBag.length) typeBag = shuffled(['Тема', 'Тема', 'Активность', 'Активность']);
+        pool = typeBag.shift() === 'Активность' ? activities : themes;
+      } else {
+        typeBag = [];
+      }
+
+      const withoutLast = pool.filter(index => index !== lastIndex);
+      const available = withoutLast.length ? withoutLast : pool;
+      return available[randomInt(available.length)];
+    }
+
+    function rowHeight() {
+      return parseFloat(getComputedStyle(reelScreen).getPropertyValue('--row-height')) || 66;
+    }
+
+    function reelItem(index, isFinal = false) {
+      const item = document.createElement('div');
+      const activity = topics[index].type === 'Активность';
+      item.className = 'reel-item' + (activity ? ' activity' : '') + (isFinal ? ' final' : '');
+      const label = document.createElement('span');
+      label.textContent = topics[index].topic;
+      item.append(label);
+      return item;
+    }
+
+    function renderRestingReel(centerIndex = 0) {
+      reelTrack.replaceChildren();
+      for (let offset = -2; offset <= 2; offset++) {
+        const index = (centerIndex + offset + topics.length) % topics.length;
+        reelTrack.appendChild(reelItem(index, offset === 0));
+      }
+      reelTrack.style.transition = 'none';
+      reelTrack.style.transform = `translate3d(0, ${-2 * rowHeight()}px, 0)`;
+    }
+
+    function runReel(selected, duration, steps, done) {
+      const sequence = [];
+      sequence.push(lastIndex >= 0 ? lastIndex : randomInt(topics.length));
+      for (let i = 1; i < steps; i++) sequence.push(randomInt(topics.length));
+      sequence.push(selected);
+
+      reelTrack.replaceChildren();
+      sequence.forEach((index, position) => reelTrack.appendChild(reelItem(index, position === sequence.length - 1)));
+      reelTrack.style.transition = 'none';
+      reelTrack.style.transform = 'translate3d(0, 0, 0)';
+      reelTrack.classList.add('is-spinning');
+      document.body.classList.add('reel-is-spinning');
+
+      const target = -(sequence.length - 1) * rowHeight();
+      let finished = false;
+
+      const finish = () => {
+        if (finished) return;
+        finished = true;
+        clearTimeout(reelFinishTimer);
+        if (reelStartFrame !== null) cancelAnimationFrame(reelStartFrame);
+        reelStartFrame = null;
+        if (windowsAnimationFrame !== null) cancelAnimationFrame(windowsAnimationFrame);
+        windowsAnimationFrame = null;
+        if (activeReelAnimation) activeReelAnimation.cancel();
+        activeReelAnimation = null;
+        reelTrack.classList.remove('is-spinning');
+        document.body.classList.remove('reel-is-spinning');
+        renderRestingReel(selected);
+        done();
+      };
+
+      const startWindowsMotion = () => {
+        const start = performance.now();
+        const easeOutQuint = t => 1 - Math.pow(1 - t, 5);
+
+        const frame = now => {
+          if (finished) return;
+          const progress = Math.min(1, (now - start) / duration);
+          const y = target * easeOutQuint(progress);
+          reelTrack.style.transform = `translate3d(0, ${y.toFixed(2)}px, 0)`;
+          if (progress < 1) {
+            windowsAnimationFrame = requestAnimationFrame(frame);
+          } else {
+            windowsAnimationFrame = null;
+            finish();
+          }
+        };
+        windowsAnimationFrame = requestAnimationFrame(frame);
+      };
+
+      const startMotion = () => {
+        reelStartFrame = null;
+        if (finished) return;
+        void reelTrack.offsetHeight;
+
+        if (IS_WINDOWS) {
+          startWindowsMotion();
+        } else if (typeof reelTrack.animate === 'function') {
+          activeReelAnimation = reelTrack.animate(
+            [
+              { transform: 'translate3d(0, 0, 0)' },
+              { transform: `translate3d(0, ${target}px, 0)` }
+            ],
+            { duration, easing: REEL_EASING, fill: 'forwards' }
+          );
+          activeReelAnimation.onfinish = finish;
+        } else {
+          reelTrack.style.transition = `transform ${duration}ms ${REEL_EASING}`;
+          window.setTimeout(() => {
+            reelTrack.style.transform = `translate3d(0, ${target}px, 0)`;
+          }, 20);
+        }
+        reelFinishTimer = window.setTimeout(finish, duration + 250);
+      };
+
+      // Один подготовительный кадр гарантирует, что Edge/Chrome сначала
+      // отрисует ленту, а уже затем начнёт трансформацию.
+      reelStartFrame = requestAnimationFrame(startMotion);
+    }
+
+    function spin() {
+      if (spinning || topics.length < 2) return;
+      spinning = true;
+      setControls(true);
+      const selected = nextIndex();
+      // На Windows используется собственный плавный режим. Некоторые системные
+      // настройки ошибочно сообщают браузеру reduced-motion и обрывают прокрутку.
+      const reducedMotion = !IS_WINDOWS && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const duration = IS_WINDOWS ? 4300 + randomInt(300) : reducedMotion ? 80 : 3700 + randomInt(350);
+      const steps = IS_WINDOWS ? 18 + randomInt(3) : reducedMotion ? 1 : 25 + randomInt(4);
+      runReel(selected, duration, steps, () => {
+        spinning = false;
+        lastIndex = selected;
+        setControls(false);
+        showResult(selected);
+      });
+    }
+
+    function setControls(disabled) {
+      spinButton.disabled = disabled;
+      spinButton.lastElementChild.textContent = disabled ? 'Крутим рулетку…' : 'Крутить рулетку 🎲';
+    }
+
+    function showResult(index) {
+      const item = topics[index];
+      resultKicker.textContent = item.type === 'Активность' ? 'Активность' : 'Тема для встречи';
+      resultIcon.textContent = item.type === 'Активность' ? '⚡️' : '💬';
+      resultQuestion.textContent = item.question;
+      showTip(item.tip);
+      currentLink = String(item.link || '').trim();
+      clearTimeout(copyLabelTimer);
+      copyLinkLabel.textContent = 'Скопировать ссылку';
+      copyLinkButton.hidden = !currentLink;
+      emptyCopy.hidden = true;
+      resultContent.hidden = false;
+      resultCard.classList.add('has-result');
+      resultCard.classList.remove('enter');
+      void resultCard.offsetWidth;
+      resultCard.classList.add('enter');
+    }
+
+    function toggleMenu(force) {
+      const open = typeof force === 'boolean' ? force : !menu.classList.contains('open');
+      menu.classList.toggle('open', open);
+      menuButton.setAttribute('aria-expanded', String(open));
+    }
+
+    function notify(message, isError = false) {
+      clearTimeout(toastTimer);
+      toast.textContent = message;
+      toast.classList.toggle('error', isError);
+      toast.classList.add('show');
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 3400);
+    }
+
+    async function copyText(value) {
+      if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+        try {
+          await navigator.clipboard.writeText(value);
+          return true;
+        } catch (_) {}
+      }
+      const field = document.createElement('textarea');
+      field.value = value;
+      field.setAttribute('readonly', '');
+      field.style.position = 'fixed';
+      field.style.left = '-9999px';
+      field.style.opacity = '0';
+      document.body.appendChild(field);
+      field.select();
+      field.setSelectionRange(0, field.value.length);
+      let copied = false;
+      try { copied = document.execCommand('copy'); } catch (_) {}
+      field.remove();
+      return copied;
+    }
+
+    copyLinkButton.addEventListener('click', async () => {
+      if (!currentLink) return;
+      const copied = await copyText(currentLink);
+      if (!copied) {
+        notify('Не удалось скопировать ссылку.', true);
+        return;
+      }
+      clearTimeout(copyLabelTimer);
+      copyLinkLabel.textContent = 'Ссылка скопирована';
+      notify('Ссылка скопирована.');
+      copyLabelTimer = setTimeout(() => { copyLinkLabel.textContent = 'Скопировать ссылку'; }, 1800);
+    });
+
+    function resetResult() {
+      clearTimeout(reelFinishTimer);
+      if (reelStartFrame !== null) cancelAnimationFrame(reelStartFrame);
+      reelStartFrame = null;
+      if (activeReelAnimation) activeReelAnimation.cancel();
+      activeReelAnimation = null;
+      if (windowsAnimationFrame !== null) cancelAnimationFrame(windowsAnimationFrame);
+      windowsAnimationFrame = null;
+      spinning = false;
+      setControls(false);
+      reelTrack.classList.remove('is-spinning');
+      document.body.classList.remove('reel-is-spinning');
+      lastIndex = -1;
+      typeBag = [];
+      currentLink = '';
+      clearTimeout(copyLabelTimer);
+      copyLinkLabel.textContent = 'Скопировать ссылку';
+      copyLinkButton.hidden = true;
+      resultKicker.textContent = 'Тема для встречи';
+      resultIcon.textContent = '✦';
+      emptyCopy.hidden = false;
+      resultContent.hidden = true;
+      resultCard.classList.remove('has-result');
+      meetingTip.hidden = true;
+      meetingTipText.textContent = '';
+      renderRestingReel(0);
+    }
+
+    spinButton.addEventListener('click', spin);
+    applyTheme(initialTheme(), false);
+    menuButton.addEventListener('click', event => { event.stopPropagation(); toggleMenu(); });
+    document.addEventListener('click', event => { if (!menu.contains(event.target) && event.target !== menuButton) toggleMenu(false); });
+    document.addEventListener('keydown', event => { if (event.key === 'Escape') toggleMenu(false); });
+
+    document.getElementById('uploadButton').addEventListener('click', () => { toggleMenu(false); fileInput.value = ''; fileInput.click(); });
+    document.getElementById('downloadButton').addEventListener('click', () => { toggleMenu(false); downloadXlsx(); });
+    themeButtons.forEach(button => button.addEventListener('click', event => {
+      event.stopPropagation();
+      applyTheme(button.dataset.themeChoice);
+      notify(`Оформление: ${THEME_LABELS[currentTheme]}.`);
+    }));
+
+    fileInput.addEventListener('change', async () => {
+      const file = fileInput.files && fileInput.files[0];
+      if (!file) return;
+      try {
+        if (!file.name.toLowerCase().endsWith('.xlsx')) throw new Error('format');
+        if (file.size > MAX_FILE_SIZE) throw new Error('file size');
+        const imported = await readXlsx(await file.arrayBuffer());
+        validateTopics(imported.topics);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(imported.topics));
+        topics = imported.topics;
+        resetResult();
+        const activities = topics.filter(item => item.type === 'Активность').length;
+        downloadPortableHtml();
+        notify(`Загружено ${topics.length} идей. Скачан обновлённый HTML: тем — ${topics.length - activities}, активностей — ${activities}.`);
+      } catch (error) {
+        console.error(error);
+        let message = 'Не удалось загрузить идеи. Проверьте структуру Excel-файла.';
+        if (error.message === 'rows') message = `В файле должно быть от 2 до ${MAX_IDEAS} заполненных строк.`;
+        else if (error.message === 'file size') message = 'Файл слишком большой. Максимальный размер — 8 МБ.';
+        else if (error.message === 'link') message = 'Одна из ссылок слишком длинная или повреждена.';
+        else if (error.message === 'link protocol') message = 'Разрешены только ссылки http:// и https://.';
+        else if (error.message === 'tip') message = 'Маленькая подсказка может быть пустой, но не должна быть длиннее 500 символов.';
+        else if (['zip entries','zip encrypted','zip path','zip bounds','zip too large','xml size','xml dtd','invalid zip'].includes(error.message)) message = 'Excel-файл отклонён проверкой безопасности.';
+        else if (error.name === 'QuotaExceededError') message = 'Недостаточно места для сохранения идей в браузере.';
+        notify(message, true);
+      }
+    });
+
+
+    function normalizeSafeLink(value) {
+      const raw = String(value || '').trim();
+      if (!raw) return '';
+      if (raw.length > 2048) throw new Error('link');
+      let parsed;
+      try { parsed = new URL(raw); } catch (_) { throw new Error('link protocol'); }
+      if (parsed.protocol !== 'https:' && parsed.protocol !== 'http:') throw new Error('link protocol');
+      return parsed.href;
+    }
+
+    function validateTopics(rows) {
+      if (!Array.isArray(rows) || rows.length < 2 || rows.length > MAX_IDEAS) throw new Error('rows');
+      for (const row of rows) {
+        if (!row || typeof row.topic !== 'string' || typeof row.question !== 'string') throw new Error('columns');
+        row.type = row.type === 'Активность' ? 'Активность' : 'Тема';
+        row.topic = row.topic.trim();
+        row.question = row.question.trim();
+        row.link = normalizeSafeLink(typeof row.link === 'string' ? row.link : '');
+        row.tip = typeof row.tip === 'string' ? row.tip.trim() : '';
+        if (!row.topic || !row.question || row.topic.length > 80 || row.question.length > 500) throw new Error('content');
+        if (row.tip.length > 500) throw new Error('tip');
+      }
+    }
+
+    // Minimal OOXML reader/writer: keeps the app offline and in one HTML file.
+    const encoder = new TextEncoder();
+    const decoder = new TextDecoder('utf-8');
+
+    function xmlEscape(value) {
+      return String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+    }
+
+    function cell(ref, value) { return `<c r="${ref}" t="inlineStr"><is><t xml:space="preserve">${xmlEscape(value)}</t></is></c>`; }
+
+    function buildXlsxFiles() {
+      const maxRows = topics.length;
+      const sheetRows = [];
+      for (let i = 0; i <= maxRows; i++) {
+        const rowNumber = i + 1;
+        if (i === 0) {
+          sheetRows.push(`<row r="${rowNumber}">${cell('A' + rowNumber, 'Тип')}${cell('B' + rowNumber, 'Название')}${cell('C' + rowNumber, 'Суть темы или активности')}${cell('D' + rowNumber, 'Ссылка')}${cell('E' + rowNumber, 'Маленькая подсказка (необязательно)')}</row>`);
+          continue;
+        }
+        const idea = topics[i - 1];
+        let cells = '';
+        if (idea) {
+          cells += cell('A' + rowNumber, idea.type);
+          cells += cell('B' + rowNumber, idea.topic);
+          cells += cell('C' + rowNumber, idea.question);
+          cells += cell('D' + rowNumber, idea.link || '');
+          cells += cell('E' + rowNumber, idea.tip || '');
+        }
+        sheetRows.push(`<row r="${rowNumber}">${cells}</row>`);
+      }
+      const rowCount = maxRows + 1;
+      return {
+        '[Content_Types].xml': `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/></Types>`,
+        '_rels/.rels': `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>`,
+        'xl/workbook.xml': `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="Идеи" sheetId="1" r:id="rId1"/></sheets></workbook>`,
+        'xl/_rels/workbook.xml.rels': `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>`,
+        'xl/styles.xml': `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><fonts count="1"><font><sz val="11"/><name val="Arial"/></font></fonts><fills count="2"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill></fills><borders count="1"><border/></borders><cellStyleXfs count="1"><xf/></cellStyleXfs><cellXfs count="1"><xf xfId="0"/></cellXfs></styleSheet>`,
+        'xl/worksheets/sheet1.xml': `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><dimension ref="A1:E${rowCount}"/><cols><col min="1" max="1" width="18" customWidth="1"/><col min="2" max="2" width="28" customWidth="1"/><col min="3" max="3" width="76" customWidth="1"/><col min="4" max="4" width="48" customWidth="1"/><col min="5" max="5" width="76" customWidth="1"/></cols><sheetData>${sheetRows.join('')}</sheetData></worksheet>`
+      };
+    }
+
+    function crc32(bytes) {
+      let crc = -1;
+      for (let i = 0; i < bytes.length; i++) {
+        crc ^= bytes[i];
+        for (let j = 0; j < 8; j++) crc = (crc >>> 1) ^ (0xEDB88320 & -(crc & 1));
+      }
+      return (crc ^ -1) >>> 0;
+    }
+
+    function writeU16(view, offset, value) { view.setUint16(offset, value, true); }
+    function writeU32(view, offset, value) { view.setUint32(offset, value >>> 0, true); }
+
+    function makeZip(files) {
+      const entries = Object.entries(files).map(([name, text]) => ({ nameBytes: encoder.encode(name), data: encoder.encode(text), name }));
+      let localSize = 0, centralSize = 0;
+      entries.forEach(entry => { localSize += 30 + entry.nameBytes.length + entry.data.length; centralSize += 46 + entry.nameBytes.length; });
+      const out = new Uint8Array(localSize + centralSize + 22);
+      const view = new DataView(out.buffer);
+      let offset = 0;
+      entries.forEach(entry => {
+        entry.offset = offset;
+        entry.crc = crc32(entry.data);
+        writeU32(view, offset, 0x04034b50); writeU16(view, offset + 4, 20); writeU16(view, offset + 6, 0x0800); writeU16(view, offset + 8, 0);
+        writeU16(view, offset + 10, 0); writeU16(view, offset + 12, 0); writeU32(view, offset + 14, entry.crc);
+        writeU32(view, offset + 18, entry.data.length); writeU32(view, offset + 22, entry.data.length); writeU16(view, offset + 26, entry.nameBytes.length); writeU16(view, offset + 28, 0);
+        out.set(entry.nameBytes, offset + 30); out.set(entry.data, offset + 30 + entry.nameBytes.length);
+        offset += 30 + entry.nameBytes.length + entry.data.length;
+      });
+      const centralOffset = offset;
+      entries.forEach(entry => {
+        writeU32(view, offset, 0x02014b50); writeU16(view, offset + 4, 20); writeU16(view, offset + 6, 20); writeU16(view, offset + 8, 0x0800); writeU16(view, offset + 10, 0);
+        writeU16(view, offset + 12, 0); writeU16(view, offset + 14, 0); writeU32(view, offset + 16, entry.crc); writeU32(view, offset + 20, entry.data.length); writeU32(view, offset + 24, entry.data.length);
+        writeU16(view, offset + 28, entry.nameBytes.length); writeU16(view, offset + 30, 0); writeU16(view, offset + 32, 0); writeU16(view, offset + 34, 0); writeU16(view, offset + 36, 0);
+        writeU32(view, offset + 38, 0); writeU32(view, offset + 42, entry.offset); out.set(entry.nameBytes, offset + 46);
+        offset += 46 + entry.nameBytes.length;
+      });
+      writeU32(view, offset, 0x06054b50); writeU16(view, offset + 4, 0); writeU16(view, offset + 6, 0); writeU16(view, offset + 8, entries.length); writeU16(view, offset + 10, entries.length);
+      writeU32(view, offset + 12, centralSize); writeU32(view, offset + 16, centralOffset); writeU16(view, offset + 20, 0);
+      return out;
+    }
+
+    function downloadXlsx() {
+      try {
+        const bytes = makeZip(buildXlsxFiles());
+        const blob = new Blob([bytes], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'random-coffee-sme.xlsx';
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+        notify('Excel-файл с темами, активностями и подсказками скачан.');
+      } catch (_) { notify('Не удалось создать Excel-файл.', true); }
+    }
+
+    function downloadPortableHtml() {
+      const clone = document.documentElement.cloneNode(true);
+      clone.querySelector('#menu')?.classList.remove('open');
+      clone.querySelector('#menuButton')?.setAttribute('aria-expanded', 'false');
+      clone.querySelector('#meetingTip')?.setAttribute('hidden', '');
+      const embeddedNode = clone.querySelector('#embeddedData');
+      if (!embeddedNode) throw new Error('embedded data');
+      const safeJson = JSON.stringify({ version: 2, customized: true, theme: currentTheme, topics })
+        .replace(/</g, '\\u003c')
+        .replace(/>/g, '\\u003e')
+        .replace(/&/g, '\\u0026')
+        .replace(/\u2028/g, '\\u2028')
+        .replace(/\u2029/g, '\\u2029');
+      embeddedNode.textContent = safeJson;
+      const html = '<!DOCTYPE html>\n' + clone.outerHTML;
+      const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'Рандом кофе SME — обновлённая версия.html';
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+    }
+
+    function inflateRawFallback(input) {
+      let bitPosition = 0;
+      const output = [];
+      const readBits = count => {
+        let value = 0;
+        for (let bit = 0; bit < count; bit++) {
+          if (bitPosition >= input.length * 8) throw new Error('deflate eof');
+          value |= ((input[bitPosition >> 3] >> (bitPosition & 7)) & 1) << bit;
+          bitPosition++;
+        }
+        return value;
+      };
+      const reverseBits = (value, count) => {
+        let reversed = 0;
+        for (let i = 0; i < count; i++) reversed = (reversed << 1) | ((value >> i) & 1);
+        return reversed;
+      };
+      const buildTree = lengths => {
+        const maxLength = Math.max(...lengths);
+        const counts = new Array(maxLength + 1).fill(0);
+        lengths.forEach(length => { if (length) counts[length]++; });
+        const nextCode = new Array(maxLength + 1).fill(0);
+        let code = 0;
+        for (let bits = 1; bits <= maxLength; bits++) {
+          code = (code + (counts[bits - 1] || 0)) << 1;
+          nextCode[bits] = code;
+        }
+        const table = new Map();
+        lengths.forEach((length, symbol) => {
+          if (!length) return;
+          const canonical = nextCode[length]++;
+          table.set(length + ':' + reverseBits(canonical, length), symbol);
+        });
+        return { table, maxLength };
+      };
+      const decodeSymbol = tree => {
+        let code = 0;
+        for (let length = 1; length <= tree.maxLength; length++) {
+          code |= readBits(1) << (length - 1);
+          const symbol = tree.table.get(length + ':' + code);
+          if (symbol !== undefined) return symbol;
+        }
+        throw new Error('deflate huffman');
+      };
+      const fixedTrees = () => {
+        const literalLengths = new Array(288).fill(0).map((_, symbol) => symbol <= 143 ? 8 : symbol <= 255 ? 9 : symbol <= 279 ? 7 : 8);
+        return [buildTree(literalLengths), buildTree(new Array(32).fill(5))];
+      };
+      const dynamicTrees = () => {
+        const literalCount = readBits(5) + 257;
+        const distanceCount = readBits(5) + 1;
+        const codeLengthCount = readBits(4) + 4;
+        const order = [16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15];
+        const codeLengths = new Array(19).fill(0);
+        for (let i = 0; i < codeLengthCount; i++) codeLengths[order[i]] = readBits(3);
+        const codeTree = buildTree(codeLengths);
+        const lengths = [];
+        while (lengths.length < literalCount + distanceCount) {
+          const symbol = decodeSymbol(codeTree);
+          if (symbol <= 15) lengths.push(symbol);
+          else if (symbol === 16) {
+            if (!lengths.length) throw new Error('deflate repeat');
+            const repeat = readBits(2) + 3;
+            const previous = lengths[lengths.length - 1];
+            for (let i = 0; i < repeat; i++) lengths.push(previous);
+          } else if (symbol === 17) {
+            const repeat = readBits(3) + 3;
+            for (let i = 0; i < repeat; i++) lengths.push(0);
+          } else if (symbol === 18) {
+            const repeat = readBits(7) + 11;
+            for (let i = 0; i < repeat; i++) lengths.push(0);
+          } else throw new Error('deflate lengths');
+          if (lengths.length > literalCount + distanceCount) throw new Error('deflate overflow');
+        }
+        return [buildTree(lengths.slice(0, literalCount)), buildTree(lengths.slice(literalCount))];
+      };
+      const lengthBase = [3,4,5,6,7,8,9,10,11,13,15,17,19,23,27,31,35,43,51,59,67,83,99,115,131,163,195,227,258];
+      const lengthExtra = [0,0,0,0,0,0,0,0,1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,0];
+      const distanceBase = [1,2,3,4,5,7,9,13,17,25,33,49,65,97,129,193,257,385,513,769,1025,1537,2049,3073,4097,6145,8193,12289,16385,24577];
+      const distanceExtra = [0,0,0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,11,12,12,13,13];
+      let finalBlock = false;
+      while (!finalBlock) {
+        finalBlock = readBits(1) === 1;
+        const blockType = readBits(2);
+        if (blockType === 0) {
+          bitPosition = Math.ceil(bitPosition / 8) * 8;
+          const length = readBits(16);
+          const inverse = readBits(16);
+          if ((length ^ 0xffff) !== inverse) throw new Error('deflate stored');
+          for (let i = 0; i < length; i++) output.push(readBits(8));
+          continue;
+        }
+        if (blockType === 3) throw new Error('deflate reserved');
+        const [literalTree, distanceTree] = blockType === 1 ? fixedTrees() : dynamicTrees();
+        while (true) {
+          const symbol = decodeSymbol(literalTree);
+          if (symbol < 256) {
+            output.push(symbol);
+          } else if (symbol === 256) {
+            break;
+          } else {
+            const lengthIndex = symbol - 257;
+            if (lengthIndex < 0 || lengthIndex >= lengthBase.length) throw new Error('deflate length');
+            const length = lengthBase[lengthIndex] + readBits(lengthExtra[lengthIndex]);
+            const distanceSymbol = decodeSymbol(distanceTree);
+            if (distanceSymbol >= distanceBase.length) throw new Error('deflate distance');
+            const distance = distanceBase[distanceSymbol] + readBits(distanceExtra[distanceSymbol]);
+            if (distance > output.length) throw new Error('deflate history');
+            for (let i = 0; i < length; i++) output.push(output[output.length - distance]);
+          }
+          if (output.length > MAX_UNZIPPED_SIZE) throw new Error('deflate too large');
+        }
+      }
+      return new Uint8Array(output);
+    }
+
+    async function inflateRaw(bytes) {
+      if ('DecompressionStream' in window) {
+        try {
+          const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('deflate-raw'));
+          return new Uint8Array(await new Response(stream).arrayBuffer());
+        } catch (_) {}
+      }
+      return inflateRawFallback(bytes);
+    }
+
+    async function unzip(buffer) {
+      const bytes = new Uint8Array(buffer);
+      const view = new DataView(buffer);
+      if (bytes.length < 22 || bytes.length > MAX_FILE_SIZE) throw new Error('invalid zip');
+
+      let eocd = -1;
+      for (let i = bytes.length - 22; i >= Math.max(0, bytes.length - 65557); i--) {
+        if (view.getUint32(i, true) === 0x06054b50) { eocd = i; break; }
+      }
+      if (eocd < 0) throw new Error('invalid zip');
+
+      const count = view.getUint16(eocd + 10, true);
+      if (!count || count > MAX_ZIP_ENTRIES) throw new Error('zip entries');
+
+      let offset = view.getUint32(eocd + 16, true);
+      if (offset < 0 || offset >= bytes.length) throw new Error('central directory');
+
+      const files = {};
+      let totalInflated = 0;
+
+      for (let i = 0; i < count; i++) {
+        if (offset + 46 > bytes.length || view.getUint32(offset, true) !== 0x02014b50) throw new Error('central directory');
+
+        const flags = view.getUint16(offset + 8, true);
+        const method = view.getUint16(offset + 10, true);
+        const compressedSize = view.getUint32(offset + 20, true);
+        const uncompressedSize = view.getUint32(offset + 24, true);
+        const nameLength = view.getUint16(offset + 28, true);
+        const extraLength = view.getUint16(offset + 30, true);
+        const commentLength = view.getUint16(offset + 32, true);
+        const localOffset = view.getUint32(offset + 42, true);
+        const recordEnd = offset + 46 + nameLength + extraLength + commentLength;
+
+        if (recordEnd > bytes.length || localOffset + 30 > bytes.length) throw new Error('zip bounds');
+        if (flags & 0x0001) throw new Error('zip encrypted');
+
+        const name = decoder.decode(bytes.slice(offset + 46, offset + 46 + nameLength));
+        if (!name || name.includes('\\') || name.startsWith('/') || name.split('/').includes('..')) throw new Error('zip path');
+
+        if (view.getUint32(localOffset, true) !== 0x04034b50) throw new Error('local header');
+        const localNameLength = view.getUint16(localOffset + 26, true);
+        const localExtraLength = view.getUint16(localOffset + 28, true);
+        const dataStart = localOffset + 30 + localNameLength + localExtraLength;
+        const dataEnd = dataStart + compressedSize;
+        if (dataStart < 0 || dataEnd > bytes.length) throw new Error('zip bounds');
+
+        if (!name.endsWith('/')) {
+          if (uncompressedSize > MAX_UNZIPPED_SIZE) throw new Error('zip too large');
+          const compressed = bytes.slice(dataStart, dataEnd);
+          let unpacked;
+
+          if (method === 0) unpacked = compressed;
+          else if (method === 8) unpacked = await inflateRaw(compressed);
+          else throw new Error('compression method');
+
+          totalInflated += unpacked.byteLength;
+          if (totalInflated > MAX_UNZIPPED_SIZE) throw new Error('zip too large');
+          files[name] = unpacked;
+        }
+
+        offset = recordEnd;
+      }
+      return files;
+    }
+
+    function xmlDocument(bytes) {
+      if (!bytes || bytes.byteLength > MAX_XML_SIZE) throw new Error('xml size');
+      const source = decoder.decode(bytes);
+      if (/<!DOCTYPE|<!ENTITY/i.test(source)) throw new Error('xml dtd');
+      const doc = new DOMParser().parseFromString(source, 'application/xml');
+      if (doc.querySelector('parsererror')) throw new Error('xml');
+      return doc;
+    }
+
+    function normalizeHeader(value) {
+      return String(value || '')
+        .replace(/^\uFEFF/, '')
+        .replace(/\u00a0/g, ' ')
+        .trim()
+        .toLowerCase()
+        .replace(/ё/g, 'е')
+        .replace(/[.:;!?()[\]{}]/g, '')
+        .replace(/\s+/g, ' ');
+    }
+
+    function normalizeIdeaType(value) {
+      const normalized = normalizeHeader(value);
+      return /актив|activity|дело|действие/.test(normalized) ? 'Активность' : 'Тема';
+    }
+
+    async function readXlsx(buffer) {
+      const files = await unzip(buffer);
+      const sheetKey = Object.keys(files).find(name => /^xl\/worksheets\/sheet\d+\.xml$/i.test(name));
+      if (!sheetKey) throw new Error('sheet');
+      const shared = files['xl/sharedStrings.xml'] ? [...xmlDocument(files['xl/sharedStrings.xml']).getElementsByTagNameNS('*', 'si')].map(si => [...si.getElementsByTagNameNS('*', 't')].map(t => t.textContent || '').join('')) : [];
+      const doc = xmlDocument(files[sheetKey]);
+      const rows = [...doc.getElementsByTagNameNS('*', 'row')];
+      const parsed = rows.map(row => {
+        const values = {};
+        [...row.getElementsByTagNameNS('*', 'c')].forEach((c, cellIndex) => {
+          const ref = c.getAttribute('r') || '';
+          let col = (ref.match(/[A-Z]+/i) || [''])[0].toUpperCase();
+          if (!col) {
+            let number = cellIndex + 1;
+            while (number > 0) {
+              number--;
+              col = String.fromCharCode(65 + (number % 26)) + col;
+              number = Math.floor(number / 26);
+            }
+          }
+          const type = c.getAttribute('t');
+          let value = '';
+          if (type === 'inlineStr') value = [...c.getElementsByTagNameNS('*', 't')].map(t => t.textContent || '').join('');
+          else {
+            const v = c.getElementsByTagNameNS('*', 'v')[0];
+            value = v ? v.textContent || '' : '';
+            if (type === 's') value = shared[Number(value)] ?? '';
+          }
+          values[col] = value;
+        });
+        return values;
+      });
+      if (!parsed.length) throw new Error('empty');
+      const topicHeaders = ['название', 'тема', 'идея', 'короткое название', 'название темы', 'название идеи'];
+      const textHeaders = ['текст', 'вопрос', 'описание', 'полный вопрос', 'формулировка', 'текст вопроса', 'суть темы', 'суть активности', 'суть темы или активности'];
+      const typeHeaders = ['тип', 'категория', 'вид'];
+      const linkHeaders = ['ссылка', 'url', 'адрес', 'link', 'ссылка на материал'];
+      const tipTextHeaders = ['совет', 'текст совета', 'маленький совет', 'подсказка', 'маленькая подсказка', 'маленькая подсказка необязательно'];
+      let headerIndex = -1;
+      let topicColumn = '';
+      let textColumn = '';
+      let typeColumn = '';
+      let linkColumn = '';
+      let tipTextColumn = '';
+
+      for (let index = 0; index < Math.min(parsed.length, 12); index++) {
+        const entries = Object.entries(parsed[index]).map(([column, value]) => [column, normalizeHeader(value)]);
+        const findColumn = aliases => (entries.find(([, value]) => aliases.includes(value)) || [])[0] || '';
+        const foundTopic = findColumn(topicHeaders);
+        const foundText = findColumn(textHeaders);
+        const foundTipText = findColumn(tipTextHeaders);
+        if (foundTopic && foundText && foundTopic !== foundText) {
+          headerIndex = index;
+          topicColumn = foundTopic;
+          textColumn = foundText;
+          typeColumn = findColumn(typeHeaders);
+          linkColumn = findColumn(linkHeaders);
+          tipTextColumn = foundTipText;
+          break;
+        }
+      }
+      if (headerIndex < 0) throw new Error('headers');
+
+      const dataRows = parsed.slice(headerIndex + 1);
+      const importedTopics = dataRows
+        .filter(row => String(row[topicColumn] || '').trim() || String(row[textColumn] || '').trim())
+        .map(row => ({
+          type: typeColumn ? normalizeIdeaType(row[typeColumn]) : 'Тема',
+          topic: String(row[topicColumn] || ''),
+          question: String(row[textColumn] || ''),
+          link: linkColumn ? String(row[linkColumn] || '') : '',
+          tip: tipTextColumn ? String(row[tipTextColumn] || '') : ''
+        }));
+      return { topics: importedTopics };
+    }
+
+    renderRestingReel(0);
+  </script>
+</body>
+</html>
