@@ -2474,6 +2474,434 @@
       }
     }
 
+    /* Final mobile composition: action first, result second, generous spacing. */
+    .icon-button,
+    .icon-button:hover,
+    .icon-button[aria-expanded="true"] {
+      border-color: transparent;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .icon-button:hover,
+    .icon-button[aria-expanded="true"] {
+      opacity: .88;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        background:
+          radial-gradient(circle at 15% 0, var(--season-glow, rgba(255, 216, 74, .15)), transparent 24rem),
+          var(--season-bg, #f8f6f0);
+      }
+
+      .app {
+        padding-inline: max(12px, env(safe-area-inset-left));
+        padding-right: max(12px, env(safe-area-inset-right));
+      }
+
+      .topbar {
+        top: max(18px, calc(env(safe-area-inset-top) + 7px));
+        right: max(20px, calc(env(safe-area-inset-right) + 8px));
+      }
+
+      .icon-button,
+      .icon-button:hover,
+      .icon-button[aria-expanded="true"] {
+        width: 44px;
+        height: 44px;
+        border: 0;
+        background: transparent;
+        box-shadow: none;
+        opacity: .72;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+      }
+
+      .icon-button:active {
+        opacity: 1;
+        transform: scale(.94);
+      }
+
+      .dots {
+        font-size: 24px;
+        color: var(--season-ink, #3f2d24);
+        text-shadow: 0 1px 0 rgba(255, 255, 255, .5);
+      }
+
+      .experience-shell,
+      body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .experience-shell {
+        overflow: visible;
+        padding-bottom: 0;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+      }
+
+      .experience-shell .hero {
+        padding: 54px 12px 25px;
+      }
+
+      .hero h1 {
+        max-width: 320px;
+        font-size: clamp(29px, 8.8vw, 37px);
+      }
+
+      .hero .subtitle {
+        width: min(100%, 330px);
+        margin-top: 14px;
+        padding: 9px 13px;
+        border-radius: 14px;
+        box-shadow: none;
+      }
+
+      body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .experience-shell::before {
+        top: 13px;
+        left: 10px;
+        font-size: 28px;
+        opacity: .2;
+      }
+
+      body[data-theme="spring"][data-romantic="true"] .experience-shell::after,
+      body[data-theme="winter"][data-festive="true"] .experience-shell::after {
+        top: 21px;
+        left: 48px;
+      }
+
+      .experience-shell .workspace,
+      body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .experience-shell .workspace {
+        grid-template-areas:
+          "wheel"
+          "spin"
+          "result";
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto auto auto;
+        gap: 16px;
+        padding: 0;
+        border: 0;
+        background: transparent;
+      }
+
+      .wheel-column {
+        grid-area: wheel;
+      }
+
+      .spin-area {
+        grid-area: spin;
+      }
+
+      .side {
+        grid-area: result;
+      }
+
+      .experience-shell .slot-machine {
+        padding: 8px;
+        border-radius: 22px;
+        box-shadow: 0 12px 30px var(--season-glow, rgba(54, 46, 27, .09)), inset 0 1px 0 rgba(255, 255, 255, .9);
+      }
+
+      .reel-frame {
+        padding: 6px;
+        border-radius: 18px;
+      }
+
+      .reel-screen {
+        height: 250px;
+        border-radius: 14px;
+      }
+
+      .spin-area {
+        padding: 11px;
+        border: 1px solid var(--season-line, #e3ddd1);
+        border-radius: 21px;
+        background: var(--season-card, rgba(255, 255, 255, .9));
+        box-shadow: 0 10px 26px var(--season-glow, rgba(54, 46, 27, .08)), inset 0 1px 0 rgba(255, 255, 255, .9);
+      }
+
+      .spin-area .primary,
+      body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .spin-area .primary,
+      body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .spin-area .primary:hover {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        min-height: 62px;
+        border: 0;
+        border-radius: 16px;
+        background: linear-gradient(145deg, #35322d, #211f1b);
+        box-shadow: 0 10px 24px rgba(33, 31, 27, .22), inset 0 1px 0 rgba(255, 255, 255, .16);
+        color: #fff;
+        font-size: clamp(16px, 4.5vw, 18px);
+        letter-spacing: -.01em;
+      }
+
+      .spin-area .primary::before {
+        content: "🎲";
+        display: grid;
+        place-items: center;
+        flex: 0 0 auto;
+        width: 34px;
+        height: 34px;
+        border-radius: 11px;
+        background: rgba(255, 255, 255, .13);
+        font-size: 19px;
+        line-height: 1;
+      }
+
+      body[data-theme="autumn"] .spin-area .primary,
+      body[data-theme="autumn"] .spin-area .primary:hover {
+        background: linear-gradient(145deg, #5c3929, #38231b);
+        box-shadow: 0 10px 24px rgba(63, 45, 36, .25), inset 0 1px 0 rgba(255, 255, 255, .15);
+      }
+
+      body[data-theme="winter"] .spin-area .primary,
+      body[data-theme="winter"] .spin-area .primary:hover {
+        background: linear-gradient(145deg, #326d88, #1d465a);
+        box-shadow: 0 10px 24px rgba(33, 57, 68, .23), inset 0 1px 0 rgba(255, 255, 255, .16);
+      }
+
+      body[data-theme="spring"] .spin-area .primary,
+      body[data-theme="spring"] .spin-area .primary:hover {
+        background: linear-gradient(145deg, #4f7848, #304c2c);
+        box-shadow: 0 10px 24px rgba(47, 67, 44, .22), inset 0 1px 0 rgba(255, 255, 255, .16);
+      }
+
+      body[data-theme="summer"] .spin-area .primary,
+      body[data-theme="summer"] .spin-area .primary:hover {
+        background: linear-gradient(145deg, #247d75, #15534e);
+        box-shadow: 0 10px 24px rgba(23, 63, 61, .22), inset 0 1px 0 rgba(255, 255, 255, .16);
+      }
+
+      body[data-theme="winter"][data-festive="true"] .spin-area .primary,
+      body[data-theme="winter"][data-festive="true"] .spin-area .primary:hover {
+        background: linear-gradient(145deg, #c24747, #8f2929);
+        box-shadow: 0 10px 24px rgba(143, 41, 41, .23), inset 0 1px 0 rgba(255, 255, 255, .16);
+      }
+
+      body[data-theme="spring"][data-romantic="true"] .spin-area .primary,
+      body[data-theme="spring"][data-romantic="true"] .spin-area .primary:hover {
+        background: linear-gradient(145deg, #d94c70, #a92a4c);
+        box-shadow: 0 10px 24px rgba(169, 42, 76, .23), inset 0 1px 0 rgba(255, 255, 255, .16);
+      }
+
+      .spin-area .primary:disabled {
+        opacity: .7;
+        box-shadow: none;
+      }
+
+      .spin-area .chance-note {
+        margin: 10px auto 1px;
+        padding-inline: 8px;
+        color: var(--season-muted, #81796e);
+        font-size: 12px;
+        line-height: 1.35;
+      }
+
+      .experience-shell .result-card {
+        min-height: 180px;
+        padding: 22px 20px;
+        border-radius: 22px;
+        box-shadow: 0 10px 28px var(--season-glow, rgba(54, 46, 27, .07)), inset 0 1px 0 rgba(255, 255, 255, .9);
+      }
+
+      .result-card:not(.has-result) .empty-copy {
+        max-width: 280px;
+        padding-block: 20px;
+        color: var(--season-muted, #81796e);
+      }
+
+      .result-header {
+        gap: 10px;
+      }
+
+      .result-header .result-kicker {
+        padding: 7px 10px;
+        font-size: 11.5px;
+      }
+
+      .result-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+      }
+
+      .meeting-tip {
+        margin: 16px 0 0;
+        padding: 17px 18px 18px 20px;
+        border-radius: 21px;
+        box-shadow: 0 9px 24px var(--season-glow, rgba(54, 46, 27, .06)), inset 0 1px 0 rgba(255, 255, 255, .9);
+      }
+
+      body[data-theme="winter"][data-festive="true"] .experience-shell .hero {
+        padding-top: 58px;
+      }
+    }
+
+    @media (max-width: 370px) {
+      .app {
+        padding-inline: 8px;
+      }
+
+      .experience-shell .workspace {
+        gap: 13px;
+      }
+
+      .reel-screen {
+        height: 236px;
+      }
+
+      .spin-area {
+        padding: 9px;
+      }
+
+      .spin-area .primary {
+        min-height: 58px;
+      }
+    }
+
+    /* Link action and final mobile polish. */
+    .copy-link {
+      border-color: rgba(73, 66, 56, .12);
+      background: #f7f4ec;
+      color: #38342e;
+    }
+
+    .copy-link:hover {
+      border-color: rgba(73, 66, 56, .2);
+      background: #f1ecdf;
+    }
+
+    @media (max-width: 600px) {
+      .experience-shell .hero {
+        padding-bottom: 28px;
+      }
+
+      .wheel-column::before {
+        content: "Случайный выбор";
+        align-self: flex-start;
+        margin: 0 0 8px 9px;
+        color: var(--season-muted, #81796e);
+        font-size: 10.5px;
+        font-weight: 800;
+        letter-spacing: .07em;
+        text-transform: uppercase;
+      }
+
+      .experience-shell .workspace {
+        gap: 17px;
+      }
+
+      .spin-area {
+        position: relative;
+        isolation: isolate;
+      }
+
+      .spin-area::after {
+        content: "";
+        position: absolute;
+        inset: 8px;
+        z-index: -1;
+        border-radius: 17px;
+        background: radial-gradient(circle at 50% 0, var(--season-glow, rgba(255, 216, 74, .14)), transparent 72%);
+        pointer-events: none;
+      }
+
+      .experience-shell .result-card:not(.has-result) {
+        min-height: 142px;
+        border-style: dashed;
+        box-shadow: none;
+      }
+
+      .result-card:not(.has-result) .empty-copy {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+        max-width: 290px;
+        padding-block: 14px;
+        font-size: 15px;
+      }
+
+      .result-card:not(.has-result) .empty-copy::before {
+        content: "✦";
+        display: grid;
+        place-items: center;
+        width: 32px;
+        height: 32px;
+        border: 1px solid var(--season-line, #e3ddd1);
+        border-radius: 11px;
+        background: var(--season-soft, #f7f4ec);
+        color: var(--season-accent, #d0a614);
+        font-size: 14px;
+      }
+
+      .experience-shell .result-card.has-result {
+        min-height: 190px;
+      }
+
+      .result-card.has-result::before {
+        height: 4px;
+      }
+
+      .copy-link {
+        align-self: stretch;
+        width: 100%;
+        min-height: 48px;
+        margin-top: 20px;
+        padding: 11px 15px;
+        border-color: var(--season-line, #e3ddd1);
+        border-radius: 14px;
+        background: var(--season-soft, #f7f4ec);
+        color: var(--season-ink, #38342e);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, .75);
+        font-size: 13.5px;
+        font-weight: 780;
+        touch-action: manipulation;
+      }
+
+      .copy-link:hover,
+      .copy-link:active {
+        border-color: var(--season-accent, #d0a614);
+        background: var(--season-soft, #f7f4ec);
+        transform: none;
+      }
+
+      .copy-link > span:first-child {
+        display: grid;
+        place-items: center;
+        width: 27px;
+        height: 27px;
+        border-radius: 9px;
+        background: color-mix(in srgb, var(--season-accent, #d0a614) 15%, transparent);
+        font-size: 15px;
+      }
+
+      .meeting-tip-title {
+        font-size: 12.5px;
+      }
+
+      .meeting-tip-text {
+        font-size: 12.75px;
+        line-height: 1.5;
+      }
+    }
+
+    @media (max-width: 370px) {
+      .wheel-column::before {
+        margin-left: 7px;
+      }
+
+      .experience-shell .workspace {
+        gap: 14px;
+      }
+
+      .experience-shell .result-card:not(.has-result) {
+        min-height: 132px;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -2539,20 +2967,20 @@
             <div class="result-kicker" id="resultKicker">Тема для встречи</div>
             <div class="result-icon" id="resultIcon" aria-hidden="true">✦</div>
           </div>
-          <p class="empty-copy" id="emptyCopy">Здесь появится вопрос или совместная активность</p>
+          <p class="empty-copy" id="emptyCopy">После запуска здесь появится вопрос или совместная активность</p>
           <div id="resultContent" hidden>
             <p class="question" id="resultQuestion"></p>
-            <button class="copy-link" id="copyLinkButton" type="button" hidden>
-              <span aria-hidden="true">⧉</span>
-              <span id="copyLinkLabel">Скопировать ссылку</span>
+            <button class="copy-link" id="copyLinkButton" type="button" aria-label="Перейти по прикреплённой ссылке" hidden>
+              <span aria-hidden="true">↗</span>
+              <span id="copyLinkLabel">Перейти по ссылке</span>
             </button>
           </div>
         </article>
       </aside>
 
       <div class="spin-area">
-        <button class="primary" id="spinButton" type="button"><span>Крутить рулетку 🎲</span></button>
-        <p class="chance-note">Не знаете, с чего начать? Доверьтесь случаю</p>
+        <button class="primary" id="spinButton" type="button"><span>Крутить рулетку</span></button>
+        <p class="chance-note">Нажмите кнопку — тему для встречи выберет случай</p>
       </div>
       </section>
 
@@ -2650,7 +3078,6 @@
     let windowsAnimationFrame = null;
     let typeBag = [];
     let currentLink = '';
-    let copyLabelTimer = null;
 
     function readEmbeddedTopics() {
       try {
@@ -2900,7 +3327,7 @@
 
     function setControls(disabled) {
       spinButton.disabled = disabled;
-      spinButton.lastElementChild.textContent = disabled ? 'Крутим рулетку…' : 'Крутить рулетку 🎲';
+      spinButton.lastElementChild.textContent = disabled ? 'Крутим рулетку…' : 'Крутить рулетку';
     }
 
     function showResult(index) {
@@ -2909,9 +3336,8 @@
       resultIcon.textContent = item.type === 'Активность' ? '⚡️' : '💬';
       resultQuestion.textContent = item.question;
       showTip(item.tip);
-      currentLink = String(item.link || '').trim();
-      clearTimeout(copyLabelTimer);
-      copyLinkLabel.textContent = 'Скопировать ссылку';
+      currentLink = normalizeExternalLink(item.link);
+      copyLinkLabel.textContent = 'Перейти по ссылке';
       copyLinkButton.hidden = !currentLink;
       emptyCopy.hidden = true;
       resultContent.hidden = false;
@@ -2919,6 +3345,12 @@
       resultCard.classList.remove('enter');
       void resultCard.offsetWidth;
       resultCard.classList.add('enter');
+      if (matchMedia('(max-width: 600px)').matches) {
+        window.setTimeout(() => {
+          const behavior = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+          resultCard.scrollIntoView({ behavior, block: 'center' });
+        }, 120);
+      }
     }
 
     function toggleMenu(force) {
@@ -2935,39 +3367,21 @@
       toastTimer = setTimeout(() => toast.classList.remove('show'), 3400);
     }
 
-    async function copyText(value) {
-      if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
-        try {
-          await navigator.clipboard.writeText(value);
-          return true;
-        } catch (_) {}
+    function normalizeExternalLink(value) {
+      const raw = String(value || '').trim();
+      if (!raw) return '';
+      try {
+        const candidate = /^[a-z][a-z0-9+.-]*:/i.test(raw) ? raw : `https://${raw}`;
+        const url = new URL(candidate);
+        return url.protocol === 'http:' || url.protocol === 'https:' ? url.href : '';
+      } catch (_) {
+        return '';
       }
-      const field = document.createElement('textarea');
-      field.value = value;
-      field.setAttribute('readonly', '');
-      field.style.position = 'fixed';
-      field.style.left = '-9999px';
-      field.style.opacity = '0';
-      document.body.appendChild(field);
-      field.select();
-      field.setSelectionRange(0, field.value.length);
-      let copied = false;
-      try { copied = document.execCommand('copy'); } catch (_) {}
-      field.remove();
-      return copied;
     }
 
-    copyLinkButton.addEventListener('click', async () => {
+    copyLinkButton.addEventListener('click', () => {
       if (!currentLink) return;
-      const copied = await copyText(currentLink);
-      if (!copied) {
-        notify('Не удалось скопировать ссылку.', true);
-        return;
-      }
-      clearTimeout(copyLabelTimer);
-      copyLinkLabel.textContent = 'Ссылка скопирована';
-      notify('Ссылка скопирована.');
-      copyLabelTimer = setTimeout(() => { copyLinkLabel.textContent = 'Скопировать ссылку'; }, 1800);
+      window.location.assign(currentLink);
     });
 
     function resetResult() {
@@ -2985,8 +3399,7 @@
       lastIndex = -1;
       typeBag = [];
       currentLink = '';
-      clearTimeout(copyLabelTimer);
-      copyLinkLabel.textContent = 'Скопировать ссылку';
+      copyLinkLabel.textContent = 'Перейти по ссылке';
       copyLinkButton.hidden = true;
       resultKicker.textContent = 'Тема для встречи';
       resultIcon.textContent = '✦';
