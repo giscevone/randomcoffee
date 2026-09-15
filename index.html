@@ -1,9 +1,8 @@
-<!doctype html>
-<html lang="ru">
-<head>
+<!DOCTYPE html>
+<html lang="ru"><head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#f8f6f0">
+  <meta name="theme-color" content="#f7eee3">
   <meta name="referrer" content="no-referrer">
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; connect-src 'none'; font-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; child-src 'none'; worker-src 'none'; base-uri 'none'; form-action 'none'; manifest-src 'none'">
   <title>Рандом кофе — идеи для хорошей встречи</title>
@@ -2459,9 +2458,9 @@
     .icon-button,
     .icon-button:hover,
     .icon-button[aria-expanded="true"] {
-      border-color: transparent;
-      background: transparent;
-      box-shadow: none;
+      border-color: transparent !important;
+      background: transparent !important;
+      box-shadow: none !important;
     }
 
     .icon-button:hover,
@@ -3489,9 +3488,632 @@
       }
     }
 
+    /* Five-spin meeting limit. Kept visually neutral to preserve the original design. */
+    .attempt-status {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 28px;
+      margin-top: 10px;
+    }
+
+    .attempt-counter,
+    .limit-message {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 28px;
+      padding: 5px 10px;
+      border: 1px solid var(--season-line, var(--line));
+      border-radius: 999px;
+      background: var(--season-card, rgba(255,255,255,.88));
+      color: var(--season-muted, var(--muted));
+      box-shadow: 0 4px 14px rgba(45,39,24,.06);
+      font-size: 12px;
+      font-weight: 720;
+      line-height: 1.2;
+    }
+
+    .attempt-counter strong {
+      margin-left: 5px;
+      color: var(--season-ink, var(--ink));
+      font-weight: 850;
+    }
+
+    .limit-message { color: var(--season-ink, var(--ink)); }
+    .limit-message[hidden] { display: none; }
+
+    .spin-area .primary:disabled {
+      cursor: not-allowed;
+      opacity: .6;
+      filter: saturate(.68);
+      transform: none;
+    }
+
+    @media (max-width: 520px) {
+      .attempt-status { gap: 7px; }
+      .attempt-counter,
+      .limit-message { padding: 5px 9px; font-size: 11.5px; }
+    }
+
+    /* Sparse static emoji wallpapers. The original cards and logo stay unchanged. */
+    body[data-theme="autumn"] {
+      --emoji-wallpaper-color: #f7eee3;
+      --emoji-wallpaper: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='280' viewBox='0 0 250 280'%3E%3Cg font-family='Apple%20Color%20Emoji,Segoe%20UI%20Emoji,sans-serif' opacity='.29'%3E%3Ctext x='30' y='45' font-size='23' transform='rotate(-12 30 45)'%3E%26%23x1F341%3B%3C/text%3E%3Ctext x='164' y='78' font-size='25' transform='rotate(13 164 78)'%3E%26%23x1F330%3B%3C/text%3E%3Ctext x='80' y='133' font-size='22' transform='rotate(18 80 133)'%3E%26%23x1F342%3B%3C/text%3E%3Ctext x='205' y='170' font-size='20' transform='rotate(-16 205 170)'%3E%26%23x1F341%3B%3C/text%3E%3Ctext x='38' y='226' font-size='24' transform='rotate(8 38 226)'%3E%26%23x1F330%3B%3C/text%3E%3Ctext x='142' y='263' font-size='22' transform='rotate(-9 142 263)'%3E%26%23x1F342%3B%3C/text%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    body[data-theme="winter"]:not([data-festive="true"]) {
+      --emoji-wallpaper-color: #edf4f8;
+      --emoji-wallpaper: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='280' viewBox='0 0 250 280'%3E%3Cg font-family='Apple%20Color%20Emoji,Segoe%20UI%20Emoji,sans-serif' opacity='.27'%3E%3Ctext x='31' y='46' font-size='23'%3E%26%23x2744%3B%26%23xFE0F%3B%3C/text%3E%3Ctext x='165' y='79' font-size='25'%3E%26%23x2603%3B%26%23xFE0F%3B%3C/text%3E%3Ctext x='80' y='134' font-size='21'%3E%26%23x1F328%3B%26%23xFE0F%3B%3C/text%3E%3Ctext x='204' y='170' font-size='20'%3E%26%23x2744%3B%26%23xFE0F%3B%3C/text%3E%3Ctext x='38' y='226' font-size='24'%3E%26%23x2603%3B%26%23xFE0F%3B%3C/text%3E%3Ctext x='143' y='263' font-size='21'%3E%26%23x2744%3B%26%23xFE0F%3B%3C/text%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    body[data-theme="spring"]:not([data-romantic="true"]) {
+      --emoji-wallpaper-color: #f1f7ed;
+      --emoji-wallpaper: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='280' viewBox='0 0 250 280'%3E%3Cg font-family='Apple%20Color%20Emoji,Segoe%20UI%20Emoji,sans-serif' opacity='.27'%3E%3Ctext x='30' y='46' font-size='23' transform='rotate(-8 30 46)'%3E%26%23x1F338%3B%3C/text%3E%3Ctext x='165' y='79' font-size='25' transform='rotate(12 165 79)'%3E%26%23x1F33F%3B%3C/text%3E%3Ctext x='79' y='134' font-size='22'%3E%26%23x1F33C%3B%3C/text%3E%3Ctext x='204' y='170' font-size='20'%3E%26%23x1F331%3B%3C/text%3E%3Ctext x='38' y='226' font-size='24'%3E%26%23x1F33F%3B%3C/text%3E%3Ctext x='142' y='263' font-size='22'%3E%26%23x1F338%3B%3C/text%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    body[data-theme="summer"] {
+      --emoji-wallpaper-color: #eef8f7;
+      --emoji-wallpaper: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='280' viewBox='0 0 250 280'%3E%3Cg font-family='Apple%20Color%20Emoji,Segoe%20UI%20Emoji,sans-serif' opacity='.27'%3E%3Ctext x='30' y='46' font-size='23'%3E%26%23x2600%3B%26%23xFE0F%3B%3C/text%3E%3Ctext x='165' y='79' font-size='25'%3E%26%23x1F30A%3B%3C/text%3E%3Ctext x='79' y='134' font-size='22'%3E%26%23x1F34B%3B%3C/text%3E%3Ctext x='204' y='170' font-size='20'%3E%26%23x1F31E%3B%3C/text%3E%3Ctext x='38' y='226' font-size='24'%3E%26%23x1F30A%3B%3C/text%3E%3Ctext x='142' y='263' font-size='22'%3E%26%23x2600%3B%26%23xFE0F%3B%3C/text%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    body[data-theme="winter"][data-festive="true"] {
+      --emoji-wallpaper-color: #f1f5f1;
+      --emoji-wallpaper: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='280' viewBox='0 0 250 280'%3E%3Cg font-family='Apple%20Color%20Emoji,Segoe%20UI%20Emoji,sans-serif' opacity='.28'%3E%3Ctext x='30' y='46' font-size='23'%3E%26%23x1F384%3B%3C/text%3E%3Ctext x='165' y='79' font-size='25'%3E%26%23x1F381%3B%3C/text%3E%3Ctext x='79' y='134' font-size='22'%3E%26%23x2B50%3B%3C/text%3E%3Ctext x='204' y='170' font-size='20'%3E%26%23x2744%3B%26%23xFE0F%3B%3C/text%3E%3Ctext x='38' y='226' font-size='24'%3E%26%23x1F381%3B%3C/text%3E%3Ctext x='142' y='263' font-size='22'%3E%26%23x1F384%3B%3C/text%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    body[data-theme="spring"][data-romantic="true"] {
+      --emoji-wallpaper-color: #fff1f4;
+      --emoji-wallpaper: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='280' viewBox='0 0 250 280'%3E%3Cg font-family='Apple%20Color%20Emoji,Segoe%20UI%20Emoji,sans-serif' opacity='.25'%3E%3Ctext x='30' y='46' font-size='23'%3E%26%23x2764%3B%26%23xFE0F%3B%3C/text%3E%3Ctext x='165' y='79' font-size='25'%3E%26%23x1F48C%3B%3C/text%3E%3Ctext x='79' y='134' font-size='22'%3E%26%23x2728%3B%3C/text%3E%3Ctext x='204' y='170' font-size='20'%3E%26%23x1F495%3B%3C/text%3E%3Ctext x='38' y='226' font-size='24'%3E%26%23x1F48C%3B%3C/text%3E%3Ctext x='142' y='263' font-size='22'%3E%26%23x2764%3B%26%23xFE0F%3B%3C/text%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) {
+      background-color: var(--emoji-wallpaper-color);
+      background-image: var(--emoji-wallpaper);
+      background-repeat: repeat;
+      background-size: 250px 280px;
+      background-attachment: fixed;
+    }
+
+    body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .experience-shell {
+      border-color: transparent !important;
+      background: transparent !important;
+      box-shadow: none !important;
+    }
+
+    @media (max-width: 700px) {
+      body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) {
+        background-attachment: scroll;
+        background-image:
+          linear-gradient(
+            color-mix(in srgb, var(--emoji-wallpaper-color) 78%, transparent),
+            color-mix(in srgb, var(--emoji-wallpaper-color) 78%, transparent)
+          ),
+          var(--emoji-wallpaper);
+        background-repeat: no-repeat, repeat;
+        background-size: cover, 320px 358px;
+      }
+
+      body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .experience-shell .hero {
+        background: transparent !important;
+        box-shadow: none !important;
+      }
+    }
+
+    /* Responsive CSS logo based on the supplied overlapping speech bubbles. */
+    .brand-lockup {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .coffee-logo-mark {
+      position: relative;
+      width: 112px;
+      height: 90px;
+      margin: 0 auto 2px;
+      filter: drop-shadow(0 10px 16px rgba(54, 37, 25, .10));
+    }
+
+    .logo-bubble {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-bubble::after {
+      content: "";
+      position: absolute;
+      width: 17px;
+      height: 17px;
+      background: inherit;
+      transform: rotate(45deg);
+    }
+
+    .logo-bubble-back {
+      top: 5px;
+      left: 4px;
+      width: 73px;
+      height: 61px;
+      border: 1px solid rgba(255,255,255,.52);
+      border-radius: 48% 52% 49% 45%;
+      background: linear-gradient(145deg, var(--logo-back-light), var(--logo-back));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.58);
+      transform: rotate(-8deg);
+    }
+
+    .logo-bubble-back::after {
+      left: 10px;
+      bottom: -5px;
+      border-radius: 3px;
+    }
+
+    .logo-bubble-front {
+      right: 4px;
+      bottom: 5px;
+      z-index: 2;
+      width: 77px;
+      height: 59px;
+      gap: 7px;
+      border: 1px solid var(--logo-front-line);
+      border-radius: 50%;
+      background: linear-gradient(150deg, var(--logo-front-light), var(--logo-front));
+      box-shadow: 0 8px 18px rgba(54,37,25,.13), inset 0 1px 0 rgba(255,255,255,.86);
+    }
+
+    .logo-bubble-front::after {
+      right: 12px;
+      bottom: -5px;
+      z-index: -1;
+      border: 1px solid var(--logo-front-line);
+      border-top: 0;
+      border-left: 0;
+      border-radius: 3px;
+    }
+
+    .logo-dot {
+      position: relative;
+      z-index: 2;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--logo-dot);
+      box-shadow: inset 0 1px 1px rgba(255,255,255,.18);
+    }
+
+    .logo-spark {
+      position: absolute;
+      z-index: 3;
+      width: 6px;
+      height: 20px;
+      border-radius: 999px;
+      background: var(--logo-spark);
+      box-shadow: 0 3px 8px color-mix(in srgb, var(--logo-spark) 26%, transparent);
+    }
+
+    .logo-spark-one { top: 12px; right: 7px; transform: rotate(31deg); }
+    .logo-spark-two { top: 29px; right: -3px; height: 17px; transform: rotate(68deg); }
+
+    .brand-lockup h1 {
+      width: auto;
+      max-width: 100%;
+      margin: 3px auto 0;
+      color: var(--logo-ink) !important;
+      font-family: ui-rounded, "Arial Rounded MT Bold", Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: clamp(37px, 5vw, 61px);
+      font-weight: 900;
+      line-height: .98;
+      letter-spacing: -.055em;
+      text-align: center;
+      text-shadow: 0 2px 0 rgba(255,255,255,.48);
+    }
+
+    .brand-lockup .subtitle,
+    body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .brand-lockup .subtitle {
+      display: block;
+      width: auto;
+      max-width: 330px;
+      margin: 11px auto 0;
+      padding: 0;
+      border: 0 !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      color: var(--logo-muted) !important;
+      font-size: 14px;
+      font-weight: 650;
+      line-height: 1.3;
+      text-align: center;
+    }
+
+    body[data-theme="autumn"] {
+      --logo-back: #e99537; --logo-back-light: #ffc95b;
+      --logo-front: #fff4e7; --logo-front-light: #fffaf3; --logo-front-line: rgba(168,91,40,.20);
+      --logo-dot: #4d2e22; --logo-spark: #e58a2d; --logo-ink: #3d2a22; --logo-muted: #846f62;
+    }
+
+    body[data-theme="winter"]:not([data-festive="true"]) {
+      --logo-back: #5aa9cf; --logo-back-light: #a8def1;
+      --logo-front: #f4fbff; --logo-front-light: #ffffff; --logo-front-line: rgba(63,135,171,.22);
+      --logo-dot: #294b5c; --logo-spark: #65b6da; --logo-ink: #233e4b; --logo-muted: #66818d;
+    }
+
+    body[data-theme="spring"]:not([data-romantic="true"]) {
+      --logo-back: #7fba68; --logo-back-light: #c9df83;
+      --logo-front: #fbfff6; --logo-front-light: #ffffff; --logo-front-line: rgba(92,148,74,.21);
+      --logo-dot: #34502f; --logo-spark: #83bd69; --logo-ink: #30442c; --logo-muted: #718269;
+    }
+
+    body[data-theme="summer"] {
+      --logo-back: #37b9aa; --logo-back-light: #85dfd2;
+      --logo-front: #f7fffd; --logo-front-light: #ffffff; --logo-front-line: rgba(39,154,144,.21);
+      --logo-dot: #1e514d; --logo-spark: #efbd43; --logo-ink: #19423f; --logo-muted: #5d827e;
+    }
+
+    body[data-theme="winter"][data-festive="true"] {
+      --logo-back: #2f8058; --logo-back-light: #61ae80;
+      --logo-front: #fff9ea; --logo-front-light: #fffef8; --logo-front-line: rgba(167,55,55,.22);
+      --logo-dot: #244735; --logo-spark: #c94747; --logo-ink: #24402f; --logo-muted: #64796c;
+    }
+
+    body[data-theme="spring"][data-romantic="true"] {
+      --logo-back: #de5575; --logo-back-light: #f39ab0;
+      --logo-front: #fff7fa; --logo-front-light: #ffffff; --logo-front-line: rgba(195,60,92,.21);
+      --logo-dot: #643143; --logo-spark: #e15a79; --logo-ink: #542735; --logo-muted: #8d6873;
+    }
+
+    @media (max-width: 700px) {
+      .experience-shell .hero { padding-top: 38px; padding-bottom: 25px; }
+      .coffee-logo-mark {
+        width: 112px;
+        height: 76px;
+        margin-bottom: 1px;
+        transform: scale(.82);
+        transform-origin: top center;
+      }
+      .brand-lockup h1 {
+        width: min(100%, 340px);
+        margin-top: 1px;
+        padding-inline: 4px;
+        font-size: clamp(31px, 8.6vw, 39px);
+        line-height: 1.02;
+        white-space: normal;
+        text-wrap: balance;
+      }
+      .brand-lockup .subtitle,
+      body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .brand-lockup .subtitle {
+        max-width: 260px;
+        margin-top: 9px;
+        font-size: 12.5px;
+        line-height: 1.28;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .brand-lockup h1 { max-width: 250px; }
+    }
+
+    /* Coffee cup logo: latte foam is shaped as a bank shield. */
+    .coffee-logo-mark {
+      display: grid;
+      place-items: center;
+      width: 132px;
+      height: 112px;
+      filter: drop-shadow(0 12px 18px rgba(54,37,25,.13));
+    }
+
+    .coffee-logo-image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: transparent;
+    }
+
+    .logo-cup-rim {
+      position: absolute;
+      top: 1px;
+      left: 10px;
+      z-index: 2;
+      display: grid;
+      place-items: center;
+      width: 94px;
+      height: 94px;
+      border: 1px solid var(--logo-cup-line);
+      border-radius: 50%;
+      background: linear-gradient(145deg, #fffdf9, var(--logo-cup-rim));
+      box-shadow:
+        0 6px 15px rgba(62,39,24,.13),
+        inset 0 0 0 5px rgba(255,255,255,.68),
+        inset 0 0 0 7px var(--logo-cup-line);
+    }
+
+    .logo-coffee {
+      position: relative;
+      display: grid;
+      place-items: center;
+      width: 72px;
+      height: 72px;
+      overflow: hidden;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 35% 24%, rgba(255,255,255,.14), transparent 21%),
+        radial-gradient(circle at 54% 57%, #5a3320, #2b160f 72%);
+      box-shadow: inset 0 4px 9px rgba(0,0,0,.30), inset 0 -2px 5px rgba(213,139,77,.18);
+    }
+
+    .logo-coffee::after {
+      content: "";
+      position: absolute;
+      inset: 5px;
+      border: 1px solid rgba(231,172,108,.18);
+      border-radius: 50%;
+    }
+
+    .logo-foam-shield {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      place-items: center;
+      width: 39px;
+      height: 43px;
+      padding-bottom: 5px;
+      clip-path: polygon(0 0, 100% 0, 100% 48%, 96% 61%, 84% 74%, 50% 100%, 16% 74%, 4% 61%, 0 48%);
+      background: linear-gradient(150deg, #fff 0%, #fff 58%, #f2eee8 100%);
+      color: #24211f;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 23px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -1px;
+      text-shadow: 0 1px 0 rgba(255,255,255,.55);
+      filter: drop-shadow(0 2px 2px rgba(16,10,7,.18));
+    }
+
+    .logo-cup-handle {
+      position: absolute;
+      top: 27px;
+      right: 0;
+      z-index: 1;
+      width: 34px;
+      height: 31px;
+      border: 9px solid var(--logo-accent);
+      border-left-width: 6px;
+      border-radius: 8px 18px 18px 8px;
+      background: transparent;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.28), 0 4px 8px color-mix(in srgb, var(--logo-accent) 22%, transparent);
+      transform: rotate(-9deg);
+    }
+
+    .coffee-logo-mark .logo-spark-one {
+      top: 56px;
+      left: -2px;
+      right: auto;
+      height: 18px;
+      transform: rotate(69deg);
+    }
+
+    .coffee-logo-mark .logo-spark-two {
+      top: 74px;
+      left: 9px;
+      right: auto;
+      height: 15px;
+      transform: rotate(33deg);
+    }
+
+    body[data-theme="autumn"] {
+      --logo-accent: #e99537; --logo-cup-rim: #f5e5d2; --logo-cup-line: rgba(170,92,42,.20);
+      --logo-foam: #ead1ae; --logo-shield-ink: #6c3d27;
+      --scene-1: "🍂"; --scene-2: "🍁"; --scene-3: "🌰"; --scene-4: "🍂"; --scene-5: "🍁"; --scene-6: "🌾";
+    }
+    body[data-theme="winter"]:not([data-festive="true"]) {
+      --logo-accent: #5aa9cf; --logo-cup-rim: #e2f1f8; --logo-cup-line: rgba(68,143,180,.20);
+      --logo-foam: #edf8fc; --logo-shield-ink: #356b86;
+      --scene-1: "❄️"; --scene-2: "☃️"; --scene-3: "🌨️"; --scene-4: "❄️"; --scene-5: "🧣"; --scene-6: "❄️";
+    }
+    body[data-theme="spring"]:not([data-romantic="true"]) {
+      --logo-accent: #80ba68; --logo-cup-rim: #e7f2de; --logo-cup-line: rgba(99,154,78,.20);
+      --logo-foam: #e6f2d8; --logo-shield-ink: #4f743f;
+      --scene-1: "🌿"; --scene-2: "🌸"; --scene-3: "🌼"; --scene-4: "🌱"; --scene-5: "🦋"; --scene-6: "🌸";
+    }
+    body[data-theme="summer"] {
+      --logo-accent: #35b9aa; --logo-cup-rim: #def3ef; --logo-cup-line: rgba(40,156,145,.20);
+      --logo-foam: #e6f7f2; --logo-shield-ink: #24746b;
+      --scene-1: "☀️"; --scene-2: "🌊"; --scene-3: "🍋"; --scene-4: "🌴"; --scene-5: "🌊"; --scene-6: "☀️";
+    }
+    body[data-theme="winter"][data-festive="true"] {
+      --logo-accent: #2f8058; --logo-cup-rim: #e2eee5; --logo-cup-line: rgba(43,119,80,.21);
+      --logo-foam: #f4ebcf; --logo-shield-ink: #2f6849;
+      --scene-1: "🎄"; --scene-2: "🎁"; --scene-3: "⭐"; --scene-4: "❄️"; --scene-5: "🛷"; --scene-6: "🎄";
+    }
+    body[data-theme="spring"][data-romantic="true"] {
+      --logo-accent: #de5575; --logo-cup-rim: #f8e3e9; --logo-cup-line: rgba(199,64,96,.20);
+      --logo-foam: #f7dde4; --logo-shield-ink: #a33c56;
+      --scene-1: "💌"; --scene-2: "💕"; --scene-3: "✨"; --scene-4: "❤️"; --scene-5: "🌹"; --scene-6: "💕";
+    }
+
+    .mobile-scene { display: none; }
+
+    @keyframes sceneDriftA {
+      from { transform: translate3d(-4px, -7px, 0) rotate(-10deg) scale(.97); }
+      to { transform: translate3d(7px, 9px, 0) rotate(-3deg) scale(1.03); }
+    }
+
+    @keyframes sceneDriftB {
+      from { transform: translate3d(5px, 8px, 0) rotate(9deg) scale(1.02); }
+      to { transform: translate3d(-6px, -8px, 0) rotate(2deg) scale(.97); }
+    }
+
+    @media (max-width: 700px) {
+      body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) {
+        position: relative;
+        isolation: isolate;
+        background-color: var(--emoji-wallpaper-color);
+        background-image: none;
+      }
+
+      body::before,
+      body::after {
+        content: none !important;
+        display: none !important;
+      }
+
+      .mobile-scene {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        display: block;
+        overflow: hidden;
+        pointer-events: none;
+        contain: strict;
+      }
+
+      .mobile-scene-item {
+        position: absolute;
+        display: block;
+        font-family: "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+        line-height: 1;
+        opacity: .13;
+        filter: saturate(.88);
+        will-change: transform;
+      }
+
+      .mobile-scene-item::before { content: var(--scene-symbol); }
+
+      .mobile-scene-item:nth-child(1) {
+        --scene-symbol: var(--scene-1); top: 8%; left: -18px;
+        font-size: clamp(92px, 27vw, 122px); filter: blur(.6px) saturate(.9);
+        animation: sceneDriftA 13s ease-in-out infinite alternate;
+      }
+      .mobile-scene-item:nth-child(2) {
+        --scene-symbol: var(--scene-2); top: 23%; right: -14px;
+        font-size: clamp(82px, 24vw, 110px); opacity: .10; filter: blur(2.2px) saturate(.82);
+      }
+      .mobile-scene-item:nth-child(3) {
+        --scene-symbol: var(--scene-3); top: 39%; left: -22px;
+        font-size: clamp(104px, 30vw, 136px); opacity: .09; filter: blur(3.2px) saturate(.78);
+        animation: sceneDriftB 17s ease-in-out -5s infinite alternate;
+      }
+      .mobile-scene-item:nth-child(4) {
+        --scene-symbol: var(--scene-4); top: 55%; right: -18px;
+        font-size: clamp(96px, 28vw, 128px); filter: blur(1.1px) saturate(.86);
+        animation: sceneDriftA 15s ease-in-out -7s infinite alternate;
+      }
+      .mobile-scene-item:nth-child(5) {
+        --scene-symbol: var(--scene-5); top: 72%; left: -12px;
+        font-size: clamp(80px, 23vw, 104px); opacity: .10; filter: blur(.4px) saturate(.9);
+      }
+      .mobile-scene-item:nth-child(6) {
+        --scene-symbol: var(--scene-6); top: 86%; right: -24px;
+        font-size: clamp(108px, 31vw, 142px); opacity: .08; filter: blur(3.8px) saturate(.76);
+        animation: sceneDriftB 19s ease-in-out -3s infinite alternate;
+      }
+
+      .app { position: relative; z-index: 1; }
+
+      body.reel-is-spinning .mobile-scene-item {
+        animation-play-state: paused;
+      }
+
+      .coffee-logo-mark {
+        width: 116px;
+        height: 98px;
+        transform: none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .mobile-scene-item { animation: none !important; }
+    }
+
+    /* Restored classic Random Coffee SME logo. */
+    .coffee-logo-mark {
+      display: none !important;
+    }
+
+    .experience-shell .hero {
+      padding-top: 38px;
+      padding-bottom: 32px;
+    }
+
+    .brand-lockup h1 {
+      width: auto;
+      max-width: 100%;
+      margin: 0 auto;
+      color: var(--logo-ink, var(--text)) !important;
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: clamp(44px, 5.6vw, 64px);
+      font-weight: 850;
+      line-height: 1.02;
+      letter-spacing: -.065em;
+      white-space: nowrap;
+      text-shadow: none;
+    }
+
+    .brand-lockup .subtitle,
+    body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .brand-lockup .subtitle {
+      display: inline-flex !important;
+      align-items: center;
+      justify-content: center;
+      width: auto;
+      max-width: min(100%, 430px);
+      min-height: 52px;
+      margin: 24px auto 0;
+      padding: 12px 25px;
+      border: 1px solid color-mix(in srgb, var(--logo-accent, #e99537) 54%, transparent) !important;
+      border-radius: 19px;
+      background: color-mix(in srgb, var(--logo-accent, #e99537) 7%, #fff 93%) !important;
+      box-shadow: 0 8px 24px rgba(62, 43, 31, .06) !important;
+      color: color-mix(in srgb, var(--logo-ink, var(--text)) 72%, #fff 28%) !important;
+      font-size: 16px;
+      font-weight: 450;
+      line-height: 1.35;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 700px) {
+      .experience-shell .hero {
+        padding-top: 26px;
+        padding-bottom: 24px;
+      }
+
+      .brand-lockup h1 {
+        width: auto;
+        max-width: 100%;
+        margin-top: 0;
+        padding-inline: 0;
+        font-size: clamp(29px, 8.3vw, 38px);
+        line-height: 1.04;
+        white-space: nowrap;
+      }
+
+      .brand-lockup .subtitle,
+      body:is([data-theme="autumn"], [data-theme="winter"], [data-theme="spring"], [data-theme="summer"]) .brand-lockup .subtitle {
+        max-width: 100%;
+        min-height: 46px;
+        margin-top: 17px;
+        padding: 10px 16px;
+        border-radius: 17px;
+        font-size: clamp(12.5px, 3.7vw, 15px);
+        line-height: 1.3;
+        white-space: nowrap;
+      }
+    }
+
   </style>
 </head>
-<body>
+<body data-theme="autumn">
+  <div class="mobile-scene" aria-hidden="true">
+    <span class="mobile-scene-item"></span><span class="mobile-scene-item"></span>
+    <span class="mobile-scene-item"></span><span class="mobile-scene-item"></span>
+    <span class="mobile-scene-item"></span><span class="mobile-scene-item"></span>
+  </div>
   <main class="app">
     <header class="topbar">
       <div class="menu-wrap">
@@ -3503,7 +4125,7 @@
             <div class="theme-group" role="radiogroup" aria-label="Сезонные оформления">
               <div class="theme-picker-title">Сезонные</div>
               <div class="theme-options seasonal">
-                <button class="theme-option" type="button" role="radio" aria-checked="false" data-theme-choice="autumn"><span class="theme-option-emoji">🍂</span><span>Осень</span></button>
+                <button class="theme-option active" type="button" role="radio" aria-checked="true" data-theme-choice="autumn"><span class="theme-option-emoji">🍂</span><span>Осень</span></button>
                 <button class="theme-option" type="button" role="radio" aria-checked="false" data-theme-choice="winter"><span class="theme-option-emoji">❄️</span><span>Зима</span></button>
                 <button class="theme-option" type="button" role="radio" aria-checked="false" data-theme-choice="spring"><span class="theme-option-emoji">🌿</span><span>Весна</span></button>
                 <button class="theme-option" type="button" role="radio" aria-checked="false" data-theme-choice="summer"><span class="theme-option-emoji">☀️</span><span>Лето</span></button>
@@ -3529,8 +4151,13 @@
         <span class="garland-bulbs"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span>
       </div>
       <section class="hero">
-        <h1><span>Рандом кофе SME</span></h1>
-        <p class="subtitle">Темы и активности для встречи 🧋</p>
+        <div class="brand-lockup" aria-label="Рандом кофе SME — темы и активности для хорошей встречи">
+          <div class="coffee-logo-mark" aria-hidden="true">
+            <img class="coffee-logo-image" src="data:image/webp;base64,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" alt="">
+          </div>
+          <h1><span>Рандом кофе SME</span></h1>
+          <p class="subtitle">Темы и активности для встречи ☕️</p>
+        </div>
       </section>
 
       <section class="workspace" aria-label="Рулетка идей">
@@ -3540,7 +4167,7 @@
           <div class="slot-machine" aria-label="Вертикальная рулетка тем и активностей Random Coffee">
             <div class="reel-frame">
               <div class="reel-screen" id="reelScreen">
-                <div class="reel-track" id="reelTrack"></div>
+                <div class="reel-track" id="reelTrack" style="padding-top: 131px; padding-bottom: 131px; transition: none; transform: translate3d(0px, -132px, 0px);"><div class="reel-item activity"><span>Блиц «Или-Или»</span></div><div class="reel-item activity"><span>Кинотеатр</span></div><div class="reel-item final"><span>Антистрeсс</span></div><div class="reel-item"><span>Антистресс</span></div><div class="reel-item"><span>Вдохнoвение</span></div></div>
                 <div class="selection-window" aria-hidden="true"></div>
               </div>
             </div>
@@ -3555,9 +4182,9 @@
             <div class="result-icon" id="resultIcon" aria-hidden="true">✦</div>
           </div>
           <p class="empty-copy" id="emptyCopy">После запуска здесь появится вопрос или совместная активность</p>
-          <div id="resultContent" hidden>
+          <div id="resultContent" hidden="">
             <p class="question" id="resultQuestion"></p>
-            <button class="copy-link" id="copyLinkButton" type="button" aria-label="Перейти по прикреплённой ссылке" hidden>
+            <button class="copy-link" id="copyLinkButton" type="button" aria-label="Перейти по прикреплённой ссылке" hidden="">
               <span aria-hidden="true">↗</span>
               <span id="copyLinkLabel">Перейти по ссылке</span>
             </button>
@@ -3567,11 +4194,15 @@
 
       <div class="spin-area">
         <button class="primary" id="spinButton" type="button"><span>Крутить рулетку</span></button>
+        <div class="attempt-status" aria-live="polite">
+          <span class="attempt-counter">Попытки:<strong id="attemptCounter">0 / 5</strong></span>
+          <span class="limit-message" id="limitMessage" hidden="">Лимит прокруток на эту встречу исчерпан</span>
+        </div>
         <p class="chance-note">Нажмите кнопку — тему для встречи выберет случай</p>
       </div>
       </section>
 
-      <section class="meeting-tip" id="meetingTip" aria-live="polite" hidden>
+      <section class="meeting-tip" id="meetingTip" aria-live="polite" hidden="">
         <div class="meeting-tip-title">
           <span class="meeting-tip-icon" aria-hidden="true">💡</span>
           <span class="meeting-tip-heading"><strong>Маленький совет</strong></span>
@@ -3586,12 +4217,13 @@
   <input id="fileInput" type="file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script id="embeddedData" type="application/json">{"version":2,"customized":false,"topics":[]}</script>
+  <script id="embeddedData" type="application/json">{"version":2,"customized":true,"theme":"autumn","topics":[{"type":"Тема","topic":"Антистрeсс","question":"Что помогает тебе снять напряжение?","link":"","tip":"Обсудите длительность: спроси, сколько времени нужно, чтобы полностью перезагрузиться."},{"type":"Тема","topic":"Антистресс","question":"Как ты переключаешься после трудного дня?","link":"","tip":"Обсудите личные табу: что вы категорически не делаете вечером, чтобы сберечь энергию?"},{"type":"Тема","topic":"Вдохнoвение","question":"Какой момент года ты ждешь больше всего?","link":"","tip":"Если нашли общую тему — задержитесь на ней подольше, даже если рулетка зовёт дальше."},{"type":"Тема","topic":"Вдохновение","question":"Что в последнее время тебя по-настоящему вдохновило?","link":"","tip":"Задай вопрос «А почему именно это?» — иногда за коротким ответом скрывается лучшая история."},{"type":"Тема","topic":"Воспоминания","question":"Какой подарок запомнился тебе больше всего?","link":"","tip":"Спроси о маленькой детали — иногда именно она делает историю живой."},{"type":"Тема","topic":"Детство","question":"Какой мультфильм ты любил больше всего в детстве?","link":"","tip":"Поделись, какая эмоция или урок из него запомнились до сих пор."},{"type":"Тема","topic":"Идeальный выходной","question":"Как выглядит твой идеальный свободный день?","link":"","tip":"Добавь немного фантазии: «А если бы бюджет и время не были ограничены?»"},{"type":"Тема","topic":"Идеaльный выходной","question":"Ты предпочитаешь активный или ленивый выходной?","link":"","tip":"Не забудь поинтересоваться почему ответ именно такой — за этим может скрываться лучшая история."},{"type":"Тема","topic":"Идеальный выходной","question":"Ты жаворонок или сова?","link":"","tip":"Расскажи, как совмещаешь свой ритм с задачами."},{"type":"Тема","topic":"Карьерa","question":"Что тебе нравится в своей работе больше всего?","link":"","tip":"Не превращай встречу в интервью: отвечай на свои же вопросы тоже, даже если больше всего любишь походы за сладостями из лавки братьев Караваевых"},{"type":"Тема","topic":"Карьера","question":"Какой профессиональный навык ты хотел бы освоить?","link":"","tip":"Добавь немного фантазии: «А если бы обучение было мгновенным?»"},{"type":"Тема","topic":"Кинo и сериалы","question":"Какой фильм или сериал ты готов пересматривать?","link":"","tip":"Попробуй найти одну вещь, в которой ваши мнения неожиданно совпадают."},{"type":"Тема","topic":"Кино и сериалы","question":"Какой фильм или сериал посоветуешь для вечера?","link":"","tip":"Попробуй угадать ответ собеседника до того, как он ответит."},{"type":"Тема","topic":"Книги","question":"Какую книгу ты недавно советовал другим?","link":"","tip":"Спроси не только «какую», но и «как ты к этому пришёл?»."},{"type":"Тема","topic":"Книги","question":"Какая книга больше всего повлияла на тебя?","link":"","tip":"Самые интересные ответы часто начинаются со слов «Есть одна история…»."},{"type":"Тема","topic":"Контент","question":"Какой блог или канал ты смотришь для удовольствия?","link":"","tip":"Делитесь ссылками друг с другом — это расширяет кругозор!"},{"type":"Тема","topic":"Кулинария","question":"Какую кухню ты любишь больше всего?","link":"","tip":"Преврати ответ в план: если вкусы совпали, предложи вместе попробовать что-то новое, например, Азиатскую кухню на фуд-корте."},{"type":"Тема","topic":"Кулинария","question":"Какое блюдо ты готовишь или заказываешь, когда совсем нет сил?","link":"","tip":"Если рецепт звучит вкусно, поделись ссылкой или инструкцией."},{"type":"Тема","topic":"Мeчты","question":"Какую технологию ты ждешь через 10 лет?","link":"","tip":"Разрешите себе фантазировать без ограничений реализма и бюджета."},{"type":"Тема","topic":"Мyзыка","question":"Какая группа тебя вдохновляет?","link":"","tip":"Не спеши менять тему: один хороший уточняющий вопрос часто интереснее пяти новых."},{"type":"Тема","topic":"Мечты","question":"Какой небольшой мечте ты хотел бы дать шанс в этом году?","link":"","tip":"Цель не пройти все вопросы, а найти хотя бы один, который захочется обсуждать дольше."},{"type":"Тема","topic":"Музыкa","question":"Какая песня мгновенно поднимает тебе настроение?","link":"","tip":"Если возникла смешная история — официально разрешается уйти от темы."},{"type":"Тема","topic":"Музыка","question":"Какой концерт запомнился тебе больше всего?","link":"","tip":"Попробуй продолжить ответ фразой «А у меня было почти наоборот…»."},{"type":"Тема","topic":"Неoбычный факт","question":"Какой неожиданный факт о тебе обычно удивляет людей?","link":"","tip":"Если ответ удивил — так и скажи. Искреннее «Серьёзно? Расскажи!» отлично продолжает разговор."},{"type":"Тема","topic":"Необычный факт","question":"На твой взгляд, какое изобретение является величайшим за всю историю человечества?","link":"","tip":"Поделись своей точкой зрения — пусть обсуждение будет любопытным."},{"type":"Тема","topic":"Обучениe","question":"Назови один полезный навык, которым ты владеешь","link":"","tip":"Расскажи, как именно этот навык помогает тебе дома или на работе"},{"type":"Тема","topic":"Обучение","question":"Бывало ли такое, что ты научился чему-то совершенно случайно?","link":"","tip":"Если что-то получилось не сразу, поделись этим"},{"type":"Тема","topic":"Отдых","question":"Что для тебя значит «ничего не делать»?","link":"","tip":"Помни, что у каждого свой способ восстановления, и это нормально."},{"type":"Тема","topic":"Пyтешествия","question":"Какое твое любимое место в Москве?","link":"","tip":"Изучить Москву можно с малого — загляните на кофе в Дринкит на 1 этаже"},{"type":"Тема","topic":"Питoмцы","question":"Есть ли у тебя домашний питомец?","link":"","tip":"Постарайся развить ответ так, чтобы на него нельзя было ответить просто «да» или «нет»."},{"type":"Тема","topic":"Питомцы","question":"С каким животным ты себя ассоциируешь?","link":"","tip":"Не бойтесь необычных сравнений — это часто раскрывает характер лучше слов."},{"type":"Тема","topic":"Путешeствия","question":"Какое место в твоём городе ты показал бы гостю первым?","link":"","tip":"Если разговор затих — попроси назвать топ-3 вместо одного ответа."},{"type":"Тема","topic":"Путешеcтвия","question":"Без какого топ-3 вещей ты не представляешь любое свое путешествие?","link":"","tip":"Сравните списки вещей — это часто выявляет неожиданные совпадения."},{"type":"Тема","topic":"Путешествия","question":"Какое путешествие запомнилось тебе больше всего?","link":"","tip":"Попробуй найти тему, о которой вы оба можете говорить без подготовки."},{"type":"Тема","topic":"Рабочее пространство","question":"Что одно ты бы изменил в нашем рабочем процессе или на рабочем месте?","link":"","tip":"Фокусируйся на пожеланиях, а не на критике."},{"type":"Тема","topic":"Суперспособности","question":"Какую суперсилу ты бы выбрал?","link":"","tip":"Разреши себе пару секунд подумать. Лучшие ответы не всегда самые быстрые."},{"type":"Тема","topic":"Технологии","question":"Какая технология заметно упростила твою жизнь?","link":"","tip":"Не бойтесь лёгкой неловкости в начале — обычно через пару минут она превращается в нормальный разговор."},{"type":"Тема","topic":"Фотография","question":"Какое фото у тебя самое ценное или смешное?","link":"","tip":"Предложи обменяться этими фото прямо сейчас, если это уместно."},{"type":"Тема","topic":"Хoбби","question":"Чем тебе нравится заниматься после работы?","link":"","tip":"Иногда полезно поменяться ролями: пусть собеседник задаст вам тот же вопрос."},{"type":"Тема","topic":"Хобби","question":"Какое хобби ты бы хотел попробовать?","link":"","tip":"Добавь немного фантазии: «А если бы бюджет и время не были ограничены?»"},{"type":"Тема","topic":"Кино и сериалы","question":"Какой персонаж из фильма тебе наиболее близок по характеру?","link":"","tip":"Сравни свои сильные стороны с героями кино, это раскрывает личность."},{"type":"Тема","topic":"Карьера","question":"Какой был твой самый первый заработок в жизни?","link":"","tip":"Сравните суммы первого заработка — это всегда вызывает улыбку и ностальгию."},{"type":"Тема","topic":"Кулинария","question":"Какой модный продукт или тренд ты считаешь переоцененным?","link":"","tip":"Вкусы могут быть разные — это помогает лучше узнать друг друга."},{"type":"Тема","topic":"Технологии","question":"Какое приложение ты бы создал, если бы умел программировать?","link":"","tip":"Пофантазируйте вслух пару минут — иногда рождаются крутые идеи для стартапа."},{"type":"Тема","topic":"Воспоминания","question":"Какое спонтанное решение недавно порадовало тебя больше всего?","link":"","tip":"Поделитесь энергией момента и эмоциями, а не только сухим фактом."},{"type":"Активность","topic":"Прогулка вокруг офиса","question":"Самое время выйти на короткую прогулку и продолжить разговор на свежем воздухе","link":"","tip":"Предложи коллеге заглянуть на кофе в OnePrice :)"},{"type":"Активность","topic":"Фото-охота","question":"Выберете с коллегой два цвета дня и сделайте 6 фотографий в выбранной палитре, объединив их в коллажи","link":"","tip":"Создайте общий коллаж с встречи как в популярном тренде."},{"type":"Активность","topic":"Кроссворд","question":"Выберите короткий кроссворд и вместе ответьте на несколько вопросов","link":"https://t-j.ru/tag/krossvordy-tj/","tip":"Обсудите логику друг друга: почему вы решили, что ответ именно такой, даже если оказались не правы."},{"type":"Активность","topic":"Книжный клуб","question":"Посоветуйте одну книгу или статью друг другу и договоритесь обсудить её кратко через месяц","link":"https://www.litres.ru/collections/luchshie-iz-luchshih-knigi-kotorye-dolzhen-prochitat-kazhdyy/","tip":"Обсудите, почему выбор именно такой: за ответом может скрываться лучшая история дня."},{"type":"Активность","topic":"Настольный теннис","question":"Сыграйте короткую дружескую партию в настольный теннис","link":"","tip":"Настольный теннис расположен в спортзале."},{"type":"Активность","topic":"Совместный обед","question":"Выберите место поблизости и устройте совместный обед","link":"https://yandex.ru/maps/213/moscow/search/%D0%93%D0%B4%D0%B5%20%D0%BF%D0%BE%D0%B5%D1%81%D1%82%D1%8C/?ll=37.496562%2C55.840512\u0026sll=37.496148%2C55.840395\u0026sspn=0.029423%2C0.011175\u0026z=15.86","tip":"Можно попробовать Вьетнамскую кухню в Pho City рядом с офисом."},{"type":"Активность","topic":"Кофейная пауза","question":"Возьмите по любимому напитку и разговаривайте не о задачах","link":"","tip":"В кофейне Loft на первом этаже действует акция Кофе недели с приятной скидкой."},{"type":"Активность","topic":"Виртуальный фон","question":"Если ваша встреча в онлайне, поставьте смешные фоны на встречу","link":"https://mymeet.ai/ru/blog/zoom-backgrounds","tip":"Это сразу снимает официальность и разбавит обстановку."},{"type":"Активность","topic":"Совместная тренировка","question":"Проведите с коллегой совместную тренировку в спортзале","link":"","tip":"Обсудите, какая часть тела «затекает» к концу рабочего дня чаще всего, и поделитесь друг с другом советами для разминки."},{"type":"Активность","topic":"Шагомер-батл","question":"Сравните количество шагов за прошедшую неделю","link":"","tip":"Поинтересуйся, где коллега любит гулять, чтобы набрать норму шагов в выходные и будние."},{"type":"Активность","topic":"Настольные игры","question":"Сыграйте небольшую партию в настольную игру","link":"https://yandex.ru/games/category/puzzles","tip":"Их можно найти в офисе или открыть на телефоне"},{"type":"Активность","topic":"Дыхательная практика","question":"Перед началом разговора выполни короткое упражнение, чтобы сбросить напряжение","link":"https://ilovesupersport.ru/blog/dyhatelnye-uprazhneniya","tip":"Обсудите, что помогает вам «заземлиться» перед сложными задачами или встречами."},{"type":"Активность","topic":"Музыкальный обмен","question":"Скинь коллеге трек, который сейчас на репите","link":"","tip":"Поделись, в какой ситцации обявно включаешь эту музыку: для отдыха или чтобы сосредоточиться?"},{"type":"Активность","topic":"Рецепт недели","question":"Поделись рецептом простого блюда, которое готовил недавно","link":"https://food.ru/","tip":"Обсуди, какой ингредиент никогда не добавишь в свое блюдо даже под пытками."},{"type":"Активность","topic":"Включаем воображение","question":"Расскажи, как представляешь себе год в голове?","link":"","tip":"Для визуализации используй лист и карандаш или найди похожее изображение в Интернете."},{"type":"Активность","topic":"Две правды, одна ложь","question":"Назови три факта о себе, один из которых — выдумка","link":"https://mensby.com/life/interesting/igra-dve-pravdy-i-odna-lozh-list-primerov-dlja-igry-v-kompanii-ili-vdvoem","tip":"Пусть собеседник угадывает ложь, а вы расскажите короткую историю по факту с правдой. Перейдя по ссылке, ты найдешь идеи для фактов."},{"type":"Активность","topic":"План «До конца года»","question":"Назови 3 личные цели до Нового года","link":"","tip":"Поддержите друг друга и спроси, какая помощь или ресурс нужны для достижения."},{"type":"Активность","topic":"Блиц «Или-Или»","question":"Задайте 5 быстрых вопросов с выбором варианта (чай/кофе, утро/вечер)","link":"https://mensby.com/life/interesting/igra-to-ili-jeto-list-voprosov-k-igre","tip":"Можно не объяснять выбор подробно, просто говорите «потому что» — это ускоряет игру и можно выбрать больше пар для сравнения. Перейдя по ссылке, ты найдешь идеи для сравнения."},{"type":"Активность","topic":"Кинотеатр","question":"Просмотрите вместе одну короткий видеоролик или серию любого сериала","link":"","tip":"Одна серия мультсериала «Рик и Морти» идет около 22–23 минут — примерно столько же и у «Гравити Фолз»"}]}</script>
   <script>
     'use strict';
 
     const IS_WINDOWS = /Windows/i.test(navigator.userAgent);
     const REEL_EASING = 'cubic-bezier(.17,0,.18,1)';
+    const MAX_SPINS = 5;
     const MAX_IDEAS = 500;
     const MAX_FILE_SIZE = 8 * 1024 * 1024;
     const MAX_UNZIPPED_SIZE = 32 * 1024 * 1024;
@@ -3656,10 +4288,13 @@
     const toast = document.getElementById('toast');
     const meetingTip = document.getElementById('meetingTip');
     const meetingTipText = document.getElementById('meetingTipText');
+    const attemptCounter = document.getElementById('attemptCounter');
+    const limitMessage = document.getElementById('limitMessage');
     const themeButtons = [...document.querySelectorAll('[data-theme-choice]')];
     let topics = loadTopics();
     let currentTheme = 'autumn';
     let spinning = false;
+    let spinCount = 0;
     let lastIndex = -1;
     let toastTimer;
     let activeReelAnimation = null;
@@ -3958,8 +4593,10 @@
     }
 
     function spin() {
-      if (spinning || topics.length < 2) return;
+      if (spinning || spinCount >= MAX_SPINS || topics.length < 2) return;
       spinning = true;
+      spinCount += 1;
+      updateSpinLimitUi(false);
       setControls(true);
       const selected = nextIndex();
       // На Windows используется собственный плавный режим. Некоторые системные
@@ -3972,12 +4609,19 @@
         lastIndex = selected;
         setControls(false);
         showResult(selected);
+        if (spinCount >= MAX_SPINS) updateSpinLimitUi(true);
       });
     }
 
     function setControls(disabled) {
-      spinButton.disabled = disabled;
-      spinButton.lastElementChild.textContent = disabled ? 'Крутим рулетку…' : 'Крутить рулетку';
+      const limitReached = spinCount >= MAX_SPINS;
+      spinButton.disabled = disabled || limitReached;
+      spinButton.lastElementChild.textContent = disabled ? 'Крутим рулетку…' : limitReached ? 'Лимит исчерпан' : 'Крутить рулетку';
+    }
+
+    function updateSpinLimitUi(showLimitMessage = false) {
+      attemptCounter.textContent = `${spinCount} / ${MAX_SPINS}`;
+      limitMessage.hidden = !(showLimitMessage && spinCount >= MAX_SPINS);
     }
 
     function showResult(index) {
@@ -4065,6 +4709,7 @@
 
     spinButton.addEventListener('click', spin);
     applyTheme(initialTheme(), false);
+    updateSpinLimitUi(false);
     menuButton.addEventListener('click', event => { event.stopPropagation(); toggleMenu(); });
     document.addEventListener('click', event => { if (!menu.contains(event.target) && event.target !== menuButton) toggleMenu(false); });
     document.addEventListener('keydown', event => { if (event.key === 'Escape') toggleMenu(false); });
@@ -4232,6 +4877,15 @@
       clone.querySelector('#menu')?.classList.remove('open');
       clone.querySelector('#menuButton')?.setAttribute('aria-expanded', 'false');
       clone.querySelector('#meetingTip')?.setAttribute('hidden', '');
+      const clonedCounter = clone.querySelector('#attemptCounter');
+      if (clonedCounter) clonedCounter.textContent = `0 / ${MAX_SPINS}`;
+      clone.querySelector('#limitMessage')?.setAttribute('hidden', '');
+      const clonedSpinButton = clone.querySelector('#spinButton');
+      if (clonedSpinButton) {
+        clonedSpinButton.removeAttribute('disabled');
+        const label = clonedSpinButton.lastElementChild;
+        if (label) label.textContent = 'Крутить рулетку';
+      }
       const embeddedNode = clone.querySelector('#embeddedData');
       if (!embeddedNode) throw new Error('embedded data');
       const safeJson = JSON.stringify({ version: 2, customized: true, theme: currentTheme, topics })
@@ -4554,5 +5208,6 @@
 
     renderRestingReel(0);
   </script>
-</body>
-</html>
+
+
+</body></html>
